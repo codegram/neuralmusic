@@ -39,18 +39,22 @@ def load_song(infile, outfile, append=False):
         write(outfile, new_df, append=append)
         return len(notes)
     except MidiException:
-        pass
+        return None
 
 def load_songs(path, glob, out):
     midis = list(Path(path).glob(glob))
     note_count = 0
+    songs = 0
     bar = progress_bar(range(len(midis)))
     for i in bar:
         file = midis[i]
         if i % 100 == 0:
             print(f"{i} songs, {note_count} notes")
         bar.comment = f"{note_count} notes"
-        note_count += load_song(file, out, append=i!=0)
-    print(f"Total: {note_count} notes")
+        notes = load_song(file, out, append=i!=0)
+        if notes is not None:
+            songs += 1
+            note_count += notes
+    print(f"Total: {songs}, {note_count} notes")
 
 load_songs("./data/", glob="raw/**/*.mid", out='data.parq')
