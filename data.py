@@ -47,7 +47,10 @@ def load_songs(path, glob, out):
     bar = progress_bar(range(len(midis)))
     for i in bar:
         file = midis[i]
+        if i % 100 == 0:
+            print(f"{i} songs, {note_count} notes")
         bar.comment = f"{note_count} notes"
         note_count += load_song(file, out, append=i!=0)
+    print(f"Total: {note_count} notes")
 
-load_songs("./data/", glob="raw/final_fantasy/*.mid", out='data.parq')
+load_songs("./data/", glob="raw/**/*.mid", out='data.parq')
