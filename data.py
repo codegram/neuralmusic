@@ -63,25 +63,39 @@ def process_and_write(mini_batch: Collection[str], outdir: str) -> bytes:
 
     logger = prefect.context.get("logger")
 
+    should_append = False
+
     n = 0
     valid_n = 0
     total = len(mini_batch)
     df = pd.DataFrame()
+    dirty = False
     for file in mini_batch:
         n += 1
         new_df, processed_notes = parse_midi_file(file)
         if new_df is not None:
-            df = pd.concat([df, new_df])
-        notes += processed_notes
-        if processed_notes != 0:
             valid_n += 1
+            dirty = True
+            df = pd.concat([df, new_df])
+
+            if valid_n % 10 == 0:
+                fastparquet.write(
+                    outfile, df, compression="SNAPPY", append=should_append
+                )
+                should_append = True
+                dirty = False
+                df = pd.DataFrame()
+
+            notes += processed_notes
             logger.info(
                 f"[Minibatch {frame_no}] {notes} notes in {valid_n}/{total} songs"
             )
         else:
             logger.warning(f"[Minibatch {frame_no}] {file} could not be processed.")
 
-    fastparquet.write(outfile, df, compression="SNAPPY")
+    if dirty:
+        fastparquet.write(outfile, df, compression="SNAPPY", append=should_append)
+
     logger.info(f"[Minibatch {frame_no}] COMPLETE! Wrote {notes} notes to {outfile}")
 
     return outfile
