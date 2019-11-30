@@ -1,3 +1,6 @@
+data:
+	spell run --machine-type CPU --conda-file=conda.yml --mount uploads/midi:midi 'python data.py data.etl.tar_gz_path=/spell/neuralmusic/midi/raw.tar.gz data.etl.outdir=/spell/neuralmusic/out; rm -fr outputs'
+
 deps:
 	conda env update --prefix ./env --file conda.yml && source activate ./env
 
