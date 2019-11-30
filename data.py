@@ -69,7 +69,8 @@ def process_and_write(mini_batch: Collection[str], outdir: str) -> bytes:
     for file in mini_batch:
         n += 1
         df, processed_notes = parse_midi_file(file)
-        fastparquet.write(outfile, df, compression="SNAPPY", append=start_appending)
+        if df is not None:
+            fastparquet.write(outfile, df, compression="SNAPPY", append=start_appending)
         notes += processed_notes
         if processed_notes != 0:
             valid_n += 1
@@ -106,8 +107,9 @@ def etl(cfg):
     assert outdir, "Config not found: data.etl.outdir"
 
     with Flow("Neuralmusic data ETL") as flow:
-        tar_gz_path = str(Path(cfg.tar_gz_path).resolve())
-        command = untar_cmd(tar_gz_path, "data")
+        tar_gz_path = Path(cfg.tar_gz_path).resolve()
+        assert tar_gz_path.exists(), f"{tar_gz_path} does not exist"
+        command = untar_cmd(str(tar_gz_path), "data")
         untarred = untar(command=command)
 
         mini_batches = partition_files(
