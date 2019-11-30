@@ -15,8 +15,15 @@ dependencies:
   - pytest-sugar
   - flake8
   - python-dotenv
+  - dask
+  - python-snappy
+  - fsspec>=0.3.3
   - pip>=19.3.1
+  - bokeh
   - pip:
       - music21
       - fastparquet
+      - prefect[viz]
+      - hydra-core
+      - hydra_colorlog
       - "git+https://github.com/fastai/fastai2"

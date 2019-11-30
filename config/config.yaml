@@ -1,0 +1,13 @@
+project: neuralmusic
+
+data:
+  etl:
+    dry_run: False
+    partition_size: 100
+    num_workers: 4
+    threads_per_worker: 2
+
+defaults:
+  - model: dual
+  - hydra/job_logging: colorlog
+  - hydra/hydra_logging: colorlog
