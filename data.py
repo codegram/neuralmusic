@@ -7,7 +7,6 @@ from typing import Collection
 import hydra
 import prefect
 import fastparquet
-import pandas as pd
 from dask.distributed import Client
 from prefect import task, Flow
 from prefect.engine.signals import SKIP
@@ -68,35 +67,21 @@ def process_and_write(mini_batch: Collection[str], outdir: str) -> bytes:
     n = 0
     valid_n = 0
     total = len(mini_batch)
-    df = pd.DataFrame()
-    dirty = False
     for file in mini_batch:
         n += 1
-        new_df, processed_notes = parse_midi_file(file)
-        if new_df is not None:
+        df, processed_notes = parse_midi_file(file)
+        if df is not None:
             valid_n += 1
-            dirty = True
-            df = pd.concat([df, new_df])
-
-            if valid_n % 10 == 0:
-                fastparquet.write(
-                    outfile, df, compression="SNAPPY", append=should_append
-                )
-                should_append = True
-                dirty = False
-                df = pd.DataFrame()
+            fastparquet.write(outfile, df, compression="SNAPPY", append=should_append)
+            should_append = True
 
             notes += processed_notes
-            logger.info(
-                f"[Minibatch {frame_no}] {notes} notes in {valid_n}/{total} songs"
-            )
         else:
             logger.warning(f"[Minibatch {frame_no}] {file} could not be processed.")
 
-    if dirty:
-        fastparquet.write(outfile, df, compression="SNAPPY", append=should_append)
-
-    logger.info(f"[Minibatch {frame_no}] COMPLETE! Wrote {notes} notes to {outfile}")
+    logger.info(
+        f"[Minibatch {frame_no}/{total}] COMPLETE! Wrote {notes} notes to {outfile}"
+    )
 
     return outfile
 
