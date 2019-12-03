@@ -4,8 +4,8 @@ data:
   etl:
     dry_run: False
     partition_size: 50
-    num_workers: 2
-    threads_per_worker: 1
+    num_workers: 1
+    threads_per_worker: 4
 
 defaults:
   - model: dual
