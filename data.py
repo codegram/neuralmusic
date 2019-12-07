@@ -1,5 +1,6 @@
 import math
 import os
+import time
 import logging
 from pathlib import Path
 from typing import Collection
@@ -7,15 +8,43 @@ from typing import Collection
 import hydra
 import prefect
 import fastparquet
-from dask.distributed import Client
+import spell.metrics
 from prefect import task, Flow
-from prefect.engine.signals import SKIP
 from prefect.engine.executors import DaskExecutor
+from prefect.engine.signals import SKIP
 from prefect.tasks.shell import ShellTask
 
-from src.midi import parse_midi_file
+from neuralmusic.midi import parse_midi_file
 
 log = logging.getLogger("data")
+
+total_songs = 0
+malformed_songs = 0
+valid_songs = 0
+valid_notes = 0
+
+started_at = None
+
+if "SPELL" in os.environ:
+    metric = spell.metrics.send_metric
+
+    def metric(_logger, k, v):
+        spell.metrics.send_metric(k, v)
+
+
+else:
+
+    def metric(logger, k, v):
+        logger.info(f"[{k}]: {v}")
+
+
+def report(logger):
+    elapsed = time.time() - started_at
+    metric(logger, "Total Songs", total_songs)
+    metric(logger, "Malformed Songs", malformed_songs)
+    metric(logger, "Notes", valid_notes)
+    metric(logger, "Total Songs / second", (total_songs / elapsed))
+    metric(logger, "Notes / second", (valid_notes / elapsed))
 
 
 @task
@@ -58,30 +87,31 @@ def process_and_write(mini_batch: Collection[str], outdir: str) -> bytes:
     frame_no = prefect.context.get("map_index")
     Path(outdir).mkdir(parents=True, exist_ok=True)
     outfile = f"{outdir}/out_{frame_no}.parq"
-    notes = 0
 
     logger = prefect.context.get("logger")
 
     should_append = False
 
-    n = 0
-    valid_n = 0
-    total = len(mini_batch)
+    global total_songs
+    global valid_songs
+    global valid_notes
+    global malformed_songs
+
     for file in mini_batch:
-        n += 1
         df, processed_notes = parse_midi_file(file)
         if df is not None:
-            valid_n += 1
-            fastparquet.write(outfile, df, compression="SNAPPY", append=should_append)
-            should_append = True
+            valid_songs += 1
+            valid_notes += processed_notes
 
-            notes += processed_notes
+            fastparquet.write(outfile, df, compression="SNAPPY", append=should_append)
+            del df
+            should_append = True
         else:
+            malformed_songs += 1
             logger.warning(f"[Minibatch {frame_no}] {file} could not be processed.")
 
-    logger.info(
-        f"[Minibatch {frame_no}/{total}] COMPLETE! Wrote {notes} notes to {outfile}"
-    )
+        total_songs += 1
+        report(logger)
 
     return outfile
 
@@ -131,11 +161,12 @@ def main(cfg):
         flow.visualize()
     else:
         log.info("Executing flow")
-        client = Client(
+        executor = DaskExecutor(
             n_workers=cfg.data.etl.num_workers,
             threads_per_worker=cfg.data.etl.threads_per_worker,
         )
-        executor = DaskExecutor(address=client.scheduler.address)
+        global started_at
+        started_at = time.time()
         flow.run(executor=executor)
 
 

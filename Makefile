@@ -1,19 +1,26 @@
-data:
-	spell run --machine-type CPU --conda-file=conda.yml --mount uploads/midi:midi 'python data.py data.etl.tar_gz_path=/spell/neuralmusic/midi/midi.tar.gz data.etl.outdir=/spell/neuralmusic/out; rm -fr outputs'
+SRC = $(wildcard nbs/*.ipynb)
 
-deps:
-	conda env update --prefix ./env --file conda.yml && source activate ./env
+all: build docs
 
-lint:
-	source activate ./env && flake8 *.py src tests
+build: $(SRC)
+	nbdev_build_lib
+	touch neuralmusic
+
+docs_serve: docs
+	cd docs && bundle exec jekyll serve
+
+docs: $(SRC)
+	nbdev_build_docs
+	touch docs
 
 test:
-	source activate ./env && pytest tests
+	nbdev_test_nbs --flags test
 
-test-ci:
-	mkdir -p test-reports && source activate ./env && pytest --junitxml=test-reports/junit.xml
+data:
+	spell run --machine-type CPU --conda-file=conda.yml --mount uploads/midi:midi 'SPELL=True python data.py data.etl.tar_gz_path=/spell/neuralmusic/midi/midi.tar.gz data.etl.outdir=/spell/neuralmusic/out; rm -fr outputs'
 
-clean:
-	rm -fr logs mlruns test-reports outputs model.pkl
+deps:
+	conda env update --prefix ./env --file conda.yml && source activate ./env && pip install nbdev
+	cd docs && bundle install
 
-.PHONY: deps lint test clean
+.PHONY: deps

@@ -3,5 +3,6 @@
   "python.envFile": "${workspaceFolder}/.env",
   "python.linting.pylamaEnabled": false,
   "python.linting.flake8Enabled": true,
-  "python.linting.enabled": true
+  "python.linting.enabled": true,
+  "python.dataScience.jupyterServerURI": "http://127.0.0.1:8888/?token=832d7526bfd9af8134d1b2ec61b954d788a0d6af4bcca4f7"
 }
