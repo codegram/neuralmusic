@@ -9,6 +9,16 @@ jobs:
         with:
           python-version: "3.6"
           architecture: "x64"
+      - uses: actions/cache@v1
+        id: conda-cache
+        with:
+          path: /github/home/myenv
+          key: ${{ runner.os }}-${{ hashFiles('conda.yml') }}
+      - name: Install conda deps
+        if: steps.conda-cache.outputs.cache-hit != 'true'
+        uses: matthewrmshin/conda-action@v1
+        with:
+          args: apt-get install git-core -y && conda env update -f conda.yml
       - name: Install the library
         run: |
           pip install nbdev
@@ -28,12 +38,6 @@ jobs:
       - name: Check if there is no diff library/notebooks
         run: |
           if [ -n "$(nbdev_diff_nbs)" ]; then echo -e "!!! Detected difference between the notebooks and the library"; false; fi
-      - name: Install git
-        run: sudo apt-get install git-core -y
-      - name: Install conda deps
-        uses: matthewrmshin/conda-action@v1
-        with:
-          args: conda env update -f ./conda.yml
       - name: Run tests
         uses: matthewrmshin/conda-action@v1
         with:
