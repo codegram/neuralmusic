@@ -28,6 +28,11 @@ jobs:
       - name: Check if there is no diff library/notebooks
         run: |
           if [-n "$(nbdev_diff_nbs)"]; then echo -e "!!! Detected difference between the notebooks and the library"; false; fi
+      - name: Install conda deps
+        uses: matthewrmshin/conda-action@v1
+        with:
+          args: conda env update -f ./conda.yml
       - name: Run tests
-        run: |
-          nbdev_test_nbs
+        uses: matthewrmshin/conda-action@v1
+        with:
+          args: nbdev_test_nbs --flags test

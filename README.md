@@ -8,37 +8,7 @@
 
 -->
 
-# Project name here
+# Neuralmusic
 
-> Summary description here.
+> An experiment at learning multiple aspects of a signal in parallel.
 
-
-This file will become your README and also the index of your documentation.
-
-## Install
-
-`pip install your_project_name`
-
-## How to use
-
-Fill me in please! Don't forget code examples:
-<div class="codecell" markdown="1">
-<div class="input_area" markdown="1">
-
-```python
-1+1
-```
-
-</div>
-<div class="output_area" markdown="1">
-
-
-
-
-    2
-
-
-
-</div>
-
-</div>
