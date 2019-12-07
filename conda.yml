@@ -23,6 +23,7 @@ dependencies:
   - pip:
       - spell
       - nb_black
+      - nbdev
       - music21
       - fastparquet
       - prefect[viz]

@@ -22,16 +22,6 @@ summary: "summary"
 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> nb_black
-</pre></div>
-
-    </div>
-</div>
-</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -41,54 +31,15 @@ summary: "summary"
 
 
 
-<div id="a89a6022-ea36-4299-8766-89bf1ae9ec3e"></div>
+<div id="eb8a741b-4393-4da3-a92d-0d3265ce815f"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#a89a6022-ea36-4299-8766-89bf1ae9ec3e');
+var element = $('#eb8a741b-4393-4da3-a92d-0d3265ce815f');
 
             setTimeout(function() {
-                var nbb_cell_id = 1;
-                var nbb_unformatted_code = "%load_ext nb_black";
-                var nbb_formatted_code = "%load_ext nb_black";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            
-</script>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-
-<div id="93496b27-274d-4c11-b504-70dddc930853"></div>
-<div class="output_subarea output_javascript ">
-<script type="text/javascript">
-var element = $('#93496b27-274d-4c11-b504-70dddc930853');
-
-            setTimeout(function() {
-                var nbb_cell_id = 3;
-                var nbb_unformatted_code = "# export\nfrom typing import Optional, Tuple\n\nfrom music21 import converter, instrument, note, chord\nfrom music21.midi import MidiException\nimport pandas as pd";
-                var nbb_formatted_code = "# export\nfrom typing import Optional, Tuple\n\nfrom music21 import converter, instrument, note, chord\nfrom music21.midi import MidiException\nimport pandas as pd";
+                var nbb_cell_id = 74;
+                var nbb_unformatted_code = "# export\nfrom typing import Optional, Tuple, Collection\nimport re\n\nfrom music21 import converter, instrument, note, chord, stream, volume, duration, midi\nfrom music21.midi import MidiException\nimport pandas as pd";
+                var nbb_formatted_code = "# export\nfrom typing import Optional, Tuple, Collection\nimport re\n\nfrom music21 import converter, instrument, note, chord, stream, volume, duration, midi\nfrom music21.midi import MidiException\nimport pandas as pd";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -114,9 +65,7 @@ var element = $('#93496b27-274d-4c11-b504-70dddc930853');
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># test</span>
-<span class="kn">from</span> <span class="nn">test</span> <span class="kn">import</span> <span class="n">test_eq</span>
-<span class="kn">from</span> <span class="nn">music21</span> <span class="kn">import</span> <span class="n">volume</span><span class="p">,</span> <span class="n">duration</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">test</span> <span class="kn">import</span> <span class="n">test_eq</span>
 </pre></div>
 
     </div>
@@ -131,15 +80,15 @@ var element = $('#93496b27-274d-4c11-b504-70dddc930853');
 
 
 
-<div id="a848f6bc-06c7-49ee-93dc-2b30a46b77b8"></div>
+<div id="3d8af3c0-3726-46da-a706-42993afe4ef8"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#a848f6bc-06c7-49ee-93dc-2b30a46b77b8');
+var element = $('#3d8af3c0-3726-46da-a706-42993afe4ef8');
 
             setTimeout(function() {
-                var nbb_cell_id = 4;
-                var nbb_unformatted_code = "# test\nfrom test import test_eq\nfrom music21 import volume, duration";
-                var nbb_formatted_code = "# test\nfrom test import test_eq\nfrom music21 import volume, duration";
+                var nbb_cell_id = 75;
+                var nbb_unformatted_code = "from test import test_eq";
+                var nbb_formatted_code = "from test import test_eq";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -177,13 +126,13 @@ var element = $('#a848f6bc-06c7-49ee-93dc-2b30a46b77b8');
 
 
 
-<div id="d944a058-9f58-4889-9f8c-a4a6062abca0"></div>
+<div id="a8f299f7-d734-4e9b-91ec-66aab6ff29a3"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#d944a058-9f58-4889-9f8c-a4a6062abca0');
+var element = $('#a8f299f7-d734-4e9b-91ec-66aab6ff29a3');
 
             setTimeout(function() {
-                var nbb_cell_id = 5;
+                var nbb_cell_id = 13;
                 var nbb_unformatted_code = "# export\n\nPitch, Duration, Velocity = str, float, int\nTriplet = Tuple[Pitch, Duration, Velocity]";
                 var nbb_formatted_code = "# export\n\nPitch, Duration, Velocity = str, float, int\nTriplet = Tuple[Pitch, Duration, Velocity]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -223,14 +172,14 @@ var element = $('#d944a058-9f58-4889-9f8c-a4a6062abca0');
 
 
 
-<div id="9f7c221b-3d3a-4647-a207-9c4bf93de53c"></div>
+<div id="2513901f-1d38-457e-aa95-afd297473cd4"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#9f7c221b-3d3a-4647-a207-9c4bf93de53c');
+var element = $('#2513901f-1d38-457e-aa95-afd297473cd4');
 
             setTimeout(function() {
-                var nbb_cell_id = 9;
-                var nbb_unformatted_code = "# export\n\n\ndef parse_single_note(note: note.Note) -> Triplet:\n    return (str(note.pitch), float(note.duration.quarterLength), note.volume.velocity)\n\n\ndef parse_chord(chord: chord.Chord) -> Triplet:\n    return (\n        \".\".join(str(n) for n in chord.normalOrder),\n        float(chord.duration.quarterLength),\n        chord.volume.velocity,\n    )\n\ndef parse_rest(rest: note.Rest) -> Triplet:\n    return (\"R\", float(rest.duration.quarterLength), 0)";
+                var nbb_cell_id = 14;
+                var nbb_unformatted_code = "# export\n\n\ndef parse_single_note(note: note.Note) -> Triplet:\n    return (str(note.pitch), float(note.duration.quarterLength), note.volume.velocity)\n\n\ndef parse_chord(chord: chord.Chord) -> Triplet:\n    return (\n        \".\".join(str(n) for n in chord.normalOrder),\n        float(chord.duration.quarterLength),\n        chord.volume.velocity,\n    )\n\n\ndef parse_rest(rest: note.Rest) -> Triplet:\n    return (\"R\", float(rest.duration.quarterLength), 0)";
                 var nbb_formatted_code = "# export\n\n\ndef parse_single_note(note: note.Note) -> Triplet:\n    return (str(note.pitch), float(note.duration.quarterLength), note.volume.velocity)\n\n\ndef parse_chord(chord: chord.Chord) -> Triplet:\n    return (\n        \".\".join(str(n) for n in chord.normalOrder),\n        float(chord.duration.quarterLength),\n        chord.volume.velocity,\n    )\n\n\ndef parse_rest(rest: note.Rest) -> Triplet:\n    return (\"R\", float(rest.duration.quarterLength), 0)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -261,7 +210,7 @@ var element = $('#9f7c221b-3d3a-4647-a207-9c4bf93de53c');
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="parse_single_note" class="doc_header"><code>parse_single_note</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/midi.py#L20" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>parse_single_note</code>(<strong><code>note</code></strong>:<code>Note</code>)</p>
+<h4 id="parse_single_note" class="doc_header"><code>parse_single_note</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/midi.py#L22" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>parse_single_note</code>(<strong><code>note</code></strong>:<code>Note</code>)</p>
 </blockquote>
 
 </div>
@@ -281,7 +230,7 @@ var element = $('#9f7c221b-3d3a-4647-a207-9c4bf93de53c');
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="parse_chord" class="doc_header"><code>parse_chord</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/midi.py#L24" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>parse_chord</code>(<strong><code>chord</code></strong>:<code>Chord</code>)</p>
+<h4 id="parse_chord" class="doc_header"><code>parse_chord</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/midi.py#L26" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>parse_chord</code>(<strong><code>chord</code></strong>:<code>Chord</code>)</p>
 </blockquote>
 
 </div>
@@ -301,7 +250,7 @@ var element = $('#9f7c221b-3d3a-4647-a207-9c4bf93de53c');
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="parse_rest" class="doc_header"><code>parse_rest</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/midi.py#L32" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>parse_rest</code>(<strong><code>rest</code></strong>:<code>Rest</code>)</p>
+<h4 id="parse_rest" class="doc_header"><code>parse_rest</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/midi.py#L34" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>parse_rest</code>(<strong><code>rest</code></strong>:<code>Rest</code>)</p>
 </blockquote>
 
 </div>
@@ -327,6 +276,11 @@ var element = $('#9f7c221b-3d3a-4647-a207-9c4bf93de53c');
 
 
 <span class="n">test_eq</span><span class="p">((</span><span class="s2">&quot;C3&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">120</span><span class="p">),</span> <span class="n">parse_single_note</span><span class="p">(</span><span class="n">loud</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;C3&quot;</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="n">quarter</span><span class="p">))))</span>
+<span class="n">test_eq</span><span class="p">(</span>
+    <span class="p">(</span><span class="s2">&quot;1.3.5&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">80</span><span class="p">),</span>
+    <span class="n">parse_chord</span><span class="p">(</span><span class="n">loud</span><span class="p">(</span><span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="n">duration</span><span class="o">=</span><span class="n">quarter</span><span class="p">),</span> <span class="n">velocity</span><span class="o">=</span><span class="mi">80</span><span class="p">)),</span>
+<span class="p">)</span>
+<span class="n">test_eq</span><span class="p">((</span><span class="s2">&quot;R&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">parse_rest</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Rest</span><span class="p">(</span><span class="n">duration</span><span class="o">=</span><span class="n">quarter</span><span class="p">)))</span>
 </pre></div>
 
     </div>
@@ -341,15 +295,15 @@ var element = $('#9f7c221b-3d3a-4647-a207-9c4bf93de53c');
 
 
 
-<div id="36d3d061-d43b-4cb1-b672-5450c63d245f"></div>
+<div id="3a3d07bb-21b6-4825-99d9-f8785d3133c3"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#36d3d061-d43b-4cb1-b672-5450c63d245f');
+var element = $('#3a3d07bb-21b6-4825-99d9-f8785d3133c3');
 
             setTimeout(function() {
-                var nbb_cell_id = 10;
-                var nbb_unformatted_code = "# test\nquarter = duration.Duration(\"quarter\")\n\n\ndef loud(n: note.Note, velocity=120) -> note.Note:\n    n.volume = volume.Volume(velocity=velocity)\n    return n\n\n\ntest_eq((\"C3\", 1.0, 120), parse_single_note(loud(note.Note(\"C3\", duration=quarter))))";
-                var nbb_formatted_code = "# test\nquarter = duration.Duration(\"quarter\")\n\n\ndef loud(n: note.Note, velocity=120) -> note.Note:\n    n.volume = volume.Volume(velocity=velocity)\n    return n\n\n\ntest_eq((\"C3\", 1.0, 120), parse_single_note(loud(note.Note(\"C3\", duration=quarter))))";
+                var nbb_cell_id = 15;
+                var nbb_unformatted_code = "# test\nquarter = duration.Duration(\"quarter\")\n\n\ndef loud(n: note.Note, velocity=120) -> note.Note:\n    n.volume = volume.Volume(velocity=velocity)\n    return n\n\n\ntest_eq((\"C3\", 1.0, 120), parse_single_note(loud(note.Note(\"C3\", duration=quarter))))\ntest_eq(\n    (\"1.3.5\", 1.0, 80),\n    parse_chord(loud(chord.Chord([1, 3, 5], duration=quarter), velocity=80)),\n)\ntest_eq((\"R\", 1.0, 0), parse_rest(note.Rest(duration=quarter)))";
+                var nbb_formatted_code = "# test\nquarter = duration.Duration(\"quarter\")\n\n\ndef loud(n: note.Note, velocity=120) -> note.Note:\n    n.volume = volume.Volume(velocity=velocity)\n    return n\n\n\ntest_eq((\"C3\", 1.0, 120), parse_single_note(loud(note.Note(\"C3\", duration=quarter))))\ntest_eq(\n    (\"1.3.5\", 1.0, 80),\n    parse_chord(loud(chord.Chord([1, 3, 5], duration=quarter), velocity=80)),\n)\ntest_eq((\"R\", 1.0, 0), parse_rest(note.Rest(duration=quarter)))";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -380,15 +334,15 @@ var element = $('#36d3d061-d43b-4cb1-b672-5450c63d245f');
 
 
 
-<div id="f2e15576-bfd1-472e-a45e-82707c84ca3e"></div>
+<div id="44cc7140-ad9c-4191-9904-076bdad6c0d8"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#f2e15576-bfd1-472e-a45e-82707c84ca3e');
+var element = $('#44cc7140-ad9c-4191-9904-076bdad6c0d8');
 
             setTimeout(function() {
-                var nbb_cell_id = 11;
-                var nbb_unformatted_code = "# export\ndef parse_midi_file(file: str) -> (Optional[pd.DataFrame], int):\n    \"\"\"\n    Attempts to parse a midi file into a Dataframe. Returns a Dataframe or None, together with the number of notes processed.\n    \"\"\"\n    try:\n        midi = converter.parse(file)\n        notes_to_parse = None\n        parts = instrument.partitionByInstrument(midi)\n        notes = []\n        if parts:  # file has instrument parts\n            notes_to_parse = parts.parts[0].recurse()\n        else:  # file has notes in a flat structure\n            notes_to_parse = midi.flat.notes\n        for element in notes_to_parse:\n            if element.__class__ == note.Note:\n                notes.append(parse_single_note(element))\n            elif element.__class__ == chord.Chord:\n                notes.append(parse_chord(element))\n            elif element.__class__ == note.Rest:\n                notes.append(parse_rest(element))\n\n        df = pd.DataFrame.from_dict(\n            {\n                \"pitches\": [[[pitch for (pitch, duration, velocity) in notes]]],\n                \"durations\": [[[duration for (pitch, duration, velocity) in notes]]],\n                \"velocities\": [[[velocity for (pitch, duration, velocity) in notes]]],\n            }\n        )\n        return (df, len(notes))\n    except MidiException:\n        return (None, 0)\n    except IndexError:\n        return (None, 0)";
-                var nbb_formatted_code = "# export\ndef parse_midi_file(file: str) -> (Optional[pd.DataFrame], int):\n    \"\"\"\n    Attempts to parse a midi file into a Dataframe. Returns a Dataframe or None, together with the number of notes processed.\n    \"\"\"\n    try:\n        midi = converter.parse(file)\n        notes_to_parse = None\n        parts = instrument.partitionByInstrument(midi)\n        notes = []\n        if parts:  # file has instrument parts\n            notes_to_parse = parts.parts[0].recurse()\n        else:  # file has notes in a flat structure\n            notes_to_parse = midi.flat.notes\n        for element in notes_to_parse:\n            if element.__class__ == note.Note:\n                notes.append(parse_single_note(element))\n            elif element.__class__ == chord.Chord:\n                notes.append(parse_chord(element))\n            elif element.__class__ == note.Rest:\n                notes.append(parse_rest(element))\n\n        df = pd.DataFrame.from_dict(\n            {\n                \"pitches\": [[[pitch for (pitch, duration, velocity) in notes]]],\n                \"durations\": [[[duration for (pitch, duration, velocity) in notes]]],\n                \"velocities\": [[[velocity for (pitch, duration, velocity) in notes]]],\n            }\n        )\n        return (df, len(notes))\n    except MidiException:\n        return (None, 0)\n    except IndexError:\n        return (None, 0)";
+                var nbb_cell_id = 77;
+                var nbb_unformatted_code = "# export\n\ndef parse_midi_file(file: str) -> (Optional[pd.DataFrame], int):\n    \"\"\"\n    Attempts to parse a midi file into a Dataframe. Returns a Dataframe or None, together with the number of notes processed.\n    \"\"\"\n    try:\n        midi = converter.parse(file)\n        notes_to_parse = None\n        parts = instrument.partitionByInstrument(midi)\n        notes = []\n        if parts:  # file has instrument parts\n            notes_to_parse = parts.parts[0].recurse()\n        else:  # file has notes in a flat structure\n            notes_to_parse = midi.flat.notes\n        for element in notes_to_parse:\n            if element.__class__ == note.Note:\n                notes.append(parse_single_note(element))\n            elif element.__class__ == chord.Chord:\n                notes.append(parse_chord(element))\n            elif element.__class__ == note.Rest:\n                notes.append(parse_rest(element))\n\n        df = pd.DataFrame.from_dict(\n            {\n                \"pitches\": [[[pitch for (pitch, dur, velocity) in notes]]],\n                \"durations\": [[[dur for (pitch, dur, velocity) in notes]]],\n                \"velocities\": [[[velocity for (pitch, dur, velocity) in notes]]],\n            }\n        )\n        return (df, len(notes))\n    except MidiException:\n        return (None, 0)\n    except IndexError:\n        return (None, 0)\n\n\ndef row_to_triplets(df: pd.DataFrame, row_index: int) -> Collection[Triplet]:\n    \"\"\"\n    Takes a DataFrame at a specific row and turns that into a triplet.\n    \"\"\"\n    pitches, durations, velocities = df.values[row_index]\n    pitches = pitches[0]\n    durations = durations[0]\n    velocities = velocities[0]\n    return list(zip(pitches, durations, velocities))";
+                var nbb_formatted_code = "# export\n\n\ndef parse_midi_file(file: str) -> (Optional[pd.DataFrame], int):\n    \"\"\"\n    Attempts to parse a midi file into a Dataframe. Returns a Dataframe or None, together with the number of notes processed.\n    \"\"\"\n    try:\n        midi = converter.parse(file)\n        notes_to_parse = None\n        parts = instrument.partitionByInstrument(midi)\n        notes = []\n        if parts:  # file has instrument parts\n            notes_to_parse = parts.parts[0].recurse()\n        else:  # file has notes in a flat structure\n            notes_to_parse = midi.flat.notes\n        for element in notes_to_parse:\n            if element.__class__ == note.Note:\n                notes.append(parse_single_note(element))\n            elif element.__class__ == chord.Chord:\n                notes.append(parse_chord(element))\n            elif element.__class__ == note.Rest:\n                notes.append(parse_rest(element))\n\n        df = pd.DataFrame.from_dict(\n            {\n                \"pitches\": [[[pitch for (pitch, dur, velocity) in notes]]],\n                \"durations\": [[[dur for (pitch, dur, velocity) in notes]]],\n                \"velocities\": [[[velocity for (pitch, dur, velocity) in notes]]],\n            }\n        )\n        return (df, len(notes))\n    except MidiException:\n        return (None, 0)\n    except IndexError:\n        return (None, 0)\n\n\ndef row_to_triplets(df: pd.DataFrame, row_index: int) -> Collection[Triplet]:\n    \"\"\"\n    Takes a DataFrame at a specific row and turns that into a triplet.\n    \"\"\"\n    pitches, durations, velocities = df.values[row_index]\n    pitches = pitches[0]\n    durations = durations[0]\n    velocities = velocities[0]\n    return list(zip(pitches, durations, velocities))";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -418,7 +372,7 @@ var element = $('#f2e15576-bfd1-472e-a45e-82707c84ca3e');
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="parse_midi_file" class="doc_header"><code>parse_midi_file</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/midi.py#L36" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>parse_midi_file</code>(<strong><code>file</code></strong>:<code>str</code>)</p>
+<h4 id="parse_midi_file" class="doc_header"><code>parse_midi_file</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/midi.py#L40" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>parse_midi_file</code>(<strong><code>file</code></strong>:<code>str</code>)</p>
 </blockquote>
 <p>Attempts to parse a midi file into a Dataframe. Returns a Dataframe or None, together with the number of notes processed.</p>
 
@@ -426,6 +380,426 @@ var element = $('#f2e15576-bfd1-472e-a45e-82707c84ca3e');
 
 </div>
 
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="row_to_triplets" class="doc_header"><code>row_to_triplets</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/midi.py#L75" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>row_to_triplets</code>(<strong><code>df</code></strong>:<code>DataFrame</code>, <strong><code>row_index</code></strong>:<code>int</code>)</p>
+</blockquote>
+<p>Takes a DataFrame at a specific row and turns that into a triplet.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># test</span>
+<span class="n">df</span><span class="p">,</span> <span class="n">notes</span> <span class="o">=</span> <span class="n">parse_midi_file</span><span class="p">(</span><span class="s2">&quot;data/ff4-main.mid&quot;</span><span class="p">)</span>
+
+<span class="n">test_eq</span><span class="p">(</span><span class="mi">812</span><span class="p">,</span> <span class="n">notes</span><span class="p">)</span>
+
+<span class="n">triplets</span> <span class="o">=</span> <span class="n">row_to_triplets</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="n">test_eq</span><span class="p">([(</span><span class="s2">&quot;A5&quot;</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">110</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;R&quot;</span><span class="p">,</span> <span class="mf">192.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;E5&quot;</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">110</span><span class="p">)],</span> <span class="n">triplets</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+
+<div id="b612aae0-ccd4-40bc-a369-4cd41bc9c184"></div>
+<div class="output_subarea output_javascript ">
+<script type="text/javascript">
+var element = $('#b612aae0-ccd4-40bc-a369-4cd41bc9c184');
+
+            setTimeout(function() {
+                var nbb_cell_id = 50;
+                var nbb_unformatted_code = "# test\ndf, notes = parse_midi_file(\"data/ff4-main.mid\")\n\ntest_eq(812, notes)\n\ntriplets = row_to_triplets(df, 0)\n\ntest_eq([(\"A5\", 0.5, 110), (\"R\", 192.0, 0), (\"E5\", 0.5, 110)], triplets[0:3])";
+                var nbb_formatted_code = "# test\ndf, notes = parse_midi_file(\"data/ff4-main.mid\")\n\ntest_eq(812, notes)\n\ntriplets = row_to_triplets(df, 0)\n\ntest_eq([(\"A5\", 0.5, 110), (\"R\", 192.0, 0), (\"E5\", 0.5, 110)], triplets[0:3])";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            
+</script>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Turning-triplets-back-into-MIDI-files">Turning triplets back into MIDI files<a class="anchor-link" href="#Turning-triplets-back-into-MIDI-files">&#182;</a></h1><p>Another interesting thing is to be able to go from triplets to MIDI files, display their scores and even an audible IPython widget to play the audio.</p>
+<p>But first of all, some utilities to turn these triplets into <code>music21</code> elements:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+
+<div id="8b599d39-c808-4d27-aa86-2fb67dda30ce"></div>
+<div class="output_subarea output_javascript ">
+<script type="text/javascript">
+var element = $('#8b599d39-c808-4d27-aa86-2fb67dda30ce');
+
+            setTimeout(function() {
+                var nbb_cell_id = 76;
+                var nbb_unformatted_code = "# export\n\ndef triplet_to_note(triplet: Triplet):\n    pitch, dur, vel = triplet\n    dur = duration.Duration(dur)\n    vol = volume.Volume(velocity=vel)\n    if re.match(r\"^[0-9]\", pitch):\n        c = chord.Chord([int(x) for x in pitch.split(\".\")], duration=dur)\n        c.volume = vol\n        return c\n    elif pitch == \"R\":\n        return note.Rest(duration=dur)\n    else:\n        n = note.Note(pitch, duration=dur)\n        n.volume = vol\n        return n\n\n\ndef triplets_to_stream(triplets: Collection[Triplet]) -> stream.Stream:\n    s = stream.Stream()\n    _ = [s.append(triplet_to_note(triplet)) for triplet in triplets]\n    return s\n\n\ndef write_midi(stream, name):\n    mf = midi.translate.streamToMidiFile(stream)\n    mf.open(f\"{name}.mid\", \"wb\")\n    mf.write()\n    mf.close()";
+                var nbb_formatted_code = "# export\n\n\ndef triplet_to_note(triplet: Triplet):\n    pitch, dur, vel = triplet\n    dur = duration.Duration(dur)\n    vol = volume.Volume(velocity=vel)\n    if re.match(r\"^[0-9]\", pitch):\n        c = chord.Chord([int(x) for x in pitch.split(\".\")], duration=dur)\n        c.volume = vol\n        return c\n    elif pitch == \"R\":\n        return note.Rest(duration=dur)\n    else:\n        n = note.Note(pitch, duration=dur)\n        n.volume = vol\n        return n\n\n\ndef triplets_to_stream(triplets: Collection[Triplet]) -> stream.Stream:\n    s = stream.Stream()\n    _ = [s.append(triplet_to_note(triplet)) for triplet in triplets]\n    return s\n\n\ndef write_midi(stream, name):\n    mf = midi.translate.streamToMidiFile(stream)\n    mf.open(f\"{name}.mid\", \"wb\")\n    mf.write()\n    mf.close()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            
+</script>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="triplet_to_note" class="doc_header"><code>triplet_to_note</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/midi.py#L88" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>triplet_to_note</code>(<strong><code>triplet</code></strong>:<code>Tuple</code>[<code>str</code>, <code>float</code>, <code>int</code>])</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="triplets_to_stream" class="doc_header"><code>triplets_to_stream</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/midi.py#L104" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>triplets_to_stream</code>(<strong><code>triplets</code></strong>:<code>Collection</code>[<code>Tuple</code>[<code>str</code>, <code>float</code>, <code>int</code>]])</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="write_midi" class="doc_header"><code>write_midi</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/midi.py#L110" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>write_midi</code>(<strong><code>stream</code></strong>, <strong><code>name</code></strong>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now let's try to visualize and listen to these streams.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If you're running Mac or Linux, uncomment the right <code>brew</code> or <code>apt</code> call:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># skip</span>
+
+<span class="c1">#!brew install fluidsynth</span>
+<span class="c1">#!apt install fluidsynth</span>
+<span class="c1">#!wget ftp://ftp.osuosl.org/pub/musescore/soundfont/MuseScore_General/MuseScore_General.sf3</span>
+<span class="c1">#!pip install midi2audio</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>--2019-12-08 01:55:32--  ftp://ftp.osuosl.org/pub/musescore/soundfont/MuseScore_General/MuseScore_General.sf3
+           =&gt; ‘MuseScore_General.sf3’
+Resolving ftp.osuosl.org (ftp.osuosl.org)... 140.211.166.134, 64.50.236.52, 64.50.233.100
+Connecting to ftp.osuosl.org (ftp.osuosl.org)|140.211.166.134|:21... connected.
+Logging in as anonymous ... Logged in!
+==&gt; SYST ... done.    ==&gt; PWD ... done.
+==&gt; TYPE I ... done.  ==&gt; CWD (1) /pub/musescore/soundfont/MuseScore_General ... done.
+==&gt; SIZE MuseScore_General.sf3 ... 39893918
+==&gt; PASV ... done.    ==&gt; RETR MuseScore_General.sf3 ... done.
+Length: 39893918 (38M) (unauthoritative)
+
+MuseScore_General.s 100%[===================&gt;]  38.04M  4.47MB/s    in 12s     
+
+2019-12-08 01:55:48 (3.23 MB/s) - ‘MuseScore_General.sf3’ saved [39893918]
+
+Requirement already satisfied: midi2audio in /Users/txus/Code/codegram/neuralmusic/env/lib/python3.7/site-packages (0.1.1)
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+
+<div id="f2995045-ec9c-45e9-a486-f98e4af1cf74"></div>
+<div class="output_subarea output_javascript ">
+<script type="text/javascript">
+var element = $('#f2995045-ec9c-45e9-a486-f98e4af1cf74');
+
+            setTimeout(function() {
+                var nbb_cell_id = 70;
+                var nbb_unformatted_code = "#!brew install fluidsynth\n#!apt install fluidsynth\n!wget ftp://ftp.osuosl.org/pub/musescore/soundfont/MuseScore_General/MuseScore_General.sf3\n!pip install midi2audio";
+                var nbb_formatted_code = "#!brew install fluidsynth\n#!apt install fluidsynth\n!wget ftp://ftp.osuosl.org/pub/musescore/soundfont/MuseScore_General/MuseScore_General.sf3\n!pip install midi2audio";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            
+</script>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># skip</span>
+
+<span class="o">%</span><span class="k">load_ext</span> music21.ipython21.ipExtension
+
+<span class="kn">import</span> <span class="nn">json</span><span class="o">,</span> <span class="nn">random</span>
+
+<span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">Javascript</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Audio</span>
+
+<span class="kn">from</span> <span class="nn">midi2audio</span> <span class="kn">import</span> <span class="n">FluidSynth</span>
+
+
+<span class="k">def</span> <span class="nf">show_score</span><span class="p">(</span><span class="n">score</span><span class="p">):</span>
+    <span class="n">xml</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">score</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;musicxml&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="n">show_xml</span><span class="p">(</span><span class="n">xml</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">show_xml</span><span class="p">(</span><span class="n">xml</span><span class="p">):</span>
+    <span class="n">DIV_ID</span> <span class="o">=</span> <span class="s2">&quot;OSMD-div-&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1000000</span><span class="p">))</span>
+    <span class="c1"># print(&quot;DIV_ID&quot;, DIV_ID)</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;loading OpenSheetMusicDisplay&quot;</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">display</span><span class="p">(</span>
+        <span class="n">HTML</span><span class="p">(</span><span class="s1">&#39;&lt;div style=&quot;background: white&quot; id=&quot;&#39;</span> <span class="o">+</span> <span class="n">DIV_ID</span> <span class="o">+</span> <span class="s1">&#39;&quot;&gt;</span><span class="si">{}</span><span class="s1">&lt;/div&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">msg</span><span class="p">))</span>
+    <span class="p">)</span>
+
+    <span class="c1"># print(&#39;xml length:&#39;, len(xml))</span>
+
+    <span class="n">script</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    console.log(&quot;loadOSMD()&quot;);</span>
+<span class="s2">    function loadOSMD() { </span>
+<span class="s2">        return new Promise(function(resolve, reject){</span>
+
+<span class="s2">            if (window.opensheetmusicdisplay) {</span>
+<span class="s2">                console.log(&quot;already loaded&quot;)</span>
+<span class="s2">                return resolve(window.opensheetmusicdisplay)</span>
+<span class="s2">            }</span>
+<span class="s2">            console.log(&quot;loading osmd for the first time&quot;)</span>
+<span class="s2">            // OSMD script has a &#39;define&#39; call which conflicts with requirejs</span>
+<span class="s2">            var _define = window.define // save the define object </span>
+<span class="s2">            window.define = undefined // now the loaded script will ignore requirejs</span>
+<span class="s2">            var s = document.createElement( &#39;script&#39; );</span>
+<span class="s2">            s.setAttribute( &#39;src&#39;, &quot;https://cdn.jsdelivr.net/npm/opensheetmusicdisplay@0.3.1/build/opensheetmusicdisplay.min.js&quot; );</span>
+<span class="s2">            //s.setAttribute( &#39;src&#39;, &quot;/custom/opensheetmusicdisplay.js&quot; );</span>
+<span class="s2">            s.onload=function(){</span>
+<span class="s2">                window.define = _define</span>
+<span class="s2">                console.log(&quot;loaded OSMD for the first time&quot;,opensheetmusicdisplay)</span>
+<span class="s2">                resolve(opensheetmusicdisplay);</span>
+<span class="s2">            };</span>
+<span class="s2">            document.body.appendChild( s ); // browser will try to load the new script tag</span>
+<span class="s2">        }) </span>
+<span class="s2">    }</span>
+<span class="s2">    loadOSMD().then((OSMD)=&gt;{</span>
+<span class="s2">        console.log(&quot;loaded OSMD&quot;,OSMD)</span>
+<span class="s2">        var div_id = &quot;{{DIV_ID}}&quot;;</span>
+<span class="s2">            console.log(div_id)</span>
+<span class="s2">        window.openSheetMusicDisplay = new OSMD.OpenSheetMusicDisplay(div_id);</span>
+<span class="s2">        openSheetMusicDisplay</span>
+<span class="s2">            .load({{data}})</span>
+<span class="s2">            .then(</span>
+<span class="s2">              function() {</span>
+<span class="s2">                console.log(&quot;rendering data&quot;)</span>
+<span class="s2">                openSheetMusicDisplay.render();</span>
+<span class="s2">              }</span>
+<span class="s2">            );</span>
+<span class="s2">    })</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+        <span class="s2">&quot;{{DIV_ID}}&quot;</span><span class="p">,</span> <span class="n">DIV_ID</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+        <span class="s2">&quot;{{data}}&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">xml</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">Javascript</span><span class="p">(</span><span class="n">script</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">DIV_ID</span>
+
+
+<span class="k">def</span> <span class="nf">view_song</span><span class="p">(</span><span class="n">triplets</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;song&quot;</span><span class="p">):</span>
+    <span class="n">stream</span> <span class="o">=</span> <span class="n">triplets_to_stream</span><span class="p">(</span><span class="n">triplets</span><span class="p">)</span>
+    <span class="n">write_midi</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{name}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">FluidSynth</span><span class="p">(</span><span class="s2">&quot;MuseScore_General.sf3&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">midi_to_audio</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{name}</span><span class="s2">.mid&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{name}</span><span class="s2">.wav&quot;</span><span class="p">)</span>
+    <span class="n">show_score</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Audio</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{name}</span><span class="s2">.wav&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+
+<div id="0e150a43-5796-4b91-bb1e-a24b0d915915"></div>
+<div class="output_subarea output_javascript ">
+<script type="text/javascript">
+var element = $('#0e150a43-5796-4b91-bb1e-a24b0d915915');
+
+            setTimeout(function() {
+                var nbb_cell_id = 71;
+                var nbb_unformatted_code = "import json, random, re\n\nfrom IPython.core.display import display, HTML, Javascript\nfrom IPython.display import Audio\n\nfrom midi2audio import FluidSynth\n\n\ndef show_score(score):\n    xml = open(score.write(\"musicxml\")).read()\n    show_xml(xml)\n\n\ndef show_xml(xml):\n    DIV_ID = \"OSMD-div-\" + str(random.randint(0, 1000000))\n    # print(\"DIV_ID\", DIV_ID)\n    msg = \"loading OpenSheetMusicDisplay\"\n    msg = \"\"\n    display(\n        HTML('<div style=\"background: white\" id=\"' + DIV_ID + '\">{}</div>'.format(msg))\n    )\n\n    # print('xml length:', len(xml))\n\n    script = \"\"\"\n    console.log(\"loadOSMD()\");\n    function loadOSMD() { \n        return new Promise(function(resolve, reject){\n\n            if (window.opensheetmusicdisplay) {\n                console.log(\"already loaded\")\n                return resolve(window.opensheetmusicdisplay)\n            }\n            console.log(\"loading osmd for the first time\")\n            // OSMD script has a 'define' call which conflicts with requirejs\n            var _define = window.define // save the define object \n            window.define = undefined // now the loaded script will ignore requirejs\n            var s = document.createElement( 'script' );\n            s.setAttribute( 'src', \"https://cdn.jsdelivr.net/npm/opensheetmusicdisplay@0.3.1/build/opensheetmusicdisplay.min.js\" );\n            //s.setAttribute( 'src', \"/custom/opensheetmusicdisplay.js\" );\n            s.onload=function(){\n                window.define = _define\n                console.log(\"loaded OSMD for the first time\",opensheetmusicdisplay)\n                resolve(opensheetmusicdisplay);\n            };\n            document.body.appendChild( s ); // browser will try to load the new script tag\n        }) \n    }\n    loadOSMD().then((OSMD)=>{\n        console.log(\"loaded OSMD\",OSMD)\n        var div_id = \"{{DIV_ID}}\";\n            console.log(div_id)\n        window.openSheetMusicDisplay = new OSMD.OpenSheetMusicDisplay(div_id);\n        openSheetMusicDisplay\n            .load({{data}})\n            .then(\n              function() {\n                console.log(\"rendering data\")\n                openSheetMusicDisplay.render();\n              }\n            );\n    })\n    \"\"\".replace(\n        \"{{DIV_ID}}\", DIV_ID\n    ).replace(\n        \"{{data}}\", json.dumps(xml)\n    )\n    display(Javascript(script))\n    return DIV_ID\n\n\ndef view_song(triplets, name=\"song\"):\n    stream = triplets_to_stream(triplets)\n    write_midi(stream, f\"{name}\")\n\n    FluidSynth('MuseScore_General.sf3').midi_to_audio(f\"{name}.mid\", f\"{name}.wav\")\n    show_score(stream)\n    return Audio(f\"{name}.wav\")";
+                var nbb_formatted_code = "import json, random, re\n\nfrom IPython.core.display import display, HTML, Javascript\nfrom IPython.display import Audio\n\nfrom midi2audio import FluidSynth\n\n\ndef show_score(score):\n    xml = open(score.write(\"musicxml\")).read()\n    show_xml(xml)\n\n\ndef show_xml(xml):\n    DIV_ID = \"OSMD-div-\" + str(random.randint(0, 1000000))\n    # print(\"DIV_ID\", DIV_ID)\n    msg = \"loading OpenSheetMusicDisplay\"\n    msg = \"\"\n    display(\n        HTML('<div style=\"background: white\" id=\"' + DIV_ID + '\">{}</div>'.format(msg))\n    )\n\n    # print('xml length:', len(xml))\n\n    script = \"\"\"\n    console.log(\"loadOSMD()\");\n    function loadOSMD() { \n        return new Promise(function(resolve, reject){\n\n            if (window.opensheetmusicdisplay) {\n                console.log(\"already loaded\")\n                return resolve(window.opensheetmusicdisplay)\n            }\n            console.log(\"loading osmd for the first time\")\n            // OSMD script has a 'define' call which conflicts with requirejs\n            var _define = window.define // save the define object \n            window.define = undefined // now the loaded script will ignore requirejs\n            var s = document.createElement( 'script' );\n            s.setAttribute( 'src', \"https://cdn.jsdelivr.net/npm/opensheetmusicdisplay@0.3.1/build/opensheetmusicdisplay.min.js\" );\n            //s.setAttribute( 'src', \"/custom/opensheetmusicdisplay.js\" );\n            s.onload=function(){\n                window.define = _define\n                console.log(\"loaded OSMD for the first time\",opensheetmusicdisplay)\n                resolve(opensheetmusicdisplay);\n            };\n            document.body.appendChild( s ); // browser will try to load the new script tag\n        }) \n    }\n    loadOSMD().then((OSMD)=>{\n        console.log(\"loaded OSMD\",OSMD)\n        var div_id = \"{{DIV_ID}}\";\n            console.log(div_id)\n        window.openSheetMusicDisplay = new OSMD.OpenSheetMusicDisplay(div_id);\n        openSheetMusicDisplay\n            .load({{data}})\n            .then(\n              function() {\n                console.log(\"rendering data\")\n                openSheetMusicDisplay.render();\n              }\n            );\n    })\n    \"\"\".replace(\n        \"{{DIV_ID}}\", DIV_ID\n    ).replace(\n        \"{{data}}\", json.dumps(xml)\n    )\n    display(Javascript(script))\n    return DIV_ID\n\n\ndef view_song(triplets, name=\"song\"):\n    stream = triplets_to_stream(triplets)\n    write_midi(stream, f\"{name}\")\n\n    FluidSynth(\"MuseScore_General.sf3\").midi_to_audio(f\"{name}.mid\", f\"{name}.wav\")\n    show_score(stream)\n    return Audio(f\"{name}.wav\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            
+</script>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># skip</span>
+<span class="n">triplets</span> <span class="o">=</span> <span class="n">row_to_triplets</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">view_song</span><span class="p">(</span><span class="n">triplets</span><span class="p">)</span>
+</pre></div>
+
+    </div>
 </div>
 </div>
 

@@ -6,9 +6,40 @@ index = {"Triplet": "01_midi.ipynb",
          "parse_single_note": "01_midi.ipynb",
          "parse_chord": "01_midi.ipynb",
          "parse_rest": "01_midi.ipynb",
-         "parse_midi_file": "01_midi.ipynb"}
+         "parse_midi_file": "01_midi.ipynb",
+         "row_to_triplets": "01_midi.ipynb",
+         "triplet_to_note": "01_midi.ipynb",
+         "triplets_to_stream": "01_midi.ipynb",
+         "write_midi": "01_midi.ipynb",
+         "log": "02_data.etl.ipynb",
+         "init_stats": "02_data.etl.ipynb",
+         "report": "02_data.etl.ipynb",
+         "total_songs": "02_data.etl.ipynb",
+         "malformed_songs": "02_data.etl.ipynb",
+         "valid_songs": "02_data.etl.ipynb",
+         "valid_notes": "02_data.etl.ipynb",
+         "started_at": "02_data.etl.ipynb",
+         "untar_cmd": "02_data.etl.ipynb",
+         "untar": "02_data.etl.ipynb",
+         "partition_files": "02_data.etl.ipynb",
+         "process_and_write": "02_data.etl.ipynb",
+         "combine_parquet_files": "02_data.etl.ipynb",
+         "build_etl": "02_data.etl.ipynb",
+         "read_parquet": "03_data.preprocessing.ipynb",
+         "preprocess": "03_data.preprocessing.ipynb",
+         "to_dual": "03_data.preprocessing.ipynb",
+         "dual_numericalize": "03_data.preprocessing.ipynb",
+         "make_splitter": "03_data.preprocessing.ipynb",
+         "DualLMDataLoader": "03_data.preprocessing.ipynb",
+         "data_source": "03_data.preprocessing.ipynb",
+         "process": "03_data.preprocessing.ipynb",
+         "LinearDecoder": "04_model.ipynb",
+         "TheModel": "04_model.ipynb"}
 
-modules = ["midi.py"]
+modules = ["midi.py",
+           "data/etl.py",
+           "data/preprocessing.py",
+           "model.py"]
 
 git_url = "https://github.com/codegram/neuralmusic/tree/master/"
 

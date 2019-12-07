@@ -1,6 +1,13 @@
 {
   "neuralmusic": {
-    "Overview": "/",
-    "Title": "/midi"
+    "Overview": "/"
+  },
+  "Data": {
+    "MIDI parsing": "/midi",
+    "ETL": "/data.etl",
+    "Preprocessing": "/data.preprocessing"
+  },
+  "Training": {
+    "Model": "/model"
   }
 }

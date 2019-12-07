@@ -11,8 +11,26 @@ entries:
       url: /
     - output: web,pdf
       title: Title
-      url: /midi
+      url: Neuralmusic
     output: web
     title: neuralmusic
+  - folderitems:
+    - output: web,pdf
+      title: MIDI parsing
+      url: /midi
+    - output: web,pdf
+      title: ETL
+      url: /data.etl
+    - output: web,pdf
+      title: Preprocessing
+      url: /data.preprocessing
+    output: web
+    title: Data
+  - folderitems:
+    - output: web,pdf
+      title: Model
+      url: /model
+    output: web
+    title: Training
   output: web
   title: Sidebar
