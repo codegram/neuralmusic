@@ -3,7 +3,6 @@ outputs/
 gcp.json
 dask-worker-space/
 out/
-*.tar.gz
 
 .last_checked
 .gitconfig
