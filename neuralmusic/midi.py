@@ -60,9 +60,9 @@ def parse_midi_file(file: str) -> (Optional[pd.DataFrame], int):
 
         df = pd.DataFrame.from_dict(
             {
-                "pitches": [[[pitch for (pitch, dur, velocity) in notes]]],
-                "durations": [[[dur for (pitch, dur, velocity) in notes]]],
-                "velocities": [[[velocity for (pitch, dur, velocity) in notes]]],
+                "pitches": [[pitch for (pitch, dur, velocity) in notes]],
+                "durations": [[dur for (pitch, dur, velocity) in notes]],
+                "velocities": [[velocity for (pitch, dur, velocity) in notes]],
             }
         )
         return (df, len(notes))
@@ -76,10 +76,9 @@ def row_to_triplets(df: pd.DataFrame, row_index: int) -> Collection[Triplet]:
     """
     Takes a DataFrame at a specific row and turns that into a triplet.
     """
-    pitches, durations, velocities = df.values[row_index]
-    pitches = pitches[0]
-    durations = durations[0]
-    velocities = velocities[0]
+    pitches = df.get("pitches")[row_index]
+    durations = df.get("durations")[row_index]
+    velocities = df.get("velocities")[row_index]
     return list(zip(pitches, durations, velocities))
 
 #Cell

@@ -1,10 +1,10 @@
 ---
 
-title: Title
+title: Data pre-processing
 keywords: fastai
 sidebar: home_sidebar
 
-summary: "summary"
+summary: "From raw parquet to an ML-suitable, clean dataset"
 ---
 <!--
 
@@ -31,13 +31,13 @@ summary: "summary"
 
 
 
-<div id="00ddfcd5-50a1-497b-a6b7-0543650bbfd3"></div>
+<div id="c13bde04-2a88-4d32-92e2-c0a8b263abba"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#00ddfcd5-50a1-497b-a6b7-0543650bbfd3');
+var element = $('#c13bde04-2a88-4d32-92e2-c0a8b263abba');
 
             setTimeout(function() {
-                var nbb_cell_id = 3;
+                var nbb_cell_id = 2;
                 var nbb_unformatted_code = "# export\nfrom typing import Collection, Counter\n\nimport fastparquet\nimport pandas as pd\nimport numpy as np\nimport torch\n\nfrom fastai2.basics import (\n    Chunks,\n    ReindexCollection,\n    round_multiple,\n    delegates,\n    tuplify,\n    Tuple,\n    IndexSplitter,\n    DataSource,\n    DataBunch,\n    attrgetter,\n    range_of,\n    Cuda,\n)\nfrom fastai2.text.data import (\n    LMTensorText,\n    tokenize_df,\n    BaseTokenizer,\n    make_vocab,\n    LMDataLoader,\n    Numericalize,\n)";
                 var nbb_formatted_code = "# export\nfrom typing import Collection, Counter\n\nimport fastparquet\nimport pandas as pd\nimport numpy as np\nimport torch\n\nfrom fastai2.basics import (\n    Chunks,\n    ReindexCollection,\n    round_multiple,\n    delegates,\n    tuplify,\n    Tuple,\n    IndexSplitter,\n    DataSource,\n    DataBunch,\n    attrgetter,\n    range_of,\n    Cuda,\n)\nfrom fastai2.text.data import (\n    LMTensorText,\n    tokenize_df,\n    BaseTokenizer,\n    make_vocab,\n    LMDataLoader,\n    Numericalize,\n)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -62,14 +62,6 @@ var element = $('#00ddfcd5-50a1-497b-a6b7-0543650bbfd3');
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Data-pre-processing">Data pre-processing<a class="anchor-link" href="#Data-pre-processing">&#182;</a></h1><p>Once the ETL runs, we'll have a bunch of parquet files representing MIDI songs. However, there is still a little work to do to turn those into a format that is suitable for training a model.</p>
-<p>Let's go through the steps we'll need to do.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Reading-raw-parquet-files-into-raw-dataframes">Reading raw parquet files into raw dataframes<a class="anchor-link" href="#Reading-raw-parquet-files-into-raw-dataframes">&#182;</a></h2><p>First order of business is turning the output of the data ETL into a dataframe ready for processing.</p>
 
 </div>
@@ -85,15 +77,15 @@ var element = $('#00ddfcd5-50a1-497b-a6b7-0543650bbfd3');
 
 
 
-<div id="b9865176-77c9-4ecf-bbe4-95a31e9f4db3"></div>
+<div id="9c370880-f786-4009-8049-b39bdc10f209"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#b9865176-77c9-4ecf-bbe4-95a31e9f4db3');
+var element = $('#9c370880-f786-4009-8049-b39bdc10f209');
 
             setTimeout(function() {
-                var nbb_cell_id = 4;
-                var nbb_unformatted_code = "# export\n\ndef read_parquet(path: str) -> pd.DataFrame:\n    \"\"\"\n    Reads a multi-file parquet at `path`, returning a dataframe of three columns.\n    \"\"\"\n    df = fastparquet.ParquetFile(path, verify=True).to_pandas()\n    df.pitches = df.pitches.apply(lambda x: \" \".join([str(y) for y in x[0]]))\n    df.durations = df.durations.apply(lambda x: \" \".join([str(y) for y in x[0]]))\n    df.velocities = df.velocities.apply(lambda x: x[0])\n    df = (\n        df[df[\"pitches\"].apply(lambda x: len(x) != 0)]\n        .reset_index()\n        .drop(\"velocities\", axis=1)\n    )\n    return df";
-                var nbb_formatted_code = "# export\n\n\ndef read_parquet(path: str) -> pd.DataFrame:\n    \"\"\"\n    Reads a multi-file parquet at `path`, returning a dataframe of three columns.\n    \"\"\"\n    df = fastparquet.ParquetFile(path, verify=True).to_pandas()\n    df.pitches = df.pitches.apply(lambda x: \" \".join([str(y) for y in x[0]]))\n    df.durations = df.durations.apply(lambda x: \" \".join([str(y) for y in x[0]]))\n    df.velocities = df.velocities.apply(lambda x: x[0])\n    df = (\n        df[df[\"pitches\"].apply(lambda x: len(x) != 0)]\n        .reset_index()\n        .drop(\"velocities\", axis=1)\n    )\n    return df";
+                var nbb_cell_id = 5;
+                var nbb_unformatted_code = "# export\n\n\ndef read_parquet(path: str) -> pd.DataFrame:\n    \"\"\"\n    Reads a multi-file parquet at `path`, returning a dataframe of three columns.\n    \"\"\"\n    df = fastparquet.ParquetFile(path, verify=True).to_pandas()\n    return df";
+                var nbb_formatted_code = "# export\n\n\ndef read_parquet(path: str) -> pd.DataFrame:\n    \"\"\"\n    Reads a multi-file parquet at `path`, returning a dataframe of three columns.\n    \"\"\"\n    df = fastparquet.ParquetFile(path, verify=True).to_pandas()\n    return df";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -152,15 +144,15 @@ var element = $('#b9865176-77c9-4ecf-bbe4-95a31e9f4db3');
 
 
 
-<div id="35cb864c-3ebd-4100-b004-56967972b723"></div>
+<div id="7d4882fa-0d83-4d90-9fb4-2dbf864171a1"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#35cb864c-3ebd-4100-b004-56967972b723');
+var element = $('#7d4882fa-0d83-4d90-9fb4-2dbf864171a1');
 
             setTimeout(function() {
-                var nbb_cell_id = 5;
-                var nbb_unformatted_code = "# export\n\ndef preprocess(df: pd.DataFrame) -> (pd.DataFrame, Counter[str], Counter[str]):\n    \"\"\"\n    Tokenizes pitches and durations and returns a dataframe\n    \"\"\"\n    df_tok, pitch_count = tokenize_df(df, \"pitches\", rules=[], tok_func=BaseTokenizer)\n    df_tok[\"pitches_tok\"] = df_tok[\"text\"]\n    df_tok, duration_count = tokenize_df(\n        df_tok, \"durations\", rules=[], tok_func=BaseTokenizer\n    )\n    df_tok[\"duration_tok\"] = df_tok[\"text\"]\n    df_tok = df_tok.drop(\"text\", axis=1).drop(\"index\", axis=1)\n\n    return df_tok, pitch_count, duration_count";
-                var nbb_formatted_code = "# export\n\n\ndef preprocess(df: pd.DataFrame) -> (pd.DataFrame, Counter[str], Counter[str]):\n    \"\"\"\n    Tokenizes pitches and durations and returns a dataframe\n    \"\"\"\n    df_tok, pitch_count = tokenize_df(df, \"pitches\", rules=[], tok_func=BaseTokenizer)\n    df_tok[\"pitches_tok\"] = df_tok[\"text\"]\n    df_tok, duration_count = tokenize_df(\n        df_tok, \"durations\", rules=[], tok_func=BaseTokenizer\n    )\n    df_tok[\"duration_tok\"] = df_tok[\"text\"]\n    df_tok = df_tok.drop(\"text\", axis=1).drop(\"index\", axis=1)\n\n    return df_tok, pitch_count, duration_count";
+                var nbb_cell_id = 6;
+                var nbb_unformatted_code = "# export\n\n\ndef preprocess(df: pd.DataFrame) -> (pd.DataFrame, Counter[str], Counter[str]):\n    \"\"\"\n    Tokenizes pitches and durations and returns a dataframe\n    \"\"\"\n    df.pitches = df.pitches.apply(lambda x: \" \".join(map(str, x)))\n    df.durations = df.durations.apply(lambda x: \" \".join(map(str, x)))\n    df = df[df[\"pitches\"].apply(lambda x: len(x) != 0)].reset_index()\n    df_tok, pitch_count = tokenize_df(df, \"pitches\", rules=[], tok_func=BaseTokenizer)\n    df_tok[\"pitches\"] = df_tok[\"text\"]\n    df_tok, duration_count = tokenize_df(\n        df_tok, \"durations\", rules=[], tok_func=BaseTokenizer\n    )\n    df_tok[\"durations\"] = df_tok[\"text\"]\n    df_tok = df_tok.drop(\"text\", axis=1).drop(\"index\", axis=1)\n\n    return df_tok, pitch_count, duration_count";
+                var nbb_formatted_code = "# export\n\n\ndef preprocess(df: pd.DataFrame) -> (pd.DataFrame, Counter[str], Counter[str]):\n    \"\"\"\n    Tokenizes pitches and durations and returns a dataframe\n    \"\"\"\n    df.pitches = df.pitches.apply(lambda x: \" \".join(map(str, x)))\n    df.durations = df.durations.apply(lambda x: \" \".join(map(str, x)))\n    df = df[df[\"pitches\"].apply(lambda x: len(x) != 0)].reset_index()\n    df_tok, pitch_count = tokenize_df(df, \"pitches\", rules=[], tok_func=BaseTokenizer)\n    df_tok[\"pitches\"] = df_tok[\"text\"]\n    df_tok, duration_count = tokenize_df(\n        df_tok, \"durations\", rules=[], tok_func=BaseTokenizer\n    )\n    df_tok[\"durations\"] = df_tok[\"text\"]\n    df_tok = df_tok.drop(\"text\", axis=1).drop(\"index\", axis=1)\n\n    return df_tok, pitch_count, duration_count";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -190,9 +182,59 @@ var element = $('#35cb864c-3ebd-4100-b004-56967972b723');
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="preprocess" class="doc_header"><code>preprocess</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/data/preprocessing.py#L58" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>preprocess</code>(<strong><code>df</code></strong>:<code>DataFrame</code>)</p>
+<h4 id="preprocess" class="doc_header"><code>preprocess</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/data/preprocessing.py#L50" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>preprocess</code>(<strong><code>df</code></strong>:<code>DataFrame</code>)</p>
 </blockquote>
 <p>Tokenizes pitches and durations and returns a dataframe</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># test</span>
+<span class="kn">from</span> <span class="nn">testing</span> <span class="kn">import</span> <span class="n">test_eq</span><span class="p">,</span> <span class="n">path</span>
+
+<span class="kn">from</span> <span class="nn">neuralmusic.midi</span> <span class="kn">import</span> <span class="n">parse_midi_file</span>
+
+<span class="n">df</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">parse_midi_file</span><span class="p">(</span><span class="n">path</span><span class="p">(</span><span class="s2">&quot;data/ff4-airship.mid&quot;</span><span class="p">))</span>
+<span class="n">df_tok</span><span class="p">,</span> <span class="n">pitch_count</span><span class="p">,</span> <span class="n">duration_count</span> <span class="o">=</span> <span class="n">preprocess</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<span class="n">test_eq</span><span class="p">([</span><span class="s2">&quot;7.11.2&quot;</span><span class="p">,</span> <span class="s2">&quot;7&quot;</span><span class="p">,</span> <span class="s2">&quot;7&quot;</span><span class="p">],</span> <span class="nb">list</span><span class="p">(</span><span class="n">df_tok</span><span class="p">[</span><span class="s2">&quot;pitches&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]))</span>
+<span class="n">test_eq</span><span class="p">([</span><span class="s2">&quot;1.75&quot;</span><span class="p">,</span> <span class="s2">&quot;0.5&quot;</span><span class="p">,</span> <span class="s2">&quot;0.5&quot;</span><span class="p">],</span> <span class="nb">list</span><span class="p">(</span><span class="n">df_tok</span><span class="p">[</span><span class="s2">&quot;durations&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]))</span>
+<span class="n">test_eq</span><span class="p">([</span><span class="mi">110</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">110</span><span class="p">],</span> <span class="nb">list</span><span class="p">(</span><span class="n">df_tok</span><span class="p">[</span><span class="s2">&quot;velocities&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]))</span>
+
+<span class="n">test_eq</span><span class="p">(</span><span class="mi">43</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pitch_count</span><span class="p">))</span>
+<span class="n">test_eq</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">duration_count</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
 
 </div>
 
@@ -219,14 +261,14 @@ var element = $('#35cb864c-3ebd-4100-b004-56967972b723');
 
 
 
-<div id="dff0cc32-e5a4-4ebe-a9bf-5f17f1fd870b"></div>
+<div id="28f4c884-5cd5-497f-8b96-3da99c16e841"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#dff0cc32-e5a4-4ebe-a9bf-5f17f1fd870b');
+var element = $('#28f4c884-5cd5-497f-8b96-3da99c16e841');
 
             setTimeout(function() {
-                var nbb_cell_id = 6;
-                var nbb_unformatted_code = "# export\n\ndef to_dual(fields):\n    \"\"\"\n    Returns a transform that will extract `fields` from a Series in the form of fastai Tuples.\n    \"\"\"\n    getters = [attrgetter(field) for field in fields]\n\n    def _inner(series: pd.Series):\n        return Tuple(tuplify([getter(series) for getter in getters]))\n\n    return _inner\n\n\ndef dual_numericalize(counters: Collection[Counter[str]], min_freq=1):\n    \"\"\"\n    Returns a transform that will numericalize each side of the tuple constructing a separate\n    vocabulary for each side.\n    \"\"\"\n    processors = [\n        Numericalize(make_vocab(counter, min_freq=min_freq)) for counter in counters\n    ]\n\n    def _inner(values):\n        return [proc(val) for (proc, val) in zip(processors, values)]\n\n    return _inner";
+                var nbb_cell_id = 9;
+                var nbb_unformatted_code = "# export\n\n\ndef to_dual(fields):\n    \"\"\"\n    Returns a transform that will extract `fields` from a Series in the form of fastai Tuples.\n    \"\"\"\n    getters = [attrgetter(field) for field in fields]\n\n    def _inner(series: pd.Series):\n        return Tuple(tuplify([getter(series) for getter in getters]))\n\n    return _inner\n\n\ndef dual_numericalize(counters: Collection[Counter[str]], min_freq=1):\n    \"\"\"\n    Returns a transform that will numericalize each side of the tuple constructing a separate\n    vocabulary for each side.\n    \"\"\"\n    processors = [\n        Numericalize(make_vocab(counter, min_freq=min_freq)) for counter in counters\n    ]\n\n    def _inner(values):\n        return [proc(val) for (proc, val) in zip(processors, values)]\n\n    return _inner";
                 var nbb_formatted_code = "# export\n\n\ndef to_dual(fields):\n    \"\"\"\n    Returns a transform that will extract `fields` from a Series in the form of fastai Tuples.\n    \"\"\"\n    getters = [attrgetter(field) for field in fields]\n\n    def _inner(series: pd.Series):\n        return Tuple(tuplify([getter(series) for getter in getters]))\n\n    return _inner\n\n\ndef dual_numericalize(counters: Collection[Counter[str]], min_freq=1):\n    \"\"\"\n    Returns a transform that will numericalize each side of the tuple constructing a separate\n    vocabulary for each side.\n    \"\"\"\n    processors = [\n        Numericalize(make_vocab(counter, min_freq=min_freq)) for counter in counters\n    ]\n\n    def _inner(values):\n        return [proc(val) for (proc, val) in zip(processors, values)]\n\n    return _inner";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -257,7 +299,7 @@ var element = $('#dff0cc32-e5a4-4ebe-a9bf-5f17f1fd870b');
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="to_dual" class="doc_header"><code>to_dual</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/data/preprocessing.py#L75" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>to_dual</code>(<strong><code>fields</code></strong>)</p>
+<h4 id="to_dual" class="doc_header"><code>to_dual</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/data/preprocessing.py#L70" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>to_dual</code>(<strong><code>fields</code></strong>)</p>
 </blockquote>
 <p>Returns a transform that will extract <code>fields</code> from a Series in the form of fastai Tuples.</p>
 
@@ -278,7 +320,7 @@ var element = $('#dff0cc32-e5a4-4ebe-a9bf-5f17f1fd870b');
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="dual_numericalize" class="doc_header"><code>dual_numericalize</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/data/preprocessing.py#L87" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>dual_numericalize</code>(<strong><code>counters</code></strong>:<code>Collection</code>[<code>Counter</code>[<code>str</code>]], <strong><code>min_freq</code></strong>=<em><code>1</code></em>)</p>
+<h4 id="dual_numericalize" class="doc_header"><code>dual_numericalize</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/data/preprocessing.py#L82" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>dual_numericalize</code>(<strong><code>counters</code></strong>:<code>Collection</code>[<code>Counter</code>[<code>str</code>]], <strong><code>min_freq</code></strong>=<em><code>1</code></em>)</p>
 </blockquote>
 <p>Returns a transform that will numericalize each side of the tuple constructing a separate
 vocabulary for each side.</p>
@@ -308,14 +350,14 @@ vocabulary for each side.</p>
 
 
 
-<div id="a90aeaf5-4c07-4c04-bb8c-d5d3d705700f"></div>
+<div id="0e02cfb5-49f5-4e0b-ac99-f6058cabebf4"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#a90aeaf5-4c07-4c04-bb8c-d5d3d705700f');
+var element = $('#0e02cfb5-49f5-4e0b-ac99-f6058cabebf4');
 
             setTimeout(function() {
-                var nbb_cell_id = 7;
-                var nbb_unformatted_code = "# export\n\ndef make_splitter(df: pd.DataFrame, split: float = 0.2) -> IndexSplitter:\n    \"\"\"\n    Returns a splitter that acts on indices on a dataframe. By default it reserves 20% of the\n    data for validation.\n    \"\"\"\n    rows = len(df)\n    indices = np.array(range(rows))\n    np.random.shuffle(indices)\n    _, valid_idx = (indices[int(0.2 * rows) :], indices[: int(0.2 * rows)])\n    return IndexSplitter(valid_idx)";
+                var nbb_cell_id = 10;
+                var nbb_unformatted_code = "# export\n\n\ndef make_splitter(df: pd.DataFrame, split: float = 0.2) -> IndexSplitter:\n    \"\"\"\n    Returns a splitter that acts on indices on a dataframe. By default it reserves 20% of the\n    data for validation.\n    \"\"\"\n    rows = len(df)\n    indices = np.array(range(rows))\n    np.random.shuffle(indices)\n    _, valid_idx = (indices[int(0.2 * rows) :], indices[: int(0.2 * rows)])\n    return IndexSplitter(valid_idx)";
                 var nbb_formatted_code = "# export\n\n\ndef make_splitter(df: pd.DataFrame, split: float = 0.2) -> IndexSplitter:\n    \"\"\"\n    Returns a splitter that acts on indices on a dataframe. By default it reserves 20% of the\n    data for validation.\n    \"\"\"\n    rows = len(df)\n    indices = np.array(range(rows))\n    np.random.shuffle(indices)\n    _, valid_idx = (indices[int(0.2 * rows) :], indices[: int(0.2 * rows)])\n    return IndexSplitter(valid_idx)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -346,7 +388,7 @@ var element = $('#a90aeaf5-4c07-4c04-bb8c-d5d3d705700f');
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="make_splitter" class="doc_header"><code>make_splitter</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/data/preprocessing.py#L104" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>make_splitter</code>(<strong><code>df</code></strong>:<code>DataFrame</code>, <strong><code>split</code></strong>:<code>float</code>=<em><code>0.2</code></em>)</p>
+<h4 id="make_splitter" class="doc_header"><code>make_splitter</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/data/preprocessing.py#L99" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>make_splitter</code>(<strong><code>df</code></strong>:<code>DataFrame</code>, <strong><code>split</code></strong>:<code>float</code>=<em><code>0.2</code></em>)</p>
 </blockquote>
 <p>Returns a splitter that acts on indices on a dataframe. By default it reserves 20% of the
 data for validation.</p>
@@ -376,13 +418,13 @@ data for validation.</p>
 
 
 
-<div id="9f247dc0-8e1c-438e-9469-cb09df3d8ab4"></div>
+<div id="713cd869-167f-400d-8ac4-bfb3e1ba0c0d"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#9f247dc0-8e1c-438e-9469-cb09df3d8ab4');
+var element = $('#713cd869-167f-400d-8ac4-bfb3e1ba0c0d');
 
             setTimeout(function() {
-                var nbb_cell_id = 9;
+                var nbb_cell_id = 11;
                 var nbb_unformatted_code = "# export\n@delegates()\nclass DualLMDataLoader(LMDataLoader):\n    \"\"\"\n    A Language Model data loader that loads tuples of 2 sequences instead of single sequences.\n    It's used to load pitches and durations at the same time.\n    \"\"\"\n\n    def __init__(\n        self, dataset, lens=None, cache=2, bs=64, seq_len=72, num_workers=0, **kwargs\n    ):\n        super().__init__(dataset=dataset, bs=bs, num_workers=num_workers, **kwargs)\n        self.items = ReindexCollection(\n            [(o[0] if isinstance(o, tuple) else o) for o in dataset], cache=cache\n        )\n        self.seq_len = seq_len\n        if lens is None:\n            lens = [len(o[0]) for o in self.items]\n        self.lens = ReindexCollection(lens, idxs=self.items.idxs)\n        # The \"-1\" is to allow for final label\n        self.m = round_multiple(sum(lens) - 1, bs * seq_len, round_down=True)\n        self.n = self.m // (seq_len)\n        self.spb = self.n // bs\n        self.make_chunks()\n\n    def make_chunks(self):\n        self.a_chunks = Chunks(list(map(lambda x: x[0], self.items)), self.lens)\n        self.b_chunks = Chunks(list(map(lambda x: x[1], self.items)), self.lens)\n\n    def create_item(self, seq):\n        if seq >= self.n:\n            raise IndexError\n        st = ((seq % self.bs) * self.spb + (seq // self.bs)) * self.seq_len\n        txt_a = self.a_chunks[st : st + self.seq_len + 1]\n        txt_b = self.b_chunks[st : st + self.seq_len + 1]\n        x1 = LMTensorText(txt_a[:-1]).unsqueeze(-2)\n        x2 = LMTensorText(txt_b[:-1]).unsqueeze(-2)\n        y1 = txt_a[1:].unsqueeze(-2)\n        y2 = txt_b[1:].unsqueeze(-2)\n        return torch.cat([x1, x2]), torch.cat([y1, y2])";
                 var nbb_formatted_code = "# export\n@delegates()\nclass DualLMDataLoader(LMDataLoader):\n    \"\"\"\n    A Language Model data loader that loads tuples of 2 sequences instead of single sequences.\n    It's used to load pitches and durations at the same time.\n    \"\"\"\n\n    def __init__(\n        self, dataset, lens=None, cache=2, bs=64, seq_len=72, num_workers=0, **kwargs\n    ):\n        super().__init__(dataset=dataset, bs=bs, num_workers=num_workers, **kwargs)\n        self.items = ReindexCollection(\n            [(o[0] if isinstance(o, tuple) else o) for o in dataset], cache=cache\n        )\n        self.seq_len = seq_len\n        if lens is None:\n            lens = [len(o[0]) for o in self.items]\n        self.lens = ReindexCollection(lens, idxs=self.items.idxs)\n        # The \"-1\" is to allow for final label\n        self.m = round_multiple(sum(lens) - 1, bs * seq_len, round_down=True)\n        self.n = self.m // (seq_len)\n        self.spb = self.n // bs\n        self.make_chunks()\n\n    def make_chunks(self):\n        self.a_chunks = Chunks(list(map(lambda x: x[0], self.items)), self.lens)\n        self.b_chunks = Chunks(list(map(lambda x: x[1], self.items)), self.lens)\n\n    def create_item(self, seq):\n        if seq >= self.n:\n            raise IndexError\n        st = ((seq % self.bs) * self.spb + (seq // self.bs)) * self.seq_len\n        txt_a = self.a_chunks[st : st + self.seq_len + 1]\n        txt_b = self.b_chunks[st : st + self.seq_len + 1]\n        x1 = LMTensorText(txt_a[:-1]).unsqueeze(-2)\n        x2 = LMTensorText(txt_b[:-1]).unsqueeze(-2)\n        y1 = txt_a[1:].unsqueeze(-2)\n        y2 = txt_b[1:].unsqueeze(-2)\n        return torch.cat([x1, x2]), torch.cat([y1, y2])";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -414,7 +456,7 @@ var element = $('#9f247dc0-8e1c-438e-9469-cb09df3d8ab4');
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="DualLMDataLoader" class="doc_header"><code>class</code> <code>DualLMDataLoader</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/data/preprocessing.py#L117" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DualLMDataLoader</code>(<strong><code>dataset</code></strong>, <strong><code>lens</code></strong>=<em><code>None</code></em>, <strong><code>cache</code></strong>=<em><code>2</code></em>, <strong><code>bs</code></strong>=<em><code>64</code></em>, <strong><code>seq_len</code></strong>=<em><code>72</code></em>, <strong><code>num_workers</code></strong>=<em><code>0</code></em>, <strong><code>shuffle</code></strong>=<em><code>False</code></em>, <strong><code>pin_memory</code></strong>=<em><code>False</code></em>, <strong><code>timeout</code></strong>=<em><code>0</code></em>, <strong><code>drop_last</code></strong>=<em><code>False</code></em>, <strong><code>indexed</code></strong>=<em><code>None</code></em>, <strong><code>n</code></strong>=<em><code>None</code></em>, <strong><code>wif</code></strong>=<em><code>None</code></em>, <strong><code>before_iter</code></strong>=<em><code>None</code></em>, <strong><code>after_item</code></strong>=<em><code>None</code></em>, <strong><code>before_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_iter</code></strong>=<em><code>None</code></em>, <strong><code>create_batches</code></strong>=<em><code>None</code></em>, <strong><code>create_item</code></strong>=<em><code>None</code></em>, <strong><code>create_batch</code></strong>=<em><code>None</code></em>, <strong><code>retain</code></strong>=<em><code>None</code></em>) :: <code>LMDataLoader</code></p>
+<h2 id="DualLMDataLoader" class="doc_header"><code>class</code> <code>DualLMDataLoader</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/data/preprocessing.py#L112" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DualLMDataLoader</code>(<strong><code>dataset</code></strong>, <strong><code>lens</code></strong>=<em><code>None</code></em>, <strong><code>cache</code></strong>=<em><code>2</code></em>, <strong><code>bs</code></strong>=<em><code>64</code></em>, <strong><code>seq_len</code></strong>=<em><code>72</code></em>, <strong><code>num_workers</code></strong>=<em><code>0</code></em>, <strong><code>shuffle</code></strong>=<em><code>False</code></em>, <strong><code>pin_memory</code></strong>=<em><code>False</code></em>, <strong><code>timeout</code></strong>=<em><code>0</code></em>, <strong><code>drop_last</code></strong>=<em><code>False</code></em>, <strong><code>indexed</code></strong>=<em><code>None</code></em>, <strong><code>n</code></strong>=<em><code>None</code></em>, <strong><code>wif</code></strong>=<em><code>None</code></em>, <strong><code>before_iter</code></strong>=<em><code>None</code></em>, <strong><code>after_item</code></strong>=<em><code>None</code></em>, <strong><code>before_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_iter</code></strong>=<em><code>None</code></em>, <strong><code>create_batches</code></strong>=<em><code>None</code></em>, <strong><code>create_item</code></strong>=<em><code>None</code></em>, <strong><code>create_batch</code></strong>=<em><code>None</code></em>, <strong><code>retain</code></strong>=<em><code>None</code></em>) :: <code>LMDataLoader</code></p>
 </blockquote>
 <p>A Language Model data loader that loads tuples of 2 sequences instead of single sequences.
 It's used to load pitches and durations at the same time.</p>
@@ -444,13 +486,13 @@ It's used to load pitches and durations at the same time.</p>
 
 
 
-<div id="c0f0f81e-5ea1-440d-8481-f794771bbe41"></div>
+<div id="c5ef2b7d-4931-4b16-a62b-be806e3f1164"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#c0f0f81e-5ea1-440d-8481-f794771bbe41');
+var element = $('#c5ef2b7d-4931-4b16-a62b-be806e3f1164');
 
             setTimeout(function() {
-                var nbb_cell_id = 10;
+                var nbb_cell_id = 12;
                 var nbb_unformatted_code = "# export\n\n\ndef data_source(\n    df: pd.DataFrame,\n    pitch_count: Counter[str],\n    duration_count: Counter[str],\n    split: float = 0.2,\n    dl_type=DualLMDataLoader,\n) -> DataSource:\n    \"\"\"\n    Creates a DataSource ready to become a databunch.\n    \"\"\"\n    splitter = make_splitter(df, split=split)\n    return DataSource(\n        df,\n        [\n            [\n                to_dual([\"pitches_tok\", \"duration_tok\"]),\n                dual_numericalize([pitch_count, duration_count]),\n                Cuda(),\n            ]\n        ],\n        splits=splitter(range_of((df))),\n        dl_type=dl_type,\n    )";
                 var nbb_formatted_code = "# export\n\n\ndef data_source(\n    df: pd.DataFrame,\n    pitch_count: Counter[str],\n    duration_count: Counter[str],\n    split: float = 0.2,\n    dl_type=DualLMDataLoader,\n) -> DataSource:\n    \"\"\"\n    Creates a DataSource ready to become a databunch.\n    \"\"\"\n    splitter = make_splitter(df, split=split)\n    return DataSource(\n        df,\n        [\n            [\n                to_dual([\"pitches_tok\", \"duration_tok\"]),\n                dual_numericalize([pitch_count, duration_count]),\n                Cuda(),\n            ]\n        ],\n        splits=splitter(range_of((df))),\n        dl_type=dl_type,\n    )";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -482,7 +524,7 @@ var element = $('#c0f0f81e-5ea1-440d-8481-f794771bbe41');
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="data_source" class="doc_header"><code>data_source</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/data/preprocessing.py#L159" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>data_source</code>(<strong><code>df</code></strong>:<code>DataFrame</code>, <strong><code>pitch_count</code></strong>:<code>Counter</code>[<code>str</code>], <strong><code>duration_count</code></strong>:<code>Counter</code>[<code>str</code>], <strong><code>split</code></strong>:<code>float</code>=<em><code>0.2</code></em>, <strong><code>dl_type</code></strong>=<em><code>'DualLMDataLoader'</code></em>)</p>
+<h4 id="data_source" class="doc_header"><code>data_source</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/data/preprocessing.py#L154" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>data_source</code>(<strong><code>df</code></strong>:<code>DataFrame</code>, <strong><code>pitch_count</code></strong>:<code>Counter</code>[<code>str</code>], <strong><code>duration_count</code></strong>:<code>Counter</code>[<code>str</code>], <strong><code>split</code></strong>:<code>float</code>=<em><code>0.2</code></em>, <strong><code>dl_type</code></strong>=<em><code>'DualLMDataLoader'</code></em>)</p>
 </blockquote>
 <p>Creates a DataSource ready to become a databunch.</p>
 
@@ -511,14 +553,14 @@ var element = $('#c0f0f81e-5ea1-440d-8481-f794771bbe41');
 
 
 
-<div id="242cf28e-4b4a-4ec7-9392-e1afec0eff4d"></div>
+<div id="5c2c25c2-9444-42aa-80bd-b13f4f01c47a"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#242cf28e-4b4a-4ec7-9392-e1afec0eff4d');
+var element = $('#5c2c25c2-9444-42aa-80bd-b13f4f01c47a');
 
             setTimeout(function() {
-                var nbb_cell_id = 11;
-                var nbb_unformatted_code = "# export\n\ndef process(\n    path: str, batch_size: int, seq_len: int, validation_split: float = 0.2\n) -> DataBunch:\n    \"\"\"\n    Turn raw parquet files into a DataBunch ready for training.\n    \"\"\"\n    raw_df = read_parquet(path)\n    df, pitch_count, vocab_count = preprocess(raw_df)\n    dsrc = data_source(df, pitch_count, vocab_count, split=validation_split)\n    return dsrc.databunch(bs=batch_size, seq_len=seq_len, after_batch=Cuda())";
+                var nbb_cell_id = 13;
+                var nbb_unformatted_code = "# export\n\n\ndef process(\n    path: str, batch_size: int, seq_len: int, validation_split: float = 0.2\n) -> DataBunch:\n    \"\"\"\n    Turn raw parquet files into a DataBunch ready for training.\n    \"\"\"\n    raw_df = read_parquet(path)\n    df, pitch_count, vocab_count = preprocess(raw_df)\n    dsrc = data_source(df, pitch_count, vocab_count, split=validation_split)\n    return dsrc.databunch(bs=batch_size, seq_len=seq_len, after_batch=Cuda())";
                 var nbb_formatted_code = "# export\n\n\ndef process(\n    path: str, batch_size: int, seq_len: int, validation_split: float = 0.2\n) -> DataBunch:\n    \"\"\"\n    Turn raw parquet files into a DataBunch ready for training.\n    \"\"\"\n    raw_df = read_parquet(path)\n    df, pitch_count, vocab_count = preprocess(raw_df)\n    dsrc = data_source(df, pitch_count, vocab_count, split=validation_split)\n    return dsrc.databunch(bs=batch_size, seq_len=seq_len, after_batch=Cuda())";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -549,7 +591,7 @@ var element = $('#242cf28e-4b4a-4ec7-9392-e1afec0eff4d');
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="process" class="doc_header"><code>process</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/data/preprocessing.py#L186" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>process</code>(<strong><code>path</code></strong>:<code>str</code>, <strong><code>batch_size</code></strong>:<code>int</code>, <strong><code>seq_len</code></strong>:<code>int</code>, <strong><code>validation_split</code></strong>:<code>float</code>=<em><code>0.2</code></em>)</p>
+<h4 id="process" class="doc_header"><code>process</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/data/preprocessing.py#L181" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>process</code>(<strong><code>path</code></strong>:<code>str</code>, <strong><code>batch_size</code></strong>:<code>int</code>, <strong><code>seq_len</code></strong>:<code>int</code>, <strong><code>validation_split</code></strong>:<code>float</code>=<em><code>0.2</code></em>)</p>
 </blockquote>
 <p>Turn raw parquet files into a DataBunch ready for training.</p>
 

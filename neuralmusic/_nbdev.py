@@ -34,12 +34,22 @@ index = {"Triplet": "01_midi.ipynb",
          "data_source": "03_data.preprocessing.ipynb",
          "process": "03_data.preprocessing.ipynb",
          "LinearDecoder": "04_model.ipynb",
-         "TheModel": "04_model.ipynb"}
+         "TheModel": "04_model.ipynb",
+         "triplets_to_input": "04_model.ipynb",
+         "choose": "04_model.ipynb",
+         "predict": "04_model.ipynb",
+         "DualCrossEntropyLossFlat": "05_training.ipynb",
+         "pitch_accuracy": "05_training.ipynb",
+         "rhythm_accuracy": "05_training.ipynb",
+         "avg_accuracy": "05_training.ipynb",
+         "ResetTrainer": "05_training.ipynb",
+         "get_learner": "05_training.ipynb"}
 
 modules = ["midi.py",
            "data/etl.py",
            "data/preprocessing.py",
-           "model.py"]
+           "model.py",
+           "training.py"]
 
 git_url = "https://github.com/codegram/neuralmusic/tree/master/"
 

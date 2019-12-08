@@ -1,10 +1,10 @@
 ---
 
-title: Title
+title: Parsing and representing MIDI notes
 keywords: fastai
 sidebar: home_sidebar
 
-summary: "summary"
+summary: "Finding a compact representation of melody and rhythm."
 ---
 <!--
 
@@ -31,13 +31,13 @@ summary: "summary"
 
 
 
-<div id="eb8a741b-4393-4da3-a92d-0d3265ce815f"></div>
+<div id="bdeab375-3d42-4d80-986b-4ad401afce62"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#eb8a741b-4393-4da3-a92d-0d3265ce815f');
+var element = $('#bdeab375-3d42-4d80-986b-4ad401afce62');
 
             setTimeout(function() {
-                var nbb_cell_id = 74;
+                var nbb_cell_id = 2;
                 var nbb_unformatted_code = "# export\nfrom typing import Optional, Tuple, Collection\nimport re\n\nfrom music21 import converter, instrument, note, chord, stream, volume, duration, midi\nfrom music21.midi import MidiException\nimport pandas as pd";
                 var nbb_formatted_code = "# export\nfrom typing import Optional, Tuple, Collection\nimport re\n\nfrom music21 import converter, instrument, note, chord, stream, volume, duration, midi\nfrom music21.midi import MidiException\nimport pandas as pd";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -61,16 +61,6 @@ var element = $('#eb8a741b-4393-4da3-a92d-0d3265ce815f');
 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">test</span> <span class="kn">import</span> <span class="n">test_eq</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -80,59 +70,13 @@ var element = $('#eb8a741b-4393-4da3-a92d-0d3265ce815f');
 
 
 
-<div id="3d8af3c0-3726-46da-a706-42993afe4ef8"></div>
+<div id="9f15d76c-b99b-4be7-a284-9543ce63dbd1"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#3d8af3c0-3726-46da-a706-42993afe4ef8');
+var element = $('#9f15d76c-b99b-4be7-a284-9543ce63dbd1');
 
             setTimeout(function() {
-                var nbb_cell_id = 75;
-                var nbb_unformatted_code = "from test import test_eq";
-                var nbb_formatted_code = "from test import test_eq";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            
-</script>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Representing-MIDI-notes-as-triplets">Representing MIDI notes as triplets<a class="anchor-link" href="#Representing-MIDI-notes-as-triplets">&#182;</a></h1><p>Although MIDI notes have a lot of information, we want to distill them into a triplet -- namely pitch, duration and velocity:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-
-<div id="a8f299f7-d734-4e9b-91ec-66aab6ff29a3"></div>
-<div class="output_subarea output_javascript ">
-<script type="text/javascript">
-var element = $('#a8f299f7-d734-4e9b-91ec-66aab6ff29a3');
-
-            setTimeout(function() {
-                var nbb_cell_id = 13;
+                var nbb_cell_id = 5;
                 var nbb_unformatted_code = "# export\n\nPitch, Duration, Velocity = str, float, int\nTriplet = Tuple[Pitch, Duration, Velocity]";
                 var nbb_formatted_code = "# export\n\nPitch, Duration, Velocity = str, float, int\nTriplet = Tuple[Pitch, Duration, Velocity]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -172,13 +116,13 @@ var element = $('#a8f299f7-d734-4e9b-91ec-66aab6ff29a3');
 
 
 
-<div id="2513901f-1d38-457e-aa95-afd297473cd4"></div>
+<div id="2466bfd1-c99c-4c7c-941b-a148e29a9b91"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#2513901f-1d38-457e-aa95-afd297473cd4');
+var element = $('#2466bfd1-c99c-4c7c-941b-a148e29a9b91');
 
             setTimeout(function() {
-                var nbb_cell_id = 14;
+                var nbb_cell_id = 6;
                 var nbb_unformatted_code = "# export\n\n\ndef parse_single_note(note: note.Note) -> Triplet:\n    return (str(note.pitch), float(note.duration.quarterLength), note.volume.velocity)\n\n\ndef parse_chord(chord: chord.Chord) -> Triplet:\n    return (\n        \".\".join(str(n) for n in chord.normalOrder),\n        float(chord.duration.quarterLength),\n        chord.volume.velocity,\n    )\n\n\ndef parse_rest(rest: note.Rest) -> Triplet:\n    return (\"R\", float(rest.duration.quarterLength), 0)";
                 var nbb_formatted_code = "# export\n\n\ndef parse_single_note(note: note.Note) -> Triplet:\n    return (str(note.pitch), float(note.duration.quarterLength), note.volume.velocity)\n\n\ndef parse_chord(chord: chord.Chord) -> Triplet:\n    return (\n        \".\".join(str(n) for n in chord.normalOrder),\n        float(chord.duration.quarterLength),\n        chord.volume.velocity,\n    )\n\n\ndef parse_rest(rest: note.Rest) -> Triplet:\n    return (\"R\", float(rest.duration.quarterLength), 0)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -267,6 +211,8 @@ var element = $('#2513901f-1d38-457e-aa95-afd297473cd4');
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># test</span>
+<span class="kn">from</span> <span class="nn">testing</span> <span class="kn">import</span> <span class="n">test_eq</span>
+
 <span class="n">quarter</span> <span class="o">=</span> <span class="n">duration</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="s2">&quot;quarter&quot;</span><span class="p">)</span>
 
 
@@ -295,13 +241,13 @@ var element = $('#2513901f-1d38-457e-aa95-afd297473cd4');
 
 
 
-<div id="3a3d07bb-21b6-4825-99d9-f8785d3133c3"></div>
+<div id="b03a882c-369f-467e-870c-5e797cfc85bf"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#3a3d07bb-21b6-4825-99d9-f8785d3133c3');
+var element = $('#b03a882c-369f-467e-870c-5e797cfc85bf');
 
             setTimeout(function() {
-                var nbb_cell_id = 15;
+                var nbb_cell_id = 7;
                 var nbb_unformatted_code = "# test\nquarter = duration.Duration(\"quarter\")\n\n\ndef loud(n: note.Note, velocity=120) -> note.Note:\n    n.volume = volume.Volume(velocity=velocity)\n    return n\n\n\ntest_eq((\"C3\", 1.0, 120), parse_single_note(loud(note.Note(\"C3\", duration=quarter))))\ntest_eq(\n    (\"1.3.5\", 1.0, 80),\n    parse_chord(loud(chord.Chord([1, 3, 5], duration=quarter), velocity=80)),\n)\ntest_eq((\"R\", 1.0, 0), parse_rest(note.Rest(duration=quarter)))";
                 var nbb_formatted_code = "# test\nquarter = duration.Duration(\"quarter\")\n\n\ndef loud(n: note.Note, velocity=120) -> note.Note:\n    n.volume = volume.Volume(velocity=velocity)\n    return n\n\n\ntest_eq((\"C3\", 1.0, 120), parse_single_note(loud(note.Note(\"C3\", duration=quarter))))\ntest_eq(\n    (\"1.3.5\", 1.0, 80),\n    parse_chord(loud(chord.Chord([1, 3, 5], duration=quarter), velocity=80)),\n)\ntest_eq((\"R\", 1.0, 0), parse_rest(note.Rest(duration=quarter)))";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -334,15 +280,15 @@ var element = $('#3a3d07bb-21b6-4825-99d9-f8785d3133c3');
 
 
 
-<div id="44cc7140-ad9c-4191-9904-076bdad6c0d8"></div>
+<div id="18f9ce06-5305-4549-b371-ba5e8ae7f28f"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#44cc7140-ad9c-4191-9904-076bdad6c0d8');
+var element = $('#18f9ce06-5305-4549-b371-ba5e8ae7f28f');
 
             setTimeout(function() {
-                var nbb_cell_id = 77;
-                var nbb_unformatted_code = "# export\n\ndef parse_midi_file(file: str) -> (Optional[pd.DataFrame], int):\n    \"\"\"\n    Attempts to parse a midi file into a Dataframe. Returns a Dataframe or None, together with the number of notes processed.\n    \"\"\"\n    try:\n        midi = converter.parse(file)\n        notes_to_parse = None\n        parts = instrument.partitionByInstrument(midi)\n        notes = []\n        if parts:  # file has instrument parts\n            notes_to_parse = parts.parts[0].recurse()\n        else:  # file has notes in a flat structure\n            notes_to_parse = midi.flat.notes\n        for element in notes_to_parse:\n            if element.__class__ == note.Note:\n                notes.append(parse_single_note(element))\n            elif element.__class__ == chord.Chord:\n                notes.append(parse_chord(element))\n            elif element.__class__ == note.Rest:\n                notes.append(parse_rest(element))\n\n        df = pd.DataFrame.from_dict(\n            {\n                \"pitches\": [[[pitch for (pitch, dur, velocity) in notes]]],\n                \"durations\": [[[dur for (pitch, dur, velocity) in notes]]],\n                \"velocities\": [[[velocity for (pitch, dur, velocity) in notes]]],\n            }\n        )\n        return (df, len(notes))\n    except MidiException:\n        return (None, 0)\n    except IndexError:\n        return (None, 0)\n\n\ndef row_to_triplets(df: pd.DataFrame, row_index: int) -> Collection[Triplet]:\n    \"\"\"\n    Takes a DataFrame at a specific row and turns that into a triplet.\n    \"\"\"\n    pitches, durations, velocities = df.values[row_index]\n    pitches = pitches[0]\n    durations = durations[0]\n    velocities = velocities[0]\n    return list(zip(pitches, durations, velocities))";
-                var nbb_formatted_code = "# export\n\n\ndef parse_midi_file(file: str) -> (Optional[pd.DataFrame], int):\n    \"\"\"\n    Attempts to parse a midi file into a Dataframe. Returns a Dataframe or None, together with the number of notes processed.\n    \"\"\"\n    try:\n        midi = converter.parse(file)\n        notes_to_parse = None\n        parts = instrument.partitionByInstrument(midi)\n        notes = []\n        if parts:  # file has instrument parts\n            notes_to_parse = parts.parts[0].recurse()\n        else:  # file has notes in a flat structure\n            notes_to_parse = midi.flat.notes\n        for element in notes_to_parse:\n            if element.__class__ == note.Note:\n                notes.append(parse_single_note(element))\n            elif element.__class__ == chord.Chord:\n                notes.append(parse_chord(element))\n            elif element.__class__ == note.Rest:\n                notes.append(parse_rest(element))\n\n        df = pd.DataFrame.from_dict(\n            {\n                \"pitches\": [[[pitch for (pitch, dur, velocity) in notes]]],\n                \"durations\": [[[dur for (pitch, dur, velocity) in notes]]],\n                \"velocities\": [[[velocity for (pitch, dur, velocity) in notes]]],\n            }\n        )\n        return (df, len(notes))\n    except MidiException:\n        return (None, 0)\n    except IndexError:\n        return (None, 0)\n\n\ndef row_to_triplets(df: pd.DataFrame, row_index: int) -> Collection[Triplet]:\n    \"\"\"\n    Takes a DataFrame at a specific row and turns that into a triplet.\n    \"\"\"\n    pitches, durations, velocities = df.values[row_index]\n    pitches = pitches[0]\n    durations = durations[0]\n    velocities = velocities[0]\n    return list(zip(pitches, durations, velocities))";
+                var nbb_cell_id = 8;
+                var nbb_unformatted_code = "# export\n\n\ndef parse_midi_file(file: str) -> (Optional[pd.DataFrame], int):\n    \"\"\"\n    Attempts to parse a midi file into a Dataframe. Returns a Dataframe or None, together with the number of notes processed.\n    \"\"\"\n    try:\n        midi = converter.parse(file)\n        notes_to_parse = None\n        parts = instrument.partitionByInstrument(midi)\n        notes = []\n        if parts:  # file has instrument parts\n            notes_to_parse = parts.parts[0].recurse()\n        else:  # file has notes in a flat structure\n            notes_to_parse = midi.flat.notes\n        for element in notes_to_parse:\n            if element.__class__ == note.Note:\n                notes.append(parse_single_note(element))\n            elif element.__class__ == chord.Chord:\n                notes.append(parse_chord(element))\n            elif element.__class__ == note.Rest:\n                notes.append(parse_rest(element))\n\n        df = pd.DataFrame.from_dict(\n            {\n                \"pitches\": [[pitch for (pitch, dur, velocity) in notes]],\n                \"durations\": [[dur for (pitch, dur, velocity) in notes]],\n                \"velocities\": [[velocity for (pitch, dur, velocity) in notes]],\n            }\n        )\n        return (df, len(notes))\n    except MidiException:\n        return (None, 0)\n    except IndexError:\n        return (None, 0)\n\n\ndef row_to_triplets(df: pd.DataFrame, row_index: int) -> Collection[Triplet]:\n    \"\"\"\n    Takes a DataFrame at a specific row and turns that into a triplet.\n    \"\"\"\n    pitches = df.get(\"pitches\")[row_index]\n    durations = df.get(\"durations\")[row_index]\n    velocities = df.get(\"velocities\")[row_index]\n    return list(zip(pitches, durations, velocities))";
+                var nbb_formatted_code = "# export\n\n\ndef parse_midi_file(file: str) -> (Optional[pd.DataFrame], int):\n    \"\"\"\n    Attempts to parse a midi file into a Dataframe. Returns a Dataframe or None, together with the number of notes processed.\n    \"\"\"\n    try:\n        midi = converter.parse(file)\n        notes_to_parse = None\n        parts = instrument.partitionByInstrument(midi)\n        notes = []\n        if parts:  # file has instrument parts\n            notes_to_parse = parts.parts[0].recurse()\n        else:  # file has notes in a flat structure\n            notes_to_parse = midi.flat.notes\n        for element in notes_to_parse:\n            if element.__class__ == note.Note:\n                notes.append(parse_single_note(element))\n            elif element.__class__ == chord.Chord:\n                notes.append(parse_chord(element))\n            elif element.__class__ == note.Rest:\n                notes.append(parse_rest(element))\n\n        df = pd.DataFrame.from_dict(\n            {\n                \"pitches\": [[pitch for (pitch, dur, velocity) in notes]],\n                \"durations\": [[dur for (pitch, dur, velocity) in notes]],\n                \"velocities\": [[velocity for (pitch, dur, velocity) in notes]],\n            }\n        )\n        return (df, len(notes))\n    except MidiException:\n        return (None, 0)\n    except IndexError:\n        return (None, 0)\n\n\ndef row_to_triplets(df: pd.DataFrame, row_index: int) -> Collection[Triplet]:\n    \"\"\"\n    Takes a DataFrame at a specific row and turns that into a triplet.\n    \"\"\"\n    pitches = df.get(\"pitches\")[row_index]\n    durations = df.get(\"durations\")[row_index]\n    velocities = df.get(\"velocities\")[row_index]\n    return list(zip(pitches, durations, velocities))";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -411,7 +357,9 @@ var element = $('#44cc7140-ad9c-4191-9904-076bdad6c0d8');
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># test</span>
-<span class="n">df</span><span class="p">,</span> <span class="n">notes</span> <span class="o">=</span> <span class="n">parse_midi_file</span><span class="p">(</span><span class="s2">&quot;data/ff4-main.mid&quot;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">testing</span> <span class="kn">import</span> <span class="n">test_eq</span><span class="p">,</span> <span class="n">path</span>
+
+<span class="n">df</span><span class="p">,</span> <span class="n">notes</span> <span class="o">=</span> <span class="n">parse_midi_file</span><span class="p">(</span><span class="n">path</span><span class="p">(</span><span class="s2">&quot;data/ff4-main.mid&quot;</span><span class="p">))</span>
 
 <span class="n">test_eq</span><span class="p">(</span><span class="mi">812</span><span class="p">,</span> <span class="n">notes</span><span class="p">)</span>
 
@@ -432,15 +380,15 @@ var element = $('#44cc7140-ad9c-4191-9904-076bdad6c0d8');
 
 
 
-<div id="b612aae0-ccd4-40bc-a369-4cd41bc9c184"></div>
+<div id="cdca14c4-64c6-42cb-a7d0-088c80c6f662"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#b612aae0-ccd4-40bc-a369-4cd41bc9c184');
+var element = $('#cdca14c4-64c6-42cb-a7d0-088c80c6f662');
 
             setTimeout(function() {
-                var nbb_cell_id = 50;
-                var nbb_unformatted_code = "# test\ndf, notes = parse_midi_file(\"data/ff4-main.mid\")\n\ntest_eq(812, notes)\n\ntriplets = row_to_triplets(df, 0)\n\ntest_eq([(\"A5\", 0.5, 110), (\"R\", 192.0, 0), (\"E5\", 0.5, 110)], triplets[0:3])";
-                var nbb_formatted_code = "# test\ndf, notes = parse_midi_file(\"data/ff4-main.mid\")\n\ntest_eq(812, notes)\n\ntriplets = row_to_triplets(df, 0)\n\ntest_eq([(\"A5\", 0.5, 110), (\"R\", 192.0, 0), (\"E5\", 0.5, 110)], triplets[0:3])";
+                var nbb_cell_id = 9;
+                var nbb_unformatted_code = "# test\ndf, notes = parse_midi_file(path(\"data/ff4-main.mid\"))\n\ntest_eq(812, notes)\n\ntriplets = row_to_triplets(df, 0)\n\ntest_eq([(\"A5\", 0.5, 110), (\"R\", 192.0, 0), (\"E5\", 0.5, 110)], triplets[0:3])";
+                var nbb_formatted_code = "# test\ndf, notes = parse_midi_file(path(\"data/ff4-main.mid\"))\n\ntest_eq(812, notes)\n\ntriplets = row_to_triplets(df, 0)\n\ntest_eq([(\"A5\", 0.5, 110), (\"R\", 192.0, 0), (\"E5\", 0.5, 110)], triplets[0:3])";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -463,7 +411,7 @@ var element = $('#b612aae0-ccd4-40bc-a369-4cd41bc9c184');
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Turning-triplets-back-into-MIDI-files">Turning triplets back into MIDI files<a class="anchor-link" href="#Turning-triplets-back-into-MIDI-files">&#182;</a></h1><p>Another interesting thing is to be able to go from triplets to MIDI files, display their scores and even an audible IPython widget to play the audio.</p>
+<h2 id="Turning-triplets-back-into-MIDI-streams">Turning triplets back into MIDI streams<a class="anchor-link" href="#Turning-triplets-back-into-MIDI-streams">&#182;</a></h2><p>Another interesting thing is to be able to go from triplets to MIDI streams, display their scores and even an audible IPython widget to play the audio.</p>
 <p>But first of all, some utilities to turn these triplets into <code>music21</code> elements:</p>
 
 </div>
@@ -479,14 +427,14 @@ var element = $('#b612aae0-ccd4-40bc-a369-4cd41bc9c184');
 
 
 
-<div id="8b599d39-c808-4d27-aa86-2fb67dda30ce"></div>
+<div id="25d1764c-a603-44c2-aa40-7d1282c47643"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#8b599d39-c808-4d27-aa86-2fb67dda30ce');
+var element = $('#25d1764c-a603-44c2-aa40-7d1282c47643');
 
             setTimeout(function() {
-                var nbb_cell_id = 76;
-                var nbb_unformatted_code = "# export\n\ndef triplet_to_note(triplet: Triplet):\n    pitch, dur, vel = triplet\n    dur = duration.Duration(dur)\n    vol = volume.Volume(velocity=vel)\n    if re.match(r\"^[0-9]\", pitch):\n        c = chord.Chord([int(x) for x in pitch.split(\".\")], duration=dur)\n        c.volume = vol\n        return c\n    elif pitch == \"R\":\n        return note.Rest(duration=dur)\n    else:\n        n = note.Note(pitch, duration=dur)\n        n.volume = vol\n        return n\n\n\ndef triplets_to_stream(triplets: Collection[Triplet]) -> stream.Stream:\n    s = stream.Stream()\n    _ = [s.append(triplet_to_note(triplet)) for triplet in triplets]\n    return s\n\n\ndef write_midi(stream, name):\n    mf = midi.translate.streamToMidiFile(stream)\n    mf.open(f\"{name}.mid\", \"wb\")\n    mf.write()\n    mf.close()";
+                var nbb_cell_id = 10;
+                var nbb_unformatted_code = "# export\n\n\ndef triplet_to_note(triplet: Triplet):\n    pitch, dur, vel = triplet\n    dur = duration.Duration(dur)\n    vol = volume.Volume(velocity=vel)\n    if re.match(r\"^[0-9]\", pitch):\n        c = chord.Chord([int(x) for x in pitch.split(\".\")], duration=dur)\n        c.volume = vol\n        return c\n    elif pitch == \"R\":\n        return note.Rest(duration=dur)\n    else:\n        n = note.Note(pitch, duration=dur)\n        n.volume = vol\n        return n\n\n\ndef triplets_to_stream(triplets: Collection[Triplet]) -> stream.Stream:\n    s = stream.Stream()\n    _ = [s.append(triplet_to_note(triplet)) for triplet in triplets]\n    return s\n\n\ndef write_midi(stream, name):\n    mf = midi.translate.streamToMidiFile(stream)\n    mf.open(f\"{name}.mid\", \"wb\")\n    mf.write()\n    mf.close()";
                 var nbb_formatted_code = "# export\n\n\ndef triplet_to_note(triplet: Triplet):\n    pitch, dur, vel = triplet\n    dur = duration.Duration(dur)\n    vol = volume.Volume(velocity=vel)\n    if re.match(r\"^[0-9]\", pitch):\n        c = chord.Chord([int(x) for x in pitch.split(\".\")], duration=dur)\n        c.volume = vol\n        return c\n    elif pitch == \"R\":\n        return note.Rest(duration=dur)\n    else:\n        n = note.Note(pitch, duration=dur)\n        n.volume = vol\n        return n\n\n\ndef triplets_to_stream(triplets: Collection[Triplet]) -> stream.Stream:\n    s = stream.Stream()\n    _ = [s.append(triplet_to_note(triplet)) for triplet in triplets]\n    return s\n\n\ndef write_midi(stream, name):\n    mf = midi.translate.streamToMidiFile(stream)\n    mf.open(f\"{name}.mid\", \"wb\")\n    mf.write()\n    mf.close()";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -517,7 +465,7 @@ var element = $('#8b599d39-c808-4d27-aa86-2fb67dda30ce');
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="triplet_to_note" class="doc_header"><code>triplet_to_note</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/midi.py#L88" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>triplet_to_note</code>(<strong><code>triplet</code></strong>:<code>Tuple</code>[<code>str</code>, <code>float</code>, <code>int</code>])</p>
+<h4 id="triplet_to_note" class="doc_header"><code>triplet_to_note</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/midi.py#L87" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>triplet_to_note</code>(<strong><code>triplet</code></strong>:<code>Tuple</code>[<code>str</code>, <code>float</code>, <code>int</code>])</p>
 </blockquote>
 
 </div>
@@ -537,7 +485,7 @@ var element = $('#8b599d39-c808-4d27-aa86-2fb67dda30ce');
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="triplets_to_stream" class="doc_header"><code>triplets_to_stream</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/midi.py#L104" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>triplets_to_stream</code>(<strong><code>triplets</code></strong>:<code>Collection</code>[<code>Tuple</code>[<code>str</code>, <code>float</code>, <code>int</code>]])</p>
+<h4 id="triplets_to_stream" class="doc_header"><code>triplets_to_stream</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/midi.py#L103" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>triplets_to_stream</code>(<strong><code>triplets</code></strong>:<code>Collection</code>[<code>Tuple</code>[<code>str</code>, <code>float</code>, <code>int</code>]])</p>
 </blockquote>
 
 </div>
@@ -557,7 +505,7 @@ var element = $('#8b599d39-c808-4d27-aa86-2fb67dda30ce');
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="write_midi" class="doc_header"><code>write_midi</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/midi.py#L110" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>write_midi</code>(<strong><code>stream</code></strong>, <strong><code>name</code></strong>)</p>
+<h4 id="write_midi" class="doc_header"><code>write_midi</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/midi.py#L109" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>write_midi</code>(<strong><code>stream</code></strong>, <strong><code>name</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -588,6 +536,7 @@ var element = $('#8b599d39-c808-4d27-aa86-2fb67dda30ce');
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># skip</span>
+<span class="c1"># hide</span>
 
 <span class="c1">#!brew install fluidsynth</span>
 <span class="c1">#!apt install fluidsynth</span>
@@ -630,10 +579,10 @@ Requirement already satisfied: midi2audio in /Users/txus/Code/codegram/neuralmus
 
 
 
-<div id="f2995045-ec9c-45e9-a486-f98e4af1cf74"></div>
+<div id="6f90022e-abe9-4499-86fa-767d0f663323"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#f2995045-ec9c-45e9-a486-f98e4af1cf74');
+var element = $('#6f90022e-abe9-4499-86fa-767d0f663323');
 
             setTimeout(function() {
                 var nbb_cell_id = 70;
@@ -665,6 +614,7 @@ var element = $('#f2995045-ec9c-45e9-a486-f98e4af1cf74');
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># skip</span>
+<span class="c1"># hide</span>
 
 <span class="o">%</span><span class="k">load_ext</span> music21.ipython21.ipExtension
 
@@ -760,10 +710,10 @@ var element = $('#f2995045-ec9c-45e9-a486-f98e4af1cf74');
 
 
 
-<div id="0e150a43-5796-4b91-bb1e-a24b0d915915"></div>
+<div id="696086ad-3fa3-465d-9b22-fc83e70d3085"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#0e150a43-5796-4b91-bb1e-a24b0d915915');
+var element = $('#696086ad-3fa3-465d-9b22-fc83e70d3085');
 
             setTimeout(function() {
                 var nbb_cell_id = 71;

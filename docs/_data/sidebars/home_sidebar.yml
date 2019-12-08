@@ -9,9 +9,6 @@ entries:
     - output: web,pdf
       title: Overview
       url: /
-    - output: web,pdf
-      title: Title
-      url: Neuralmusic
     output: web
     title: neuralmusic
   - folderitems:

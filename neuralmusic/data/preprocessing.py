@@ -42,14 +42,6 @@ def read_parquet(path: str) -> pd.DataFrame:
     Reads a multi-file parquet at `path`, returning a dataframe of three columns.
     """
     df = fastparquet.ParquetFile(path, verify=True).to_pandas()
-    df.pitches = df.pitches.apply(lambda x: " ".join([str(y) for y in x[0]]))
-    df.durations = df.durations.apply(lambda x: " ".join([str(y) for y in x[0]]))
-    df.velocities = df.velocities.apply(lambda x: x[0])
-    df = (
-        df[df["pitches"].apply(lambda x: len(x) != 0)]
-        .reset_index()
-        .drop("velocities", axis=1)
-    )
     return df
 
 #Cell
@@ -59,12 +51,15 @@ def preprocess(df: pd.DataFrame) -> (pd.DataFrame, Counter[str], Counter[str]):
     """
     Tokenizes pitches and durations and returns a dataframe
     """
+    df.pitches = df.pitches.apply(lambda x: " ".join(map(str, x)))
+    df.durations = df.durations.apply(lambda x: " ".join(map(str, x)))
+    df = df[df["pitches"].apply(lambda x: len(x) != 0)].reset_index()
     df_tok, pitch_count = tokenize_df(df, "pitches", rules=[], tok_func=BaseTokenizer)
-    df_tok["pitches_tok"] = df_tok["text"]
+    df_tok["pitches"] = df_tok["text"]
     df_tok, duration_count = tokenize_df(
         df_tok, "durations", rules=[], tok_func=BaseTokenizer
     )
-    df_tok["duration_tok"] = df_tok["text"]
+    df_tok["durations"] = df_tok["text"]
     df_tok = df_tok.drop("text", axis=1).drop("index", axis=1)
 
     return df_tok, pitch_count, duration_count

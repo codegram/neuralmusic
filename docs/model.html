@@ -1,10 +1,10 @@
 ---
 
-title: Title
+title: Model
 keywords: fastai
 sidebar: home_sidebar
 
-summary: "summary"
+summary: "Learning melody and rhythm at the same time"
 ---
 <!--
 
@@ -23,49 +23,6 @@ summary: "summary"
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-
-<div id="5455bfa8-9abf-495b-ad02-c8a6b0ccb855"></div>
-<div class="output_subarea output_javascript ">
-<script type="text/javascript">
-var element = $('#5455bfa8-9abf-495b-ad02-c8a6b0ccb855');
-
-            setTimeout(function() {
-                var nbb_cell_id = 5;
-                var nbb_unformatted_code = "# export\nimport torch\nfrom torch import Tensor\nimport torch.nn as nn\nfrom fastai2.text.models import RNNDropout";
-                var nbb_formatted_code = "# export\nimport torch\nfrom torch import Tensor\nimport torch.nn as nn\nfrom fastai2.text.models import RNNDropout";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            
-</script>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Model">Model<a class="anchor-link" href="#Model">&#182;</a></h1><p>We're attempting to build a model that can effectively learn two parallel signals (pitch and duration) at the same time, with a single loss function.</p>
-
-</div>
-</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -84,15 +41,15 @@ var element = $('#5455bfa8-9abf-495b-ad02-c8a6b0ccb855');
 
 
 
-<div id="3caf4fe4-ea20-4705-b92e-d1f4321c38b7"></div>
+<div id="72da7234-061d-461e-aad4-6f2d89fdd87e"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#3caf4fe4-ea20-4705-b92e-d1f4321c38b7');
+var element = $('#72da7234-061d-461e-aad4-6f2d89fdd87e');
 
             setTimeout(function() {
-                var nbb_cell_id = 6;
-                var nbb_unformatted_code = "# export\nclass LinearDecoder(nn.Module):\n    initrange = 0.1\n\n    def __init__(\n        self,\n        n_out: int,\n        n_hid: int,\n        output_p: float,\n        tie_encoder=None,\n        bias: bool = True,\n    ):\n        super().__init__()\n        self.decoder = nn.Linear(n_hid, n_out, bias=bias)\n        self.decoder.weight.data.uniform_(-self.initrange, self.initrange)\n        self.output_dp = RNNDropout(output_p)\n        if bias:\n            self.decoder.bias.data.zero_()\n        if tie_encoder:\n            self.decoder.weight = tie_encoder.weight\n\n    def forward(self, input: Tensor) -> Tensor:\n        output = self.output_dp(input)\n        decoded = self.decoder(\n            output.view(output.size(0) * output.size(1), output.size(2))\n        )\n        return decoded";
-                var nbb_formatted_code = "# export\nclass LinearDecoder(nn.Module):\n    initrange = 0.1\n\n    def __init__(\n        self,\n        n_out: int,\n        n_hid: int,\n        output_p: float,\n        tie_encoder=None,\n        bias: bool = True,\n    ):\n        super().__init__()\n        self.decoder = nn.Linear(n_hid, n_out, bias=bias)\n        self.decoder.weight.data.uniform_(-self.initrange, self.initrange)\n        self.output_dp = RNNDropout(output_p)\n        if bias:\n            self.decoder.bias.data.zero_()\n        if tie_encoder:\n            self.decoder.weight = tie_encoder.weight\n\n    def forward(self, input: Tensor) -> Tensor:\n        output = self.output_dp(input)\n        decoded = self.decoder(\n            output.view(output.size(0) * output.size(1), output.size(2))\n        )\n        return decoded";
+                var nbb_cell_id = 11;
+                var nbb_unformatted_code = "# export\nclass LinearDecoder(nn.Module):\n    \"\"\"\n    A Linear Decoder from fastai v1.\n    \"\"\"\n    initrange = 0.1\n\n    def __init__(\n        self,\n        n_out: int,\n        n_hid: int,\n        output_p: float,\n        tie_encoder=None,\n        bias: bool = True,\n    ):\n        super().__init__()\n        self.decoder = nn.Linear(n_hid, n_out, bias=bias)\n        self.decoder.weight.data.uniform_(-self.initrange, self.initrange)\n        self.output_dp = RNNDropout(output_p)\n        if bias:\n            self.decoder.bias.data.zero_()\n        if tie_encoder:\n            self.decoder.weight = tie_encoder.weight\n\n    def forward(self, input: Tensor) -> Tensor:\n        output = self.output_dp(input)\n        decoded = self.decoder(\n            output.view(output.size(0) * output.size(1), output.size(2))\n        )\n        return decoded";
+                var nbb_formatted_code = "# export\nclass LinearDecoder(nn.Module):\n    \"\"\"\n    A Linear Decoder from fastai v1.\n    \"\"\"\n\n    initrange = 0.1\n\n    def __init__(\n        self,\n        n_out: int,\n        n_hid: int,\n        output_p: float,\n        tie_encoder=None,\n        bias: bool = True,\n    ):\n        super().__init__()\n        self.decoder = nn.Linear(n_hid, n_out, bias=bias)\n        self.decoder.weight.data.uniform_(-self.initrange, self.initrange)\n        self.output_dp = RNNDropout(output_p)\n        if bias:\n            self.decoder.bias.data.zero_()\n        if tie_encoder:\n            self.decoder.weight = tie_encoder.weight\n\n    def forward(self, input: Tensor) -> Tensor:\n        output = self.output_dp(input)\n        decoded = self.decoder(\n            output.view(output.size(0) * output.size(1), output.size(2))\n        )\n        return decoded";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -122,7 +79,7 @@ var element = $('#3caf4fe4-ea20-4705-b92e-d1f4321c38b7');
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="LinearDecoder" class="doc_header"><code>class</code> <code>LinearDecoder</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/model.py#L12" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>LinearDecoder</code>(<strong><code>n_out</code></strong>:<code>int</code>, <strong><code>n_hid</code></strong>:<code>int</code>, <strong><code>output_p</code></strong>:<code>float</code>, <strong><code>tie_encoder</code></strong>=<em><code>None</code></em>, <strong><code>bias</code></strong>:<code>bool</code>=<em><code>True</code></em>) :: <code>Module</code></p>
+<h2 id="LinearDecoder" class="doc_header"><code>class</code> <code>LinearDecoder</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/model.py#L17" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>LinearDecoder</code>(<strong><code>n_out</code></strong>:<code>int</code>, <strong><code>n_hid</code></strong>:<code>int</code>, <strong><code>output_p</code></strong>:<code>float</code>, <strong><code>tie_encoder</code></strong>=<em><code>None</code></em>, <strong><code>bias</code></strong>:<code>bool</code>=<em><code>True</code></em>) :: <code>Module</code></p>
 </blockquote>
 <p>Base class for all neural network modules.</p>
 <p>Your models should also subclass this class.</p>
@@ -171,15 +128,15 @@ parameters converted too when you call :meth:<code>to</code>, etc.</p>
 
 
 
-<div id="b426918b-d37e-4b36-9d6b-3ed50722ecd1"></div>
+<div id="d0287082-ff06-420b-8c98-8fd4b6b42e7c"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#b426918b-d37e-4b36-9d6b-3ed50722ecd1');
+var element = $('#d0287082-ff06-420b-8c98-8fd4b6b42e7c');
 
             setTimeout(function() {
-                var nbb_cell_id = 7;
-                var nbb_unformatted_code = "# export\nclass TheModel(nn.Module):\n    def __init__(self, pitch_len, duration_len, emb_size=1000, rnn_size=1200, rnn_layers=3, dropout=0.0):\n        super().__init__()\n\n        self.pitch_emb = nn.Embedding(num_embeddings=pitch_len, embedding_dim=emb_size, padding_idx=1)\n        self.duration_emb = nn.Embedding(num_embeddings=duration_len, embedding_dim=emb_size, padding_idx=1)\n\n        self.hidden_size = rnn_size\n        self.layers = rnn_layers\n        self.pitch_rnn = nn.GRU(input_size=emb_size, hidden_size=rnn_size, num_layers=rnn_layers, batch_first=False, bidirectional=False)\n        self.duration_rnn = nn.GRU(input_size=emb_size, hidden_size=rnn_size, num_layers=rnn_layers, batch_first=False, bidirectional=False)\n\n        self.pitch_dec = LinearDecoder(n_out=pitch_len, n_hid=rnn_size + rnn_size, output_p=dropout)\n        self.duration_dec = LinearDecoder(n_out=duration_len, n_hid=rnn_size + rnn_size, output_p=dropout)\n\n        self.reset()\n\n    def forward(self, x):\n        pitches, durations = x.transpose(0,1)\n\n        pitch_emb = self.pitch_emb(pitches).transpose(0,1)\n        duration_emb = self.duration_emb(durations).transpose(0,1)\n\n        if self.pitch_hid is None:\n          self.pitch_hid = self.init_hidden(self.layers, pitches.size(0), self.hidden_size)\n        if self.duration_hid is None:\n          self.duration_hid = self.init_hidden(self.layers, durations.size(0), self.hidden_size)\n\n        pitch, self.pitch_hid = self.pitch_rnn(pitch_emb, self.pitch_hid)\n        duration, self.duration_hid = self.duration_rnn(duration_emb, self.duration_hid)\n\n        together = torch.cat([pitch, duration], dim=2)\n\n        pitch_decoded = self.pitch_dec(together)\n        duration_decoded = self.duration_dec(together)\n\n        self.pitch_hid.detach_()\n        self.duration_hid.detach_()\n\n        pitch_out = pitch_decoded.view(pitches.size(0), pitches.size(1), -1)\n        duration_out = duration_decoded.view(durations.size(0), durations.size(1), -1)\n\n        return pitch_out, duration_out\n\n    def reset(self):\n        self.pitch_hid = None\n        self.duration_hid = None\n\n    def init_hidden(self, layers, batch_size, hidden_size):\n        weight = next(self.parameters()).data\n        return weight.new(layers, batch_size, hidden_size).zero_()";
-                var nbb_formatted_code = "# export\nclass TheModel(nn.Module):\n    def __init__(\n        self,\n        pitch_len,\n        duration_len,\n        emb_size=1000,\n        rnn_size=1200,\n        rnn_layers=3,\n        dropout=0.0,\n    ):\n        super().__init__()\n\n        self.pitch_emb = nn.Embedding(\n            num_embeddings=pitch_len, embedding_dim=emb_size, padding_idx=1\n        )\n        self.duration_emb = nn.Embedding(\n            num_embeddings=duration_len, embedding_dim=emb_size, padding_idx=1\n        )\n\n        self.hidden_size = rnn_size\n        self.layers = rnn_layers\n        self.pitch_rnn = nn.GRU(\n            input_size=emb_size,\n            hidden_size=rnn_size,\n            num_layers=rnn_layers,\n            batch_first=False,\n            bidirectional=False,\n        )\n        self.duration_rnn = nn.GRU(\n            input_size=emb_size,\n            hidden_size=rnn_size,\n            num_layers=rnn_layers,\n            batch_first=False,\n            bidirectional=False,\n        )\n\n        self.pitch_dec = LinearDecoder(\n            n_out=pitch_len, n_hid=rnn_size + rnn_size, output_p=dropout\n        )\n        self.duration_dec = LinearDecoder(\n            n_out=duration_len, n_hid=rnn_size + rnn_size, output_p=dropout\n        )\n\n        self.reset()\n\n    def forward(self, x):\n        pitches, durations = x.transpose(0, 1)\n\n        pitch_emb = self.pitch_emb(pitches).transpose(0, 1)\n        duration_emb = self.duration_emb(durations).transpose(0, 1)\n\n        if self.pitch_hid is None:\n            self.pitch_hid = self.init_hidden(\n                self.layers, pitches.size(0), self.hidden_size\n            )\n        if self.duration_hid is None:\n            self.duration_hid = self.init_hidden(\n                self.layers, durations.size(0), self.hidden_size\n            )\n\n        pitch, self.pitch_hid = self.pitch_rnn(pitch_emb, self.pitch_hid)\n        duration, self.duration_hid = self.duration_rnn(duration_emb, self.duration_hid)\n\n        together = torch.cat([pitch, duration], dim=2)\n\n        pitch_decoded = self.pitch_dec(together)\n        duration_decoded = self.duration_dec(together)\n\n        self.pitch_hid.detach_()\n        self.duration_hid.detach_()\n\n        pitch_out = pitch_decoded.view(pitches.size(0), pitches.size(1), -1)\n        duration_out = duration_decoded.view(durations.size(0), durations.size(1), -1)\n\n        return pitch_out, duration_out\n\n    def reset(self):\n        self.pitch_hid = None\n        self.duration_hid = None\n\n    def init_hidden(self, layers, batch_size, hidden_size):\n        weight = next(self.parameters()).data\n        return weight.new(layers, batch_size, hidden_size).zero_()";
+                var nbb_cell_id = 10;
+                var nbb_unformatted_code = "# export\nclass TheModel(nn.Module):\n    \"\"\"\n    A model that learns pitch and duration through separate RNNs, merging them at\n    the end to 'compare notes', and outputting separate predictions for each aspect.\n    \"\"\"\n    def __init__(\n        self,\n        pitch_len,\n        duration_len,\n        emb_size=1000,\n        rnn_size=1200,\n        rnn_layers=3,\n        dropout=0.0,\n    ):\n        super().__init__()\n\n        self.pitch_emb = nn.Embedding(\n            num_embeddings=pitch_len, embedding_dim=emb_size, padding_idx=1\n        )\n        self.duration_emb = nn.Embedding(\n            num_embeddings=duration_len, embedding_dim=emb_size, padding_idx=1\n        )\n\n        self.hidden_size = rnn_size\n        self.layers = rnn_layers\n        self.pitch_rnn = nn.GRU(\n            input_size=emb_size,\n            hidden_size=rnn_size,\n            num_layers=rnn_layers,\n            batch_first=False,\n            bidirectional=False,\n        )\n        self.duration_rnn = nn.GRU(\n            input_size=emb_size,\n            hidden_size=rnn_size,\n            num_layers=rnn_layers,\n            batch_first=False,\n            bidirectional=False,\n        )\n\n        self.pitch_dec = LinearDecoder(\n            n_out=pitch_len, n_hid=rnn_size + rnn_size, output_p=dropout\n        )\n        self.duration_dec = LinearDecoder(\n            n_out=duration_len, n_hid=rnn_size + rnn_size, output_p=dropout\n        )\n\n        self.reset()\n\n    def forward(self, x):\n        pitches, durations = x.transpose(0, 1)\n\n        pitch_emb = self.pitch_emb(pitches).transpose(0, 1)\n        duration_emb = self.duration_emb(durations).transpose(0, 1)\n\n        if self.pitch_hid is None:\n            self.pitch_hid = self.init_hidden(\n                self.layers, pitches.size(0), self.hidden_size\n            )\n        if self.duration_hid is None:\n            self.duration_hid = self.init_hidden(\n                self.layers, durations.size(0), self.hidden_size\n            )\n\n        pitch, self.pitch_hid = self.pitch_rnn(pitch_emb, self.pitch_hid)\n        duration, self.duration_hid = self.duration_rnn(duration_emb, self.duration_hid)\n\n        together = torch.cat([pitch, duration], dim=2)\n\n        pitch_decoded = self.pitch_dec(together)\n        duration_decoded = self.duration_dec(together)\n\n        self.pitch_hid.detach_()\n        self.duration_hid.detach_()\n\n        pitch_out = pitch_decoded.view(pitches.size(0), pitches.size(1), -1)\n        duration_out = duration_decoded.view(durations.size(0), durations.size(1), -1)\n\n        return pitch_out, duration_out\n\n    def reset(self):\n        self.pitch_hid = None\n        self.duration_hid = None\n\n    def init_hidden(self, layers, batch_size, hidden_size):\n        weight = next(self.parameters()).data\n        return weight.new(layers, batch_size, hidden_size).zero_()";
+                var nbb_formatted_code = "# export\nclass TheModel(nn.Module):\n    \"\"\"\n    A model that learns pitch and duration through separate RNNs, merging them at\n    the end to 'compare notes', and outputting separate predictions for each aspect.\n    \"\"\"\n\n    def __init__(\n        self,\n        pitch_len,\n        duration_len,\n        emb_size=1000,\n        rnn_size=1200,\n        rnn_layers=3,\n        dropout=0.0,\n    ):\n        super().__init__()\n\n        self.pitch_emb = nn.Embedding(\n            num_embeddings=pitch_len, embedding_dim=emb_size, padding_idx=1\n        )\n        self.duration_emb = nn.Embedding(\n            num_embeddings=duration_len, embedding_dim=emb_size, padding_idx=1\n        )\n\n        self.hidden_size = rnn_size\n        self.layers = rnn_layers\n        self.pitch_rnn = nn.GRU(\n            input_size=emb_size,\n            hidden_size=rnn_size,\n            num_layers=rnn_layers,\n            batch_first=False,\n            bidirectional=False,\n        )\n        self.duration_rnn = nn.GRU(\n            input_size=emb_size,\n            hidden_size=rnn_size,\n            num_layers=rnn_layers,\n            batch_first=False,\n            bidirectional=False,\n        )\n\n        self.pitch_dec = LinearDecoder(\n            n_out=pitch_len, n_hid=rnn_size + rnn_size, output_p=dropout\n        )\n        self.duration_dec = LinearDecoder(\n            n_out=duration_len, n_hid=rnn_size + rnn_size, output_p=dropout\n        )\n\n        self.reset()\n\n    def forward(self, x):\n        pitches, durations = x.transpose(0, 1)\n\n        pitch_emb = self.pitch_emb(pitches).transpose(0, 1)\n        duration_emb = self.duration_emb(durations).transpose(0, 1)\n\n        if self.pitch_hid is None:\n            self.pitch_hid = self.init_hidden(\n                self.layers, pitches.size(0), self.hidden_size\n            )\n        if self.duration_hid is None:\n            self.duration_hid = self.init_hidden(\n                self.layers, durations.size(0), self.hidden_size\n            )\n\n        pitch, self.pitch_hid = self.pitch_rnn(pitch_emb, self.pitch_hid)\n        duration, self.duration_hid = self.duration_rnn(duration_emb, self.duration_hid)\n\n        together = torch.cat([pitch, duration], dim=2)\n\n        pitch_decoded = self.pitch_dec(together)\n        duration_decoded = self.duration_dec(together)\n\n        self.pitch_hid.detach_()\n        self.duration_hid.detach_()\n\n        pitch_out = pitch_decoded.view(pitches.size(0), pitches.size(1), -1)\n        duration_out = duration_decoded.view(durations.size(0), durations.size(1), -1)\n\n        return pitch_out, duration_out\n\n    def reset(self):\n        self.pitch_hid = None\n        self.duration_hid = None\n\n    def init_hidden(self, layers, batch_size, hidden_size):\n        weight = next(self.parameters()).data\n        return weight.new(layers, batch_size, hidden_size).zero_()";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -209,7 +166,7 @@ var element = $('#b426918b-d37e-4b36-9d6b-3ed50722ecd1');
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="TheModel" class="doc_header"><code>class</code> <code>TheModel</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/model.py#L40" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TheModel</code>(<strong><code>pitch_len</code></strong>, <strong><code>duration_len</code></strong>, <strong><code>emb_size</code></strong>=<em><code>1000</code></em>, <strong><code>rnn_size</code></strong>=<em><code>1200</code></em>, <strong><code>rnn_layers</code></strong>=<em><code>3</code></em>, <strong><code>dropout</code></strong>=<em><code>0.0</code></em>) :: <code>Module</code></p>
+<h2 id="TheModel" class="doc_header"><code>class</code> <code>TheModel</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/model.py#L45" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TheModel</code>(<strong><code>pitch_len</code></strong>, <strong><code>duration_len</code></strong>, <strong><code>emb_size</code></strong>=<em><code>1000</code></em>, <strong><code>rnn_size</code></strong>=<em><code>1200</code></em>, <strong><code>rnn_layers</code></strong>=<em><code>3</code></em>, <strong><code>dropout</code></strong>=<em><code>0.0</code></em>) :: <code>Module</code></p>
 </blockquote>
 <p>Base class for all neural network modules.</p>
 <p>Your models should also subclass this class.</p>
@@ -233,6 +190,287 @@ class Model(nn.Module):
 <p>Submodules assigned in this way will be registered, and will have their
 parameters converted too when you call :meth:<code>to</code>, etc.</p>
 
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+
+<div id="b64bec26-8f44-41c7-81b9-71f415ea0c02"></div>
+<div class="output_subarea output_javascript ">
+<script type="text/javascript">
+var element = $('#b64bec26-8f44-41c7-81b9-71f415ea0c02');
+
+            setTimeout(function() {
+                var nbb_cell_id = 7;
+                var nbb_unformatted_code = "# export\n\n\ndef triplets_to_input(\n    triplets: Collection[Triplet], pitch_vocab, duration_vocab\n) -> torch.Tensor:\n    \"\"\"\n    Formats a sequence of triplets as an input to the model.\n    \"\"\"\n    return torch.tensor(\n        [\n            [\n                [pitch_vocab.index(p) for (p, _, _) in prompt],\n                [duration_vocab.index(str(d)) for (_, d, _) in prompt],\n            ]\n        ]\n    )";
+                var nbb_formatted_code = "# export\n\n\ndef triplets_to_input(\n    triplets: Collection[Triplet], pitch_vocab, duration_vocab\n) -> torch.Tensor:\n    \"\"\"\n    Formats a sequence of triplets as an input to the model.\n    \"\"\"\n    return torch.tensor(\n        [\n            [\n                [pitch_vocab.index(p) for (p, _, _) in prompt],\n                [duration_vocab.index(str(d)) for (_, d, _) in prompt],\n            ]\n        ]\n    )";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            
+</script>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="triplets_to_input" class="doc_header"><code>triplets_to_input</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/model.py#L132" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>triplets_to_input</code>(<strong><code>triplets</code></strong>:<code>Collection</code>[<code>Tuple</code>[<code>str</code>, <code>float</code>, <code>int</code>]], <strong><code>pitch_vocab</code></strong>, <strong><code>duration_vocab</code></strong>)</p>
+</blockquote>
+<p>Formats a sequence of triplets as an input to the model.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># test</span>
+<span class="kn">from</span> <span class="nn">fastai2.text.data</span> <span class="kn">import</span> <span class="n">make_vocab</span>
+
+<span class="kn">from</span> <span class="nn">testing</span> <span class="kn">import</span> <span class="n">test_eq</span><span class="p">,</span> <span class="n">path</span>
+
+<span class="kn">from</span> <span class="nn">neuralmusic.midi</span> <span class="kn">import</span> <span class="n">parse_midi_file</span><span class="p">,</span> <span class="n">row_to_triplets</span>
+<span class="kn">from</span> <span class="nn">neuralmusic.data.preprocessing</span> <span class="kn">import</span> <span class="n">preprocess</span>
+
+<span class="n">raw_df</span><span class="p">,</span> <span class="n">notes</span> <span class="o">=</span> <span class="n">parse_midi_file</span><span class="p">(</span><span class="n">path</span><span class="p">(</span><span class="s2">&quot;data/ff4-airship.mid&quot;</span><span class="p">))</span>
+<span class="n">df</span><span class="p">,</span> <span class="n">pitch_count</span><span class="p">,</span> <span class="n">duration_count</span> <span class="o">=</span> <span class="n">preprocess</span><span class="p">(</span><span class="n">raw_df</span><span class="p">)</span>
+
+<span class="n">song</span> <span class="o">=</span> <span class="n">row_to_triplets</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">seq_len</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">song</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">seq_len</span><span class="p">]</span>
+
+<span class="n">pitch_vocab</span> <span class="o">=</span> <span class="n">make_vocab</span><span class="p">(</span><span class="n">pitch_count</span><span class="p">,</span> <span class="n">min_freq</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">duration_vocab</span> <span class="o">=</span> <span class="n">make_vocab</span><span class="p">(</span><span class="n">duration_count</span><span class="p">,</span> <span class="n">min_freq</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">TheModel</span><span class="p">(</span>
+    <span class="n">pitch_len</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">pitch_vocab</span><span class="p">),</span>
+    <span class="n">duration_len</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">duration_vocab</span><span class="p">),</span>
+    <span class="n">emb_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+    <span class="n">rnn_size</span><span class="o">=</span><span class="mi">1200</span><span class="p">,</span>
+    <span class="n">rnn_layers</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">pitch_out</span><span class="p">,</span> <span class="n">duration_out</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">triplets_to_input</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">pitch_vocab</span><span class="p">,</span> <span class="n">duration_vocab</span><span class="p">))</span>
+
+<span class="n">test_eq</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">Size</span><span class="p">([</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">seq_len</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pitch_vocab</span><span class="p">)]),</span> <span class="n">pitch_out</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">test_eq</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">Size</span><span class="p">([</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">seq_len</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">duration_vocab</span><span class="p">)]),</span> <span class="n">duration_out</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Prediction">Prediction<a class="anchor-link" href="#Prediction">&#182;</a></h2><p>To predict notes from a prompt (a sequence of triplets to prime the model), we'll need a couple more functions.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+
+<div id="eb7597fd-8767-4cec-b8e4-470bfe0f4bb6"></div>
+<div class="output_subarea output_javascript ">
+<script type="text/javascript">
+var element = $('#eb7597fd-8767-4cec-b8e4-470bfe0f4bb6');
+
+            setTimeout(function() {
+                var nbb_cell_id = 15;
+                var nbb_unformatted_code = "# export\ndef choose(top_k, logits, vocab):\n    \"\"\"\n    Chooses between the top K probabilities, and returns a single random choice.\n    \"\"\"\n    last_logits = logits.squeeze(0)[-1]\n    top_vals, top_ix = torch.topk(last_logits, k=top_k)\n    choices = top_ix.tolist()\n    choice = np.random.choice(top_ix.tolist())\n    category = vocab[choice]\n    return choice, category\n\n\ndef predict(device, model, prompt, pitch_vocab, duration_vocab, top_k=5, n_notes=4):\n    \"\"\"\n    Predicts the next n notes given a model and a prompt.\n    \"\"\"\n    model.reset()\n    model.eval()\n    notes = []\n    input = triplets_to_input(prompt, pitch_vocab, duration_vocab).to(device)\n    for n in range(n_notes):\n        pitch_out, duration_out = model(input)\n        pitch_encoded, pitch = choose(top_k, pitch_out, pitch_vocab)\n        duration_encoded, duration = choose(top_k, duration_out, duration_vocab)\n        input = torch.tensor([[[pitch_encoded], [duration_encoded]]]).to(device)\n        notes.append((pitch, duration))\n\n    return notes";
+                var nbb_formatted_code = "# export\ndef choose(top_k, logits, vocab):\n    \"\"\"\n    Chooses between the top K probabilities, and returns a single random choice.\n    \"\"\"\n    last_logits = logits.squeeze(0)[-1]\n    top_vals, top_ix = torch.topk(last_logits, k=top_k)\n    choices = top_ix.tolist()\n    choice = np.random.choice(top_ix.tolist())\n    category = vocab[choice]\n    return choice, category\n\n\ndef predict(device, model, prompt, pitch_vocab, duration_vocab, top_k=5, n_notes=4):\n    \"\"\"\n    Predicts the next n notes given a model and a prompt.\n    \"\"\"\n    model.reset()\n    model.eval()\n    notes = []\n    input = triplets_to_input(prompt, pitch_vocab, duration_vocab).to(device)\n    for n in range(n_notes):\n        pitch_out, duration_out = model(input)\n        pitch_encoded, pitch = choose(top_k, pitch_out, pitch_vocab)\n        duration_encoded, duration = choose(top_k, duration_out, duration_vocab)\n        input = torch.tensor([[[pitch_encoded], [duration_encoded]]]).to(device)\n        notes.append((pitch, duration))\n\n    return notes";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            
+</script>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="choose" class="doc_header"><code>choose</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/model.py#L148" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>choose</code>(<strong><code>top_k</code></strong>, <strong><code>logits</code></strong>, <strong><code>vocab</code></strong>)</p>
+</blockquote>
+<p>Chooses between the top K probabilities, and returns a single random choice.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="predict" class="doc_header"><code>predict</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/model.py#L160" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>predict</code>(<strong><code>device</code></strong>, <strong><code>model</code></strong>, <strong><code>prompt</code></strong>, <strong><code>pitch_vocab</code></strong>, <strong><code>duration_vocab</code></strong>, <strong><code>top_k</code></strong>=<em><code>5</code></em>, <strong><code>n_notes</code></strong>=<em><code>4</code></em>)</p>
+</blockquote>
+<p>Predicts the next n notes given a model and a prompt.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># test</span>
+<span class="n">predicted</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cpu&quot;</span><span class="p">),</span> <span class="n">model</span><span class="p">,</span> <span class="n">prompt</span><span class="p">,</span> <span class="n">pitch_vocab</span><span class="p">,</span> <span class="n">duration_vocab</span><span class="p">,</span> <span class="n">top_k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_notes</span><span class="o">=</span><span class="mi">5</span>
+<span class="p">)</span>
+<span class="n">pitch</span><span class="p">,</span> <span class="n">duration</span> <span class="o">=</span> <span class="n">predicted</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">pitch</span><span class="p">,</span> <span class="n">duration</span><span class="p">,</span> <span class="n">pitch_vocab</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">pitch</span><span class="p">),</span> <span class="n">duration_vocab</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">duration</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(&#39;G5&#39;, &#39;0.75&#39;, 23, 10)</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+
+
+<div id="8776a889-3405-47ae-9e70-76e5e337dc7f"></div>
+<div class="output_subarea output_javascript ">
+<script type="text/javascript">
+var element = $('#8776a889-3405-47ae-9e70-76e5e337dc7f');
+
+            setTimeout(function() {
+                var nbb_cell_id = 16;
+                var nbb_unformatted_code = "# test\npredicted = predict(\n    torch.device(\"cpu\"), model, prompt, pitch_vocab, duration_vocab, top_k=1, n_notes=5\n)\npitch, duration = predicted[0]\n\npitch, duration, pitch_vocab.index(pitch), duration_vocab.index(duration)";
+                var nbb_formatted_code = "# test\npredicted = predict(\n    torch.device(\"cpu\"), model, prompt, pitch_vocab, duration_vocab, top_k=1, n_notes=5\n)\npitch, duration = predicted[0]\n\npitch, duration, pitch_vocab.index(pitch), duration_vocab.index(duration)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            
+</script>
 </div>
 
 </div>
