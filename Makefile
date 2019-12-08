@@ -23,8 +23,8 @@ etl:
 	spell run --machine-type CPU --conda-file=conda.yml --mount uploads/midi:midi 'SPELL=True PYTHONPATH=. bin/etl data.etl.tar_gz_path=/spell/neuralmusic/midi/midi.tar.gz data.etl.outdir=/spell/neuralmusic/out; rm -fr outputs'
 
 deps:
-	conda env update --prefix ./env --file conda.yml && source activate ./env
-	pip install spell nb_black nbdev
+	conda env update --prefix ./env --file conda.yml && activate ./env
+	pip install spell nb_black nbdev jupyter
 	cd docs && bundle install
 
 .PHONY: deps
