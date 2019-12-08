@@ -12,13 +12,13 @@ jobs:
       - uses: actions/cache@v1
         id: conda-cache
         with:
-          path: /github/home/myenv
+          path: /github/workspace/env
           key: ${{ runner.os }}-${{ hashFiles('conda.yml') }}
       - name: Install conda deps
         if: steps.conda-cache.outputs.cache-hit != 'true'
         uses: matthewrmshin/conda-action@v1
         with:
-          args: apt-get install git-core -y && conda env update -f conda.yml
+          args: apt-get install git-core -y && conda env update -f /github/workspace/conda.yml
       - name: Install the library
         run: |
           pip install nbdev
