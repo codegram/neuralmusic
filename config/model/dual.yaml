@@ -1,2 +1,5 @@
 model:
   name: dual
+  emb_size: 800
+  rnn_size: 400
+  rnn_layers: 2

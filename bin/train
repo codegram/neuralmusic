@@ -1,0 +1,30 @@
+#!/usr/bin/env python
+
+import logging
+
+import hydra
+
+from neuralmusic.data.preprocessing import process
+from neuralmusic.model import get_model
+from neuralmusic.training import get_learner, train
+
+log = logging.getLogger("train")
+
+
+@hydra.main(config_path="../config/config.yaml", strict=False)
+def main(cfg):
+    assert cfg.data.etl.outdir, "Config not found: data.etl.outdir"
+    assert cfg.training.outdir, "Config not found: training.outdir"
+    databunch, pitch_vocab, duration_vocab = process(
+        path=cfg.data.etl.outdir,
+        batch_size=cfg.training.batch_size,
+        seq_len=cfg.training.seq_len,
+        validation_split=cfg.training.validation_split,
+    )
+    learn = get_learner(databunch, get_model(cfg.model, pitch_vocab, duration_vocab))
+    learn.fit_one_cycle(cfg.training.epochs)
+    learn.save(cfg.training.outdir, "model")
+
+
+if __name__ == "__main__":
+    main()
