@@ -14,7 +14,13 @@ from fastai2.text.models import RNNDropout
 from .midi import Triplet
 
 #Cell
+
+
 class LinearDecoder(nn.Module):
+    """
+    A Linear Decoder from fastai v1.
+    """
+
     initrange = 0.1
 
     def __init__(
@@ -42,7 +48,14 @@ class LinearDecoder(nn.Module):
         return decoded
 
 #Cell
+
+
 class TheModel(nn.Module):
+    """
+    A model that learns pitch and duration through separate RNNs, merging them at
+    the end to 'compare notes', and outputting separate predictions for each aspect.
+    """
+
     def __init__(
         self,
         pitch_len,
@@ -145,13 +158,14 @@ def triplets_to_input(
     )
 
 #Cell
+
+
 def choose(top_k, logits, vocab):
     """
     Chooses between the top K probabilities, and returns a single random choice.
     """
     last_logits = logits.squeeze(0)[-1]
     top_vals, top_ix = torch.topk(last_logits, k=top_k)
-    choices = top_ix.tolist()
     choice = np.random.choice(top_ix.tolist())
     category = vocab[choice]
     return choice, category

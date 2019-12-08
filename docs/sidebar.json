@@ -8,6 +8,7 @@
     "Preprocessing": "/data.preprocessing"
   },
   "Training": {
-    "Model": "/model"
+    "Model": "/model",
+    "Training": "/training"
   }
 }

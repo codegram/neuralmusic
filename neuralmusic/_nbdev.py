@@ -43,7 +43,8 @@ index = {"Triplet": "01_midi.ipynb",
          "rhythm_accuracy": "05_training.ipynb",
          "avg_accuracy": "05_training.ipynb",
          "ResetTrainer": "05_training.ipynb",
-         "get_learner": "05_training.ipynb"}
+         "get_learner": "05_training.ipynb",
+         "train": "05_training.ipynb"}
 
 modules = ["midi.py",
            "data/etl.py",

@@ -2,6 +2,9 @@ SRC = $(wildcard nbs/*.ipynb)
 
 all: build docs
 
+dev:
+	jupyter notebook
+
 build: $(SRC)
 	nbdev_build_lib
 	touch neuralmusic

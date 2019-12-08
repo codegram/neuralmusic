@@ -12,3 +12,35 @@
 
 > An experiment at learning multiple aspects of a signal in parallel.
 
+
+## Development workflow
+
+First of all get the dependencies:
+
+```bash
+make deps
+```
+
+To develop this project, you want to edit the notebooks under `nbs/`. So fire up Jupyter with:
+
+```bash
+make dev
+```
+
+Once you're happy with the changes, just build the project with:
+
+```bash
+make build
+```
+
+To run the tests (any cell marked with `# test` will be considered a runnable test):
+
+```bash
+make test
+```
+
+To build the docs:
+
+```bash
+make docs
+```

@@ -21,6 +21,27 @@ summary: "An experiment at learning multiple aspects of a signal in parallel."
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Development-workflow">Development workflow<a class="anchor-link" href="#Development-workflow">&#182;</a></h2><p>First of all get the dependencies:</p>
+<div class="highlight"><pre><span></span>make deps
+</pre></div>
+<p>To develop this project, you want to edit the notebooks under <code>nbs/</code>. So fire up Jupyter with:</p>
+<div class="highlight"><pre><span></span>make dev
+</pre></div>
+<p>Once you're happy with the changes, just build the project with:</p>
+<div class="highlight"><pre><span></span>make build
+</pre></div>
+<p>To run the tests (any cell marked with <code># test</code> will be considered a runnable test):</p>
+<div class="highlight"><pre><span></span>make <span class="nb">test</span>
+</pre></div>
+<p>To build the docs:</p>
+<div class="highlight"><pre><span></span>make docs
+</pre></div>
+
+</div>
+</div>
+</div>
 </div>
  
 
