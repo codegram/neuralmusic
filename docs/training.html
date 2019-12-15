@@ -31,14 +31,14 @@ summary: "Training the model"
 
 
 
-<div id="e3d62b74-ef9d-4da5-969c-5f03594a95ae"></div>
+<div id="819a1813-d1e6-4b3f-b555-948b72876a1b"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#e3d62b74-ef9d-4da5-969c-5f03594a95ae');
+var element = $('#819a1813-d1e6-4b3f-b555-948b72876a1b');
 
             setTimeout(function() {
-                var nbb_cell_id = 8;
-                var nbb_unformatted_code = "# export\nfrom torch import nn\nfrom fastai2.basics import (\n    CrossEntropyLossFlat,\n    accuracy,\n    Callback,\n    DataBunch,\n    Learner,\n)\nfrom fastai2.callback.schedule import *\nfrom fastai2.callback.progress import *\nfrom fastai2.callback.fp16 import *";
+                var nbb_cell_id = 2;
+                var nbb_unformatted_code = "# export\nfrom torch import nn\nfrom fastai2.basics import CrossEntropyLossFlat, accuracy, Callback, DataBunch, Learner\nfrom fastai2.callback.schedule import *\nfrom fastai2.callback.progress import *\nfrom fastai2.callback.fp16 import *";
                 var nbb_formatted_code = "# export\nfrom torch import nn\nfrom fastai2.basics import CrossEntropyLossFlat, accuracy, Callback, DataBunch, Learner\nfrom fastai2.callback.schedule import *\nfrom fastai2.callback.progress import *\nfrom fastai2.callback.fp16 import *";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -70,13 +70,13 @@ var element = $('#e3d62b74-ef9d-4da5-969c-5f03594a95ae');
 
 
 
-<div id="03ca73e0-9982-4a44-8082-0e910814f1cc"></div>
+<div id="d0c657be-e81b-4d2d-a6a9-f15b8b132d12"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#03ca73e0-9982-4a44-8082-0e910814f1cc');
+var element = $('#d0c657be-e81b-4d2d-a6a9-f15b8b132d12');
 
             setTimeout(function() {
-                var nbb_cell_id = 10;
+                var nbb_cell_id = 4;
                 var nbb_unformatted_code = "# export\n\n\nclass DualCrossEntropyLossFlat(CrossEntropyLossFlat):\n    \"\"\"\n    Average of a tuple of cross-entropy losses. Not sure it's a good idea.\n    \"\"\"\n\n    def __call__(self, inp, targ, **kwargs):\n        pitches_targ, durations_targ = targ.transpose(0, 1)\n        pitches_targ = pitches_targ.transpose(0, 1)[-1]\n        durations_targ = durations_targ.transpose(0, 1)[-1]\n        pitches_input = inp[0].transpose(0, 1)[-1]\n        durations_input = inp[1].transpose(0, 1)[-1]\n        pitches_loss = super().__call__(pitches_input, pitches_targ, **kwargs)\n        durations_loss = super().__call__(durations_input, durations_targ, **kwargs)\n        return (pitches_loss + durations_loss) / 2\n\n\ndef pitch_accuracy(inp, targ):\n    targ_pitches, targ_durations = targ.transpose(0, 1)\n    return accuracy(inp[0], targ_pitches)\n\n\ndef rhythm_accuracy(inp, targ):\n    targ_pitches, targ_durations = targ.transpose(0, 1)\n    return accuracy(inp[1], targ_durations)\n\n\ndef avg_accuracy(inp, targ):\n    return (pitch_accuracy(inp, targ) + rhythm_accuracy(inp, targ)) / 2\n\n\nclass ResetTrainer(Callback):\n    \"Reset the model when switching between training and validation.\"\n\n    def begin_train(self):\n        self.model.reset()\n\n    def begin_validate(self):\n        self.model.reset()";
                 var nbb_formatted_code = "# export\n\n\nclass DualCrossEntropyLossFlat(CrossEntropyLossFlat):\n    \"\"\"\n    Average of a tuple of cross-entropy losses. Not sure it's a good idea.\n    \"\"\"\n\n    def __call__(self, inp, targ, **kwargs):\n        pitches_targ, durations_targ = targ.transpose(0, 1)\n        pitches_targ = pitches_targ.transpose(0, 1)[-1]\n        durations_targ = durations_targ.transpose(0, 1)[-1]\n        pitches_input = inp[0].transpose(0, 1)[-1]\n        durations_input = inp[1].transpose(0, 1)[-1]\n        pitches_loss = super().__call__(pitches_input, pitches_targ, **kwargs)\n        durations_loss = super().__call__(durations_input, durations_targ, **kwargs)\n        return (pitches_loss + durations_loss) / 2\n\n\ndef pitch_accuracy(inp, targ):\n    targ_pitches, targ_durations = targ.transpose(0, 1)\n    return accuracy(inp[0], targ_pitches)\n\n\ndef rhythm_accuracy(inp, targ):\n    targ_pitches, targ_durations = targ.transpose(0, 1)\n    return accuracy(inp[1], targ_durations)\n\n\ndef avg_accuracy(inp, targ):\n    return (pitch_accuracy(inp, targ) + rhythm_accuracy(inp, targ)) / 2\n\n\nclass ResetTrainer(Callback):\n    \"Reset the model when switching between training and validation.\"\n\n    def begin_train(self):\n        self.model.reset()\n\n    def begin_validate(self):\n        self.model.reset()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -211,13 +211,13 @@ var element = $('#03ca73e0-9982-4a44-8082-0e910814f1cc');
 
 
 
-<div id="0959c823-e42b-47b1-a9f8-b43603be0790"></div>
+<div id="49ae1d8c-78af-4efc-b316-e942f8f24489"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#0959c823-e42b-47b1-a9f8-b43603be0790');
+var element = $('#49ae1d8c-78af-4efc-b316-e942f8f24489');
 
             setTimeout(function() {
-                var nbb_cell_id = 11;
+                var nbb_cell_id = 5;
                 var nbb_unformatted_code = "# export\n\n\ndef get_learner(db: DataBunch, model: nn.Module) -> Learner:\n    \"\"\"\n    Constructs a learner from a databunch, using DualCrossEntroyLossFlat as a loss function.\n    \"\"\"\n    return Learner(\n        db,\n        model,\n        loss_func=DualCrossEntropyLossFlat(),\n        cb_funcs=ResetTrainer,\n        metrics=[pitch_accuracy, rhythm_accuracy, avg_accuracy],\n    )";
                 var nbb_formatted_code = "# export\n\n\ndef get_learner(db: DataBunch, model: nn.Module) -> Learner:\n    \"\"\"\n    Constructs a learner from a databunch, using DualCrossEntroyLossFlat as a loss function.\n    \"\"\"\n    return Learner(\n        db,\n        model,\n        loss_func=DualCrossEntropyLossFlat(),\n        cb_funcs=ResetTrainer,\n        metrics=[pitch_accuracy, rhythm_accuracy, avg_accuracy],\n    )";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -271,14 +271,14 @@ var element = $('#0959c823-e42b-47b1-a9f8-b43603be0790');
 
 
 
-<div id="b2051fc4-bb7c-4e39-8289-1ae91f5e564e"></div>
+<div id="64ac7560-9a52-4040-858e-ca9187c8b416"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#b2051fc4-bb7c-4e39-8289-1ae91f5e564e');
+var element = $('#64ac7560-9a52-4040-858e-ca9187c8b416');
 
             setTimeout(function() {
-                var nbb_cell_id = 12;
-                var nbb_unformatted_code = "# export\n\ndef train(learn: Learner, epochs=10, max_lr=1e-03):\n    \"Train the model for a number of `epochs`.\"\n    learn.fit(10, max_lr=max_lr)";
+                var nbb_cell_id = 6;
+                var nbb_unformatted_code = "# export\n\n\ndef train(learn: Learner, epochs=10, max_lr=1e-03):\n    \"Train the model for a number of `epochs`.\"\n    learn.fit(10, max_lr=max_lr)";
                 var nbb_formatted_code = "# export\n\n\ndef train(learn: Learner, epochs=10, max_lr=1e-03):\n    \"Train the model for a number of `epochs`.\"\n    learn.fit(10, max_lr=max_lr)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {

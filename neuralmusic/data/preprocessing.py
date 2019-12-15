@@ -5,6 +5,7 @@ __all__ = ['read_parquet', 'preprocess', 'to_dual', 'dual_numericalize', 'Vocab'
 
 #Cell
 from typing import Collection, Counter
+from functools import partial
 
 import fastparquet
 import pandas as pd
@@ -52,12 +53,12 @@ def preprocess(df: pd.DataFrame) -> (pd.DataFrame, Counter[str], Counter[str]):
     Tokenizes pitches and durations and returns a dataframe
     """
     df.pitches = df.pitches.apply(lambda x: " ".join(map(str, x)))
-    df.durations = df.durations.apply(lambda x: " ".join(map(str, x)))
+    df.durations = df.durations.apply(lambda x: "|".join(map(str, x)))
     df = df[df["pitches"].apply(lambda x: len(x) != 0)].reset_index()
     df_tok, pitch_count = tokenize_df(df, "pitches", rules=[], tok_func=BaseTokenizer)
     df_tok["pitches"] = df_tok["text"]
     df_tok, duration_count = tokenize_df(
-        df_tok, "durations", rules=[], tok_func=BaseTokenizer
+        df_tok, "durations", rules=[], tok_func=partial(BaseTokenizer, split_char="|")
     )
     df_tok["durations"] = df_tok["text"]
     df_tok = df_tok.drop("text", axis=1).drop("index", axis=1)

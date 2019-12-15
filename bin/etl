@@ -19,7 +19,7 @@ def main(cfg):
     else:
         log.info("Executing flow")
         executor = DaskExecutor(
-            n_workers=cfg.data.etl.num_workers,
+            n_workers=1,  # we cannot run multi-process beacuse we have global reporting
             threads_per_worker=cfg.data.etl.threads_per_worker,
         )
         init_stats()

@@ -34,15 +34,15 @@ summary: "Turning a bunch of MIDI files into parquet data"
 
 
 
-<div id="f3aad664-7bcc-4815-b763-33d359432b95"></div>
+<div id="51af2db0-2f18-4a93-a809-02f0af2ccdff"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#f3aad664-7bcc-4815-b763-33d359432b95');
+var element = $('#51af2db0-2f18-4a93-a809-02f0af2ccdff');
 
             setTimeout(function() {
-                var nbb_cell_id = 4;
-                var nbb_unformatted_code = "# export\ntotal_songs = 0\nmalformed_songs = 0\nvalid_songs = 0\nvalid_notes = 0\n\nstarted_at = None\n\n\ndef init_stats():\n    \"\"\"\n    Resets reporting stats to zero.\n    \"\"\"\n    global total_songs\n    global valid_songs\n    global valid_notes\n    global malformed_songs\n    global started_at\n\n    total_songs = 0\n    malformed_songs = 0\n    valid_songs = 0\n    valid_notes = 0\n\n    started_at = time.time()\n\n\nif \"SPELL\" in os.environ:\n    metric = spell.metrics.send_metric\n\n    def metric(_logger, k, v):\n        spell.metrics.send_metric(k, v)\n\n\nelse:\n\n    def metric(logger, k, v):\n        logger.info(f\"[{k}]: {v}\")\n\n\ndef report(logger):\n    \"\"\"\n    Reports current metrics, either to Spell or to a logger.\n    \"\"\"\n    elapsed = time.time() - started_at\n    metric(logger, \"Total Songs\", total_songs)\n    metric(logger, \"Malformed Songs\", malformed_songs)\n    metric(logger, \"Notes\", valid_notes)\n    metric(logger, \"Total Songs / second\", (total_songs / elapsed))\n    metric(logger, \"Notes / second\", (valid_notes / elapsed))";
-                var nbb_formatted_code = "# export\ntotal_songs = 0\nmalformed_songs = 0\nvalid_songs = 0\nvalid_notes = 0\n\nstarted_at = None\n\n\ndef init_stats():\n    \"\"\"\n    Resets reporting stats to zero.\n    \"\"\"\n    global total_songs\n    global valid_songs\n    global valid_notes\n    global malformed_songs\n    global started_at\n\n    total_songs = 0\n    malformed_songs = 0\n    valid_songs = 0\n    valid_notes = 0\n\n    started_at = time.time()\n\n\nif \"SPELL\" in os.environ:\n    metric = spell.metrics.send_metric\n\n    def metric(_logger, k, v):\n        spell.metrics.send_metric(k, v)\n\n\nelse:\n\n    def metric(logger, k, v):\n        logger.info(f\"[{k}]: {v}\")\n\n\ndef report(logger):\n    \"\"\"\n    Reports current metrics, either to Spell or to a logger.\n    \"\"\"\n    elapsed = time.time() - started_at\n    metric(logger, \"Total Songs\", total_songs)\n    metric(logger, \"Malformed Songs\", malformed_songs)\n    metric(logger, \"Notes\", valid_notes)\n    metric(logger, \"Total Songs / second\", (total_songs / elapsed))\n    metric(logger, \"Notes / second\", (valid_notes / elapsed))";
+                var nbb_cell_id = 6;
+                var nbb_unformatted_code = "# export\ntotal_songs = 0\nmalformed_songs = 0\nvalid_songs = 0\nvalid_rows = 0\n\nstarted_at = None\n\n\ndef init_stats():\n    \"\"\"\n    Resets reporting stats to zero.\n    \"\"\"\n    global total_songs\n    global valid_songs\n    global valid_rows\n    global malformed_songs\n    global started_at\n\n    total_songs = 0\n    malformed_songs = 0\n    valid_songs = 0\n    valid_rows = 0\n\n    started_at = time.time()\n\n\nif \"SPELL\" in os.environ:\n    metric = spell.metrics.send_metric\n\n    def metric(_logger, k, v):\n        spell.metrics.send_metric(k, v)\n\n\nelse:\n\n    def metric(logger, k, v):\n        logger.info(f\"[{k}]: {v}\")\n\n\ndef report(logger):\n    \"\"\"\n    Reports current metrics, either to Spell or to a logger.\n    \"\"\"\n    elapsed = time.time() - started_at\n    metric(logger, \"Total Songs\", total_songs)\n    metric(logger, \"Malformed Songs\", malformed_songs)\n    metric(logger, \"Songs\", valid_songs)\n    metric(logger, \"Total Songs / second\", (total_songs / elapsed))\n    metric(logger, \"Rows / second\", (valid_rows / elapsed))";
+                var nbb_formatted_code = "# export\ntotal_songs = 0\nmalformed_songs = 0\nvalid_songs = 0\nvalid_rows = 0\n\nstarted_at = None\n\n\ndef init_stats():\n    \"\"\"\n    Resets reporting stats to zero.\n    \"\"\"\n    global total_songs\n    global valid_songs\n    global valid_rows\n    global malformed_songs\n    global started_at\n\n    total_songs = 0\n    malformed_songs = 0\n    valid_songs = 0\n    valid_rows = 0\n\n    started_at = time.time()\n\n\nif \"SPELL\" in os.environ:\n    metric = spell.metrics.send_metric\n\n    def metric(_logger, k, v):\n        spell.metrics.send_metric(k, v)\n\n\nelse:\n\n    def metric(logger, k, v):\n        logger.info(f\"[{k}]: {v}\")\n\n\ndef report(logger):\n    \"\"\"\n    Reports current metrics, either to Spell or to a logger.\n    \"\"\"\n    elapsed = time.time() - started_at\n    metric(logger, \"Total Songs\", total_songs)\n    metric(logger, \"Malformed Songs\", malformed_songs)\n    metric(logger, \"Songs\", valid_songs)\n    metric(logger, \"Total Songs / second\", (total_songs / elapsed))\n    metric(logger, \"Rows / second\", (valid_rows / elapsed))";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -122,13 +122,13 @@ var element = $('#f3aad664-7bcc-4815-b763-33d359432b95');
 
 
 
-<div id="a9855da3-c9d1-4027-9816-14c992a8db4f"></div>
+<div id="4fb2104d-90c8-48c3-8d78-e05481dd6a10"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#a9855da3-c9d1-4027-9816-14c992a8db4f');
+var element = $('#4fb2104d-90c8-48c3-8d78-e05481dd6a10');
 
             setTimeout(function() {
-                var nbb_cell_id = 5;
+                var nbb_cell_id = 7;
                 var nbb_unformatted_code = "# export\n@task\ndef untar_cmd(file_path: str, outdir: str) -> str:\n    \"\"\"\n    Untars a .tar.gz file onto a directory (will create it if it does not exist).\n    \"\"\"\n    if os.path.exists(outdir):\n        raise SKIP(\"Output directory already exists.\")\n    return f\"mkdir -p {outdir} && tar -zxf {file_path} -C {outdir}\"\n\n\nuntar = ShellTask(name=\"untar_task\")";
                 var nbb_formatted_code = "# export\n@task\ndef untar_cmd(file_path: str, outdir: str) -> str:\n    \"\"\"\n    Untars a .tar.gz file onto a directory (will create it if it does not exist).\n    \"\"\"\n    if os.path.exists(outdir):\n        raise SKIP(\"Output directory already exists.\")\n    return f\"mkdir -p {outdir} && tar -zxf {file_path} -C {outdir}\"\n\n\nuntar = ShellTask(name=\"untar_task\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -210,13 +210,13 @@ arbitrary callable <code>run</code> methods.</p>
 
 
 
-<div id="c3a8d560-7853-41ee-b478-c19f9f0d8534"></div>
+<div id="3d719643-bfbd-4cc8-8627-e08729bfc6a2"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#c3a8d560-7853-41ee-b478-c19f9f0d8534');
+var element = $('#3d719643-bfbd-4cc8-8627-e08729bfc6a2');
 
             setTimeout(function() {
-                var nbb_cell_id = 6;
+                var nbb_cell_id = 8;
                 var nbb_unformatted_code = "# export\n@task(skip_on_upstream_skip=False)\ndef partition_files(\n    data_path: str, partition_size: int = 100, min_partitions: int = 4\n) -> list:\n    \"\"\"\n    Partitions the midi files in data_path into chunks.\n    \"\"\"\n    midi_files = list(Path(data_path).glob(\"**/*.mid\"))\n    n = len(midi_files)\n    if (n / partition_size) < min_partitions:\n        partition_size = math.ceil(n / min_partitions)\n    logger = prefect.context.get(\"logger\")\n    logger.info(\n        f\"Processing {n} MIDI files partitioned into groups of {partition_size}\"\n    )\n    return [\n        midi_files[i : i + partition_size]\n        for i in range(0, len(midi_files), partition_size)\n    ]";
                 var nbb_formatted_code = "# export\n@task(skip_on_upstream_skip=False)\ndef partition_files(\n    data_path: str, partition_size: int = 100, min_partitions: int = 4\n) -> list:\n    \"\"\"\n    Partitions the midi files in data_path into chunks.\n    \"\"\"\n    midi_files = list(Path(data_path).glob(\"**/*.mid\"))\n    n = len(midi_files)\n    if (n / partition_size) < min_partitions:\n        partition_size = math.ceil(n / min_partitions)\n    logger = prefect.context.get(\"logger\")\n    logger.info(\n        f\"Processing {n} MIDI files partitioned into groups of {partition_size}\"\n    )\n    return [\n        midi_files[i : i + partition_size]\n        for i in range(0, len(midi_files), partition_size)\n    ]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -298,15 +298,15 @@ arbitrary callable <code>run</code> methods.</p>
 
 
 
-<div id="d4a5be21-034c-4f96-a5b2-25ec9f6ffb8c"></div>
+<div id="b680ceff-86fb-4247-8964-99abe591e6a3"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#d4a5be21-034c-4f96-a5b2-25ec9f6ffb8c');
+var element = $('#b680ceff-86fb-4247-8964-99abe591e6a3');
 
             setTimeout(function() {
-                var nbb_cell_id = 7;
-                var nbb_unformatted_code = "# export\n@task\ndef process_and_write(mini_batch: Collection[str], outdir: str) -> bytes:\n    \"\"\"\n    Parses a mini batch of MIDI files and writes the results to a parquet file.\n    The filename is determined by `map_index`. Returns the amount of notes it parsed.\n    \"\"\"\n    frame_no = prefect.context.get(\"map_index\")\n    Path(outdir).mkdir(parents=True, exist_ok=True)\n    outfile = f\"{outdir}/out_{frame_no}.parq\"\n\n    logger = prefect.context.get(\"logger\")\n\n    should_append = False\n\n    global total_songs\n    global valid_songs\n    global valid_notes\n    global malformed_songs\n\n    for file in mini_batch:\n        df, processed_notes = parse_midi_file(file)\n        if df is not None:\n            valid_songs += 1\n            valid_notes += processed_notes\n\n            fastparquet.write(outfile, df, compression=\"SNAPPY\", append=should_append)\n            del df\n            should_append = True\n        else:\n            malformed_songs += 1\n            logger.warning(f\"[Minibatch {frame_no}] {file} could not be processed.\")\n\n        total_songs += 1\n        report(logger)\n\n    return outfile";
-                var nbb_formatted_code = "# export\n@task\ndef process_and_write(mini_batch: Collection[str], outdir: str) -> bytes:\n    \"\"\"\n    Parses a mini batch of MIDI files and writes the results to a parquet file.\n    The filename is determined by `map_index`. Returns the amount of notes it parsed.\n    \"\"\"\n    frame_no = prefect.context.get(\"map_index\")\n    Path(outdir).mkdir(parents=True, exist_ok=True)\n    outfile = f\"{outdir}/out_{frame_no}.parq\"\n\n    logger = prefect.context.get(\"logger\")\n\n    should_append = False\n\n    global total_songs\n    global valid_songs\n    global valid_notes\n    global malformed_songs\n\n    for file in mini_batch:\n        df, processed_notes = parse_midi_file(file)\n        if df is not None:\n            valid_songs += 1\n            valid_notes += processed_notes\n\n            fastparquet.write(outfile, df, compression=\"SNAPPY\", append=should_append)\n            del df\n            should_append = True\n        else:\n            malformed_songs += 1\n            logger.warning(f\"[Minibatch {frame_no}] {file} could not be processed.\")\n\n        total_songs += 1\n        report(logger)\n\n    return outfile";
+                var nbb_cell_id = 14;
+                var nbb_unformatted_code = "# export\n@task\ndef process_and_write(mini_batch: Collection[str], outdir: str) -> bytes:\n    \"\"\"\n    Parses a mini batch of MIDI files and writes the results to a parquet file.\n    The filename is determined by `map_index`. Returns the amount of notes it parsed.\n    \"\"\"\n    frame_no = prefect.context.get(\"map_index\")\n    Path(outdir).mkdir(parents=True, exist_ok=True)\n    outfile = f\"{outdir}/out_{frame_no}.parq\"\n\n    logger = prefect.context.get(\"logger\")\n\n    should_append = False\n\n    global total_songs\n    global valid_songs\n    global valid_rows\n    global malformed_songs\n\n    for file in mini_batch:\n        df = parse_midi_file(file)\n        if df is not None:\n            valid_songs += 1\n            valid_rows += len(df)\n\n            fastparquet.write(outfile, df, compression=\"SNAPPY\", append=should_append)\n            del df\n            should_append = True\n        else:\n            malformed_songs += 1\n            logger.warning(f\"[Minibatch {frame_no}] {file} could not be processed.\")\n\n        total_songs += 1\n        report(logger)\n\n    return outfile";
+                var nbb_formatted_code = "# export\n@task\ndef process_and_write(mini_batch: Collection[str], outdir: str) -> bytes:\n    \"\"\"\n    Parses a mini batch of MIDI files and writes the results to a parquet file.\n    The filename is determined by `map_index`. Returns the amount of notes it parsed.\n    \"\"\"\n    frame_no = prefect.context.get(\"map_index\")\n    Path(outdir).mkdir(parents=True, exist_ok=True)\n    outfile = f\"{outdir}/out_{frame_no}.parq\"\n\n    logger = prefect.context.get(\"logger\")\n\n    should_append = False\n\n    global total_songs\n    global valid_songs\n    global valid_rows\n    global malformed_songs\n\n    for file in mini_batch:\n        df = parse_midi_file(file)\n        if df is not None:\n            valid_songs += 1\n            valid_rows += len(df)\n\n            fastparquet.write(outfile, df, compression=\"SNAPPY\", append=should_append)\n            del df\n            should_append = True\n        else:\n            malformed_songs += 1\n            logger.warning(f\"[Minibatch {frame_no}] {file} could not be processed.\")\n\n        total_songs += 1\n        report(logger)\n\n    return outfile";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -386,13 +386,13 @@ arbitrary callable <code>run</code> methods.</p>
 
 
 
-<div id="be3b34f3-a48f-484b-ab3d-f05fb6e04d94"></div>
+<div id="1394153e-9f95-40cb-91e5-939a4854e1ff"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#be3b34f3-a48f-484b-ab3d-f05fb6e04d94');
+var element = $('#1394153e-9f95-40cb-91e5-939a4854e1ff');
 
             setTimeout(function() {
-                var nbb_cell_id = 8;
+                var nbb_cell_id = 15;
                 var nbb_unformatted_code = "# export\n@task\ndef combine_parquet_files(files: Collection[str]) -> None:\n    \"\"\"\n    Combines N parquet files with the same schema into another one.\n    \"\"\"\n    fastparquet.writer.merge(files)";
                 var nbb_formatted_code = "# export\n@task\ndef combine_parquet_files(files: Collection[str]) -> None:\n    \"\"\"\n    Combines N parquet files with the same schema into another one.\n    \"\"\"\n    fastparquet.writer.merge(files)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -474,13 +474,13 @@ arbitrary callable <code>run</code> methods.</p>
 
 
 
-<div id="84db4d1b-1105-4d93-828c-3b3885c5ea3b"></div>
+<div id="ba5e3193-cc36-4aa9-9f07-abdc351e2dcf"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#84db4d1b-1105-4d93-828c-3b3885c5ea3b');
+var element = $('#ba5e3193-cc36-4aa9-9f07-abdc351e2dcf');
 
             setTimeout(function() {
-                var nbb_cell_id = 9;
+                var nbb_cell_id = 16;
                 var nbb_unformatted_code = "# export\n\n\ndef build_etl(cfg):\n    \"\"\"\n    Builds the ETL flow.\n    \"\"\"\n    tar_gz_path = cfg.tar_gz_path\n    outdir = cfg.outdir\n    assert tar_gz_path, \"Config not found: data.etl.tar_gz_path\"\n    assert outdir, \"Config not found: data.etl.outdir\"\n\n    with Flow(\"Neuralmusic Data ETL\") as flow:\n        tar_gz_path = Path(cfg.tar_gz_path).resolve()\n        assert tar_gz_path.exists(), f\"{tar_gz_path} does not exist\"\n        command = untar_cmd(str(tar_gz_path), \"data\")\n        untarred = untar(command=command)\n\n        mini_batches = partition_files(\n            \"data\", partition_size=cfg.partition_size, upstream_tasks=[untarred]\n        )\n\n        partitions = process_and_write.map(mini_batches, outdir=outdir)\n\n        combine_parquet_files(partitions)\n\n    return flow";
                 var nbb_formatted_code = "# export\n\n\ndef build_etl(cfg):\n    \"\"\"\n    Builds the ETL flow.\n    \"\"\"\n    tar_gz_path = cfg.tar_gz_path\n    outdir = cfg.outdir\n    assert tar_gz_path, \"Config not found: data.etl.tar_gz_path\"\n    assert outdir, \"Config not found: data.etl.outdir\"\n\n    with Flow(\"Neuralmusic Data ETL\") as flow:\n        tar_gz_path = Path(cfg.tar_gz_path).resolve()\n        assert tar_gz_path.exists(), f\"{tar_gz_path} does not exist\"\n        command = untar_cmd(str(tar_gz_path), \"data\")\n        untarred = untar(command=command)\n\n        mini_batches = partition_files(\n            \"data\", partition_size=cfg.partition_size, upstream_tasks=[untarred]\n        )\n\n        partitions = process_and_write.map(mini_batches, outdir=outdir)\n\n        combine_parquet_files(partitions)\n\n    return flow";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -547,13 +547,14 @@ var element = $('#84db4d1b-1105-4d93-828c-3b3885c5ea3b');
 <span class="n">started_at</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 <span class="n">flow</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 
-<span class="n">test_eq</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">total_songs</span><span class="p">)</span>
+<span class="n">test_eq</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">total_songs</span><span class="p">)</span>
 <span class="n">test_eq</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">malformed_songs</span><span class="p">)</span>
-<span class="n">test_eq</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">valid_songs</span><span class="p">)</span>
-<span class="n">test_eq</span><span class="p">(</span><span class="mi">1457</span><span class="p">,</span> <span class="n">valid_notes</span><span class="p">)</span>
+<span class="n">test_eq</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">valid_songs</span><span class="p">)</span>
+<span class="n">test_eq</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">valid_rows</span><span class="p">)</span>
+
 
 <span class="n">df</span> <span class="o">=</span> <span class="n">fastparquet</span><span class="o">.</span><span class="n">ParquetFile</span><span class="p">(</span><span class="n">tmp_path</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
-<span class="n">pitches</span><span class="p">,</span> <span class="n">durations</span><span class="p">,</span> <span class="n">velocities</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">test_eq</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
 
 <span class="c1"># TODO: figure out order!</span>
 <span class="c1"># test_eq([&quot;7.11.2&quot;, &quot;7&quot;, &quot;7&quot;], pitches[0:3])</span>
@@ -571,41 +572,48 @@ var element = $('#84db4d1b-1105-4d93-828c-3b3885c5ea3b');
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[2019-12-08 15:58:44,603] INFO - prefect.FlowRunner | Beginning Flow run for &#39;Neuralmusic Data ETL&#39;
-[2019-12-08 15:58:44,608] INFO - prefect.FlowRunner | Starting flow run.
-[2019-12-08 15:58:44,629] INFO - prefect.TaskRunner | Task &#39;untar_cmd&#39;: Starting task run...
-[2019-12-08 15:58:44,636] INFO - prefect.TaskRunner | Task &#39;untar_cmd&#39;: finished task run for task with final state: &#39;Skipped&#39;
-[2019-12-08 15:58:44,646] INFO - prefect.TaskRunner | Task &#39;untar_task&#39;: Starting task run...
-[2019-12-08 15:58:44,653] INFO - prefect.TaskRunner | Task &#39;untar_task&#39;: finished task run for task with final state: &#39;Skipped&#39;
-[2019-12-08 15:58:44,669] INFO - prefect.TaskRunner | Task &#39;partition_files&#39;: Starting task run...
-[2019-12-08 15:58:44,671] INFO - prefect.Task: partition_files | Processing 3 MIDI files partitioned into groups of 1
-[2019-12-08 15:58:44,676] INFO - prefect.TaskRunner | Task &#39;partition_files&#39;: finished task run for task with final state: &#39;Success&#39;
-[2019-12-08 15:58:44,690] INFO - prefect.TaskRunner | Task &#39;process_and_write&#39;: Starting task run...
-[2019-12-08 15:58:44,697] INFO - prefect.TaskRunner | Task &#39;process_and_write[0]&#39;: Starting task run...
-[2019-12-08 15:58:44,795] INFO - prefect.Task: process_and_write | [Total Songs]: 1
-[2019-12-08 15:58:44,795] INFO - prefect.Task: process_and_write | [Malformed Songs]: 0
-[2019-12-08 15:58:44,796] INFO - prefect.Task: process_and_write | [Notes]: 350
-[2019-12-08 15:58:44,797] INFO - prefect.Task: process_and_write | [Total Songs / second]: 5.1847332169716625
-[2019-12-08 15:58:44,798] INFO - prefect.Task: process_and_write | [Notes / second]: 1814.656625940082
-[2019-12-08 15:58:44,802] INFO - prefect.TaskRunner | Task &#39;process_and_write[0]&#39;: finished task run for task with final state: &#39;Success&#39;
-[2019-12-08 15:58:44,813] INFO - prefect.TaskRunner | Task &#39;process_and_write[1]&#39;: Starting task run...
-[2019-12-08 15:58:45,132] INFO - prefect.Task: process_and_write | [Total Songs]: 2
-[2019-12-08 15:58:45,133] INFO - prefect.Task: process_and_write | [Malformed Songs]: 0
-[2019-12-08 15:58:45,133] INFO - prefect.Task: process_and_write | [Notes]: 1162
-[2019-12-08 15:58:45,134] INFO - prefect.Task: process_and_write | [Total Songs / second]: 3.7718917309920643
-[2019-12-08 15:58:45,134] INFO - prefect.Task: process_and_write | [Notes / second]: 2191.4690957063895
-[2019-12-08 15:58:45,143] INFO - prefect.TaskRunner | Task &#39;process_and_write[1]&#39;: finished task run for task with final state: &#39;Success&#39;
-[2019-12-08 15:58:45,161] INFO - prefect.TaskRunner | Task &#39;process_and_write[2]&#39;: Starting task run...
-[2019-12-08 15:58:45,249] INFO - prefect.Task: process_and_write | [Total Songs]: 3
-[2019-12-08 15:58:45,253] INFO - prefect.Task: process_and_write | [Malformed Songs]: 0
-[2019-12-08 15:58:45,254] INFO - prefect.Task: process_and_write | [Notes]: 1457
-[2019-12-08 15:58:45,266] INFO - prefect.Task: process_and_write | [Total Songs / second]: 4.635804072447701
-[2019-12-08 15:58:45,268] INFO - prefect.Task: process_and_write | [Notes / second]: 2251.455511185434
-[2019-12-08 15:58:45,286] INFO - prefect.TaskRunner | Task &#39;process_and_write[2]&#39;: finished task run for task with final state: &#39;Success&#39;
-[2019-12-08 15:58:45,295] INFO - prefect.TaskRunner | Task &#39;process_and_write&#39;: finished task run for task with final state: &#39;Mapped&#39;
-[2019-12-08 15:58:45,311] INFO - prefect.TaskRunner | Task &#39;combine_parquet_files&#39;: Starting task run...
-[2019-12-08 15:58:45,332] INFO - prefect.TaskRunner | Task &#39;combine_parquet_files&#39;: finished task run for task with final state: &#39;Success&#39;
-[2019-12-08 15:58:45,335] INFO - prefect.FlowRunner | Flow run SUCCESS: all reference tasks succeeded
+<pre>[2019-12-15 06:48:02,998] INFO - prefect.FlowRunner | Beginning Flow run for &#39;Neuralmusic Data ETL&#39;
+[2019-12-15 06:48:03,005] INFO - prefect.FlowRunner | Starting flow run.
+[2019-12-15 06:48:03,022] INFO - prefect.TaskRunner | Task &#39;untar_cmd&#39;: Starting task run...
+[2019-12-15 06:48:03,031] INFO - prefect.TaskRunner | Task &#39;untar_cmd&#39;: finished task run for task with final state: &#39;Skipped&#39;
+[2019-12-15 06:48:03,051] INFO - prefect.TaskRunner | Task &#39;untar_task&#39;: Starting task run...
+[2019-12-15 06:48:03,058] INFO - prefect.TaskRunner | Task &#39;untar_task&#39;: finished task run for task with final state: &#39;Skipped&#39;
+[2019-12-15 06:48:03,072] INFO - prefect.TaskRunner | Task &#39;partition_files&#39;: Starting task run...
+[2019-12-15 06:48:03,074] INFO - prefect.Task: partition_files | Processing 4 MIDI files partitioned into groups of 1
+[2019-12-15 06:48:03,084] INFO - prefect.TaskRunner | Task &#39;partition_files&#39;: finished task run for task with final state: &#39;Success&#39;
+[2019-12-15 06:48:03,097] INFO - prefect.TaskRunner | Task &#39;process_and_write&#39;: Starting task run...
+[2019-12-15 06:48:03,113] INFO - prefect.TaskRunner | Task &#39;process_and_write[0]&#39;: Starting task run...
+[2019-12-15 06:48:03,761] INFO - prefect.Task: process_and_write | [Total Songs]: 1
+[2019-12-15 06:48:03,762] INFO - prefect.Task: process_and_write | [Malformed Songs]: 0
+[2019-12-15 06:48:03,762] INFO - prefect.Task: process_and_write | [Songs]: 1
+[2019-12-15 06:48:03,763] INFO - prefect.Task: process_and_write | [Total Songs / second]: 1.3101386259847192
+[2019-12-15 06:48:03,764] INFO - prefect.Task: process_and_write | [Rows / second]: 1.3101386259847192
+[2019-12-15 06:48:03,771] INFO - prefect.TaskRunner | Task &#39;process_and_write[0]&#39;: finished task run for task with final state: &#39;Success&#39;
+[2019-12-15 06:48:03,778] INFO - prefect.TaskRunner | Task &#39;process_and_write[1]&#39;: Starting task run...
+[2019-12-15 06:48:05,166] INFO - prefect.Task: process_and_write | [Total Songs]: 2
+[2019-12-15 06:48:05,167] INFO - prefect.Task: process_and_write | [Malformed Songs]: 0
+[2019-12-15 06:48:05,167] INFO - prefect.Task: process_and_write | [Songs]: 2
+[2019-12-15 06:48:05,168] INFO - prefect.Task: process_and_write | [Total Songs / second]: 0.9222680476523394
+[2019-12-15 06:48:05,169] INFO - prefect.Task: process_and_write | [Rows / second]: 0.9222680476523394
+[2019-12-15 06:48:05,176] INFO - prefect.TaskRunner | Task &#39;process_and_write[1]&#39;: finished task run for task with final state: &#39;Success&#39;
+[2019-12-15 06:48:05,185] INFO - prefect.TaskRunner | Task &#39;process_and_write[2]&#39;: Starting task run...
+[2019-12-15 06:48:06,140] INFO - prefect.Task: process_and_write | [Total Songs]: 3
+[2019-12-15 06:48:06,141] INFO - prefect.Task: process_and_write | [Malformed Songs]: 0
+[2019-12-15 06:48:06,141] INFO - prefect.Task: process_and_write | [Songs]: 3
+[2019-12-15 06:48:06,142] INFO - prefect.Task: process_and_write | [Total Songs / second]: 0.954573427184572
+[2019-12-15 06:48:06,143] INFO - prefect.Task: process_and_write | [Rows / second]: 0.954573427184572
+[2019-12-15 06:48:06,150] INFO - prefect.TaskRunner | Task &#39;process_and_write[2]&#39;: finished task run for task with final state: &#39;Success&#39;
+[2019-12-15 06:48:06,157] INFO - prefect.TaskRunner | Task &#39;process_and_write[3]&#39;: Starting task run...
+[2019-12-15 06:48:06,739] INFO - prefect.Task: process_and_write | [Total Songs]: 4
+[2019-12-15 06:48:06,740] INFO - prefect.Task: process_and_write | [Malformed Songs]: 0
+[2019-12-15 06:48:06,741] INFO - prefect.Task: process_and_write | [Songs]: 4
+[2019-12-15 06:48:06,741] INFO - prefect.Task: process_and_write | [Total Songs / second]: 1.069037375364476
+[2019-12-15 06:48:06,743] INFO - prefect.Task: process_and_write | [Rows / second]: 1.069037375364476
+[2019-12-15 06:48:06,750] INFO - prefect.TaskRunner | Task &#39;process_and_write[3]&#39;: finished task run for task with final state: &#39;Success&#39;
+[2019-12-15 06:48:06,755] INFO - prefect.TaskRunner | Task &#39;process_and_write&#39;: finished task run for task with final state: &#39;Mapped&#39;
+[2019-12-15 06:48:06,767] INFO - prefect.TaskRunner | Task &#39;combine_parquet_files&#39;: Starting task run...
+[2019-12-15 06:48:06,781] INFO - prefect.TaskRunner | Task &#39;combine_parquet_files&#39;: finished task run for task with final state: &#39;Success&#39;
+[2019-12-15 06:48:06,783] INFO - prefect.FlowRunner | Flow run SUCCESS: all reference tasks succeeded
 </pre>
 </div>
 </div>
@@ -615,15 +623,15 @@ var element = $('#84db4d1b-1105-4d93-828c-3b3885c5ea3b');
 
 
 
-<div id="2ef60450-6aef-44d0-9d6d-b34cc9131e08"></div>
+<div id="dd825af4-239a-4c5f-9cae-ade37b92d145"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#2ef60450-6aef-44d0-9d6d-b34cc9131e08');
+var element = $('#dd825af4-239a-4c5f-9cae-ade37b92d145');
 
             setTimeout(function() {
-                var nbb_cell_id = 12;
-                var nbb_unformatted_code = "# test\nfrom testing import test_eq, path\nfrom omegaconf import OmegaConf\nimport fastparquet\n\ntmp_path = \"/tmp/neuralmusic_etl\"\n\ntargz_path = path(\"data/midi.tar.gz\")\n\ndot_list = [f\"tar_gz_path={targz_path}\", f\"outdir={tmp_path}\", \"partition_size=1\"]\netl_cfg = OmegaConf.from_dotlist(dot_list)\nflow = build_etl(etl_cfg)\n\ninit_stats()\n\nstarted_at = time.time()\nflow.run()\n\ntest_eq(3, total_songs)\ntest_eq(0, malformed_songs)\ntest_eq(3, valid_songs)\ntest_eq(1457, valid_notes)\n\ndf = fastparquet.ParquetFile(tmp_path, verify=True).to_pandas()\npitches, durations, velocities = df.values[0]\n\n# TODO: figure out order!\n#test_eq([\"7.11.2\", \"7\", \"7\"], pitches[0:3])\n#test_eq([1.75, 0.5, 0.5], durations[0:3])\n#test_eq([110, 110, 110], velocities[0:3])";
-                var nbb_formatted_code = "# test\nfrom testing import test_eq, path\nfrom omegaconf import OmegaConf\nimport fastparquet\n\ntmp_path = \"/tmp/neuralmusic_etl\"\n\ntargz_path = path(\"data/midi.tar.gz\")\n\ndot_list = [f\"tar_gz_path={targz_path}\", f\"outdir={tmp_path}\", \"partition_size=1\"]\netl_cfg = OmegaConf.from_dotlist(dot_list)\nflow = build_etl(etl_cfg)\n\ninit_stats()\n\nstarted_at = time.time()\nflow.run()\n\ntest_eq(3, total_songs)\ntest_eq(0, malformed_songs)\ntest_eq(3, valid_songs)\ntest_eq(1457, valid_notes)\n\ndf = fastparquet.ParquetFile(tmp_path, verify=True).to_pandas()\npitches, durations, velocities = df.values[0]\n\n# TODO: figure out order!\n# test_eq([\"7.11.2\", \"7\", \"7\"], pitches[0:3])\n# test_eq([1.75, 0.5, 0.5], durations[0:3])\n# test_eq([110, 110, 110], velocities[0:3])";
+                var nbb_cell_id = 19;
+                var nbb_unformatted_code = "# test\nfrom testing import test_eq, path\nfrom omegaconf import OmegaConf\nimport fastparquet\n\ntmp_path = \"/tmp/neuralmusic_etl\"\n\ntargz_path = path(\"data/midi.tar.gz\")\n\ndot_list = [f\"tar_gz_path={targz_path}\", f\"outdir={tmp_path}\", \"partition_size=1\"]\netl_cfg = OmegaConf.from_dotlist(dot_list)\nflow = build_etl(etl_cfg)\n\ninit_stats()\n\nstarted_at = time.time()\nflow.run()\n\ntest_eq(4, total_songs)\ntest_eq(0, malformed_songs)\ntest_eq(4, valid_songs)\ntest_eq(4, valid_rows)\n\n\ndf = fastparquet.ParquetFile(tmp_path, verify=True).to_pandas()\ntest_eq(4, len(df))\n\n# TODO: figure out order!\n# test_eq([\"7.11.2\", \"7\", \"7\"], pitches[0:3])\n# test_eq([1.75, 0.5, 0.5], durations[0:3])\n# test_eq([110, 110, 110], velocities[0:3])";
+                var nbb_formatted_code = "# test\nfrom testing import test_eq, path\nfrom omegaconf import OmegaConf\nimport fastparquet\n\ntmp_path = \"/tmp/neuralmusic_etl\"\n\ntargz_path = path(\"data/midi.tar.gz\")\n\ndot_list = [f\"tar_gz_path={targz_path}\", f\"outdir={tmp_path}\", \"partition_size=1\"]\netl_cfg = OmegaConf.from_dotlist(dot_list)\nflow = build_etl(etl_cfg)\n\ninit_stats()\n\nstarted_at = time.time()\nflow.run()\n\ntest_eq(4, total_songs)\ntest_eq(0, malformed_songs)\ntest_eq(4, valid_songs)\ntest_eq(4, valid_rows)\n\n\ndf = fastparquet.ParquetFile(tmp_path, verify=True).to_pandas()\ntest_eq(4, len(df))\n\n# TODO: figure out order!\n# test_eq([\"7.11.2\", \"7\", \"7\"], pitches[0:3])\n# test_eq([1.75, 0.5, 0.5], durations[0:3])\n# test_eq([110, 110, 110], velocities[0:3])";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {

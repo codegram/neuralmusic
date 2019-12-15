@@ -31,15 +31,15 @@ summary: "Finding a compact representation of melody and rhythm."
 
 
 
-<div id="bdeab375-3d42-4d80-986b-4ad401afce62"></div>
+<div id="29678f8e-b7aa-4868-9cf2-116841f4d390"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#bdeab375-3d42-4d80-986b-4ad401afce62');
+var element = $('#29678f8e-b7aa-4868-9cf2-116841f4d390');
 
             setTimeout(function() {
-                var nbb_cell_id = 2;
-                var nbb_unformatted_code = "# export\nfrom typing import Optional, Tuple, Collection\nimport re\n\nfrom music21 import converter, instrument, note, chord, stream, volume, duration, midi\nfrom music21.midi import MidiException\nimport pandas as pd";
-                var nbb_formatted_code = "# export\nfrom typing import Optional, Tuple, Collection\nimport re\n\nfrom music21 import converter, instrument, note, chord, stream, volume, duration, midi\nfrom music21.midi import MidiException\nimport pandas as pd";
+                var nbb_cell_id = 118;
+                var nbb_unformatted_code = "# export\nfrom typing import Optional, Tuple, Collection\nimport re\n\nfrom music21 import (\n    converter,\n    instrument,\n    note,\n    chord,\n    pitch,\n    interval,\n    stream,\n    volume,\n    duration,\n    midi,\n    meter,\n    key,\n    tempo,\n)\nfrom music21.midi import MidiException\nimport pandas as pd";
+                var nbb_formatted_code = "# export\nfrom typing import Optional, Tuple, Collection\nimport re\n\nfrom music21 import (\n    converter,\n    instrument,\n    note,\n    chord,\n    pitch,\n    interval,\n    stream,\n    volume,\n    duration,\n    midi,\n    meter,\n    key,\n    tempo,\n)\nfrom music21.midi import MidiException\nimport pandas as pd";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -70,13 +70,13 @@ var element = $('#bdeab375-3d42-4d80-986b-4ad401afce62');
 
 
 
-<div id="9f15d76c-b99b-4be7-a284-9543ce63dbd1"></div>
+<div id="b974c567-f8cc-4788-a4e9-548ecd55b235"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#9f15d76c-b99b-4be7-a284-9543ce63dbd1');
+var element = $('#b974c567-f8cc-4788-a4e9-548ecd55b235');
 
             setTimeout(function() {
-                var nbb_cell_id = 5;
+                var nbb_cell_id = 120;
                 var nbb_unformatted_code = "# export\n\nPitch, Duration, Velocity = str, float, int\nTriplet = Tuple[Pitch, Duration, Velocity]";
                 var nbb_formatted_code = "# export\n\nPitch, Duration, Velocity = str, float, int\nTriplet = Tuple[Pitch, Duration, Velocity]";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -116,15 +116,15 @@ var element = $('#9f15d76c-b99b-4be7-a284-9543ce63dbd1');
 
 
 
-<div id="2466bfd1-c99c-4c7c-941b-a148e29a9b91"></div>
+<div id="ae11fa42-3811-4293-9863-d52bdf7b690f"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#2466bfd1-c99c-4c7c-941b-a148e29a9b91');
+var element = $('#ae11fa42-3811-4293-9863-d52bdf7b690f');
 
             setTimeout(function() {
-                var nbb_cell_id = 6;
-                var nbb_unformatted_code = "# export\n\n\ndef parse_single_note(note: note.Note) -> Triplet:\n    return (str(note.pitch), float(note.duration.quarterLength), note.volume.velocity)\n\n\ndef parse_chord(chord: chord.Chord) -> Triplet:\n    return (\n        \".\".join(str(n) for n in chord.normalOrder),\n        float(chord.duration.quarterLength),\n        chord.volume.velocity,\n    )\n\n\ndef parse_rest(rest: note.Rest) -> Triplet:\n    return (\"R\", float(rest.duration.quarterLength), 0)";
-                var nbb_formatted_code = "# export\n\n\ndef parse_single_note(note: note.Note) -> Triplet:\n    return (str(note.pitch), float(note.duration.quarterLength), note.volume.velocity)\n\n\ndef parse_chord(chord: chord.Chord) -> Triplet:\n    return (\n        \".\".join(str(n) for n in chord.normalOrder),\n        float(chord.duration.quarterLength),\n        chord.volume.velocity,\n    )\n\n\ndef parse_rest(rest: note.Rest) -> Triplet:\n    return (\"R\", float(rest.duration.quarterLength), 0)";
+                var nbb_cell_id = 121;
+                var nbb_unformatted_code = "# export\n\n\ndef _parse_duration(d: duration.Duration) -> Optional[str]:\n    dur = float(d.quarterLength)\n    name = d.fullName\n    if dur > 0.0 and dur <= 32.0 and name is not \"Inexpressible\":\n        return name\n    else:\n        return None\n\n\ndef parse_single_note(note: note.Note) -> Optional[Triplet]:\n    dur = _parse_duration(note.duration)\n    if dur is not None:\n        return (str(note.pitch), dur, note.volume.velocity)\n    else:\n        return None\n\n\ndef parse_chord(chord: chord.Chord) -> Optional[Triplet]:\n    dur = _parse_duration(chord.duration)\n    if dur is not None:\n        return (\".\".join(str(n) for n in chord.normalOrder), dur, chord.volume.velocity)\n    else:\n        return None\n\n\ndef parse_rest(rest: note.Rest) -> Optional[Triplet]:\n    dur = _parse_duration(rest.duration)\n    if dur is not None:\n        return (\"R\", dur, 0)\n    else:\n        return None";
+                var nbb_formatted_code = "# export\n\n\ndef _parse_duration(d: duration.Duration) -> Optional[str]:\n    dur = float(d.quarterLength)\n    name = d.fullName\n    if dur > 0.0 and dur <= 32.0 and name is not \"Inexpressible\":\n        return name\n    else:\n        return None\n\n\ndef parse_single_note(note: note.Note) -> Optional[Triplet]:\n    dur = _parse_duration(note.duration)\n    if dur is not None:\n        return (str(note.pitch), dur, note.volume.velocity)\n    else:\n        return None\n\n\ndef parse_chord(chord: chord.Chord) -> Optional[Triplet]:\n    dur = _parse_duration(chord.duration)\n    if dur is not None:\n        return (\".\".join(str(n) for n in chord.normalOrder), dur, chord.volume.velocity)\n    else:\n        return None\n\n\ndef parse_rest(rest: note.Rest) -> Optional[Triplet]:\n    dur = _parse_duration(rest.duration)\n    if dur is not None:\n        return (\"R\", dur, 0)\n    else:\n        return None";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -154,7 +154,7 @@ var element = $('#2466bfd1-c99c-4c7c-941b-a148e29a9b91');
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="parse_single_note" class="doc_header"><code>parse_single_note</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/midi.py#L22" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>parse_single_note</code>(<strong><code>note</code></strong>:<code>Note</code>)</p>
+<h4 id="parse_single_note" class="doc_header"><code>parse_single_note</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/midi.py#L45" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>parse_single_note</code>(<strong><code>note</code></strong>:<code>Note</code>)</p>
 </blockquote>
 
 </div>
@@ -174,7 +174,7 @@ var element = $('#2466bfd1-c99c-4c7c-941b-a148e29a9b91');
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="parse_chord" class="doc_header"><code>parse_chord</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/midi.py#L26" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>parse_chord</code>(<strong><code>chord</code></strong>:<code>Chord</code>)</p>
+<h4 id="parse_chord" class="doc_header"><code>parse_chord</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/midi.py#L53" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>parse_chord</code>(<strong><code>chord</code></strong>:<code>Chord</code>)</p>
 </blockquote>
 
 </div>
@@ -194,7 +194,7 @@ var element = $('#2466bfd1-c99c-4c7c-941b-a148e29a9b91');
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="parse_rest" class="doc_header"><code>parse_rest</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/midi.py#L34" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>parse_rest</code>(<strong><code>rest</code></strong>:<code>Rest</code>)</p>
+<h4 id="parse_rest" class="doc_header"><code>parse_rest</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/midi.py#L61" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>parse_rest</code>(<strong><code>rest</code></strong>:<code>Rest</code>)</p>
 </blockquote>
 
 </div>
@@ -221,12 +221,19 @@ var element = $('#2466bfd1-c99c-4c7c-941b-a148e29a9b91');
     <span class="k">return</span> <span class="n">n</span>
 
 
-<span class="n">test_eq</span><span class="p">((</span><span class="s2">&quot;C3&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">120</span><span class="p">),</span> <span class="n">parse_single_note</span><span class="p">(</span><span class="n">loud</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;C3&quot;</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="n">quarter</span><span class="p">))))</span>
 <span class="n">test_eq</span><span class="p">(</span>
-    <span class="p">(</span><span class="s2">&quot;1.3.5&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">80</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;C3&quot;</span><span class="p">,</span> <span class="s2">&quot;Quarter&quot;</span><span class="p">,</span> <span class="mi">120</span><span class="p">),</span> <span class="n">parse_single_note</span><span class="p">(</span><span class="n">loud</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;C3&quot;</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="n">quarter</span><span class="p">)))</span>
+<span class="p">)</span>
+<span class="n">test_eq</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">parse_single_note</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;C3&quot;</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="n">duration</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="mf">34.0</span><span class="p">))))</span>
+
+<span class="n">test_eq</span><span class="p">(</span>
+    <span class="p">(</span><span class="s2">&quot;1.3.5&quot;</span><span class="p">,</span> <span class="s2">&quot;Quarter&quot;</span><span class="p">,</span> <span class="mi">80</span><span class="p">),</span>
     <span class="n">parse_chord</span><span class="p">(</span><span class="n">loud</span><span class="p">(</span><span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="n">duration</span><span class="o">=</span><span class="n">quarter</span><span class="p">),</span> <span class="n">velocity</span><span class="o">=</span><span class="mi">80</span><span class="p">)),</span>
 <span class="p">)</span>
-<span class="n">test_eq</span><span class="p">((</span><span class="s2">&quot;R&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">parse_rest</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Rest</span><span class="p">(</span><span class="n">duration</span><span class="o">=</span><span class="n">quarter</span><span class="p">)))</span>
+<span class="n">test_eq</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">parse_chord</span><span class="p">(</span><span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="n">duration</span><span class="o">=</span><span class="n">duration</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="mf">0.0</span><span class="p">))))</span>
+
+<span class="n">test_eq</span><span class="p">((</span><span class="s2">&quot;R&quot;</span><span class="p">,</span> <span class="s2">&quot;Quarter&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">parse_rest</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Rest</span><span class="p">(</span><span class="n">duration</span><span class="o">=</span><span class="n">quarter</span><span class="p">)))</span>
+<span class="n">test_eq</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">parse_rest</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Rest</span><span class="p">(</span><span class="n">duration</span><span class="o">=</span><span class="n">duration</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="mf">0.0</span><span class="p">))))</span>
 </pre></div>
 
     </div>
@@ -241,15 +248,15 @@ var element = $('#2466bfd1-c99c-4c7c-941b-a148e29a9b91');
 
 
 
-<div id="b03a882c-369f-467e-870c-5e797cfc85bf"></div>
+<div id="fd69b967-7974-4feb-8c85-fe13e48826d0"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#b03a882c-369f-467e-870c-5e797cfc85bf');
+var element = $('#fd69b967-7974-4feb-8c85-fe13e48826d0');
 
             setTimeout(function() {
-                var nbb_cell_id = 7;
-                var nbb_unformatted_code = "# test\nquarter = duration.Duration(\"quarter\")\n\n\ndef loud(n: note.Note, velocity=120) -> note.Note:\n    n.volume = volume.Volume(velocity=velocity)\n    return n\n\n\ntest_eq((\"C3\", 1.0, 120), parse_single_note(loud(note.Note(\"C3\", duration=quarter))))\ntest_eq(\n    (\"1.3.5\", 1.0, 80),\n    parse_chord(loud(chord.Chord([1, 3, 5], duration=quarter), velocity=80)),\n)\ntest_eq((\"R\", 1.0, 0), parse_rest(note.Rest(duration=quarter)))";
-                var nbb_formatted_code = "# test\nquarter = duration.Duration(\"quarter\")\n\n\ndef loud(n: note.Note, velocity=120) -> note.Note:\n    n.volume = volume.Volume(velocity=velocity)\n    return n\n\n\ntest_eq((\"C3\", 1.0, 120), parse_single_note(loud(note.Note(\"C3\", duration=quarter))))\ntest_eq(\n    (\"1.3.5\", 1.0, 80),\n    parse_chord(loud(chord.Chord([1, 3, 5], duration=quarter), velocity=80)),\n)\ntest_eq((\"R\", 1.0, 0), parse_rest(note.Rest(duration=quarter)))";
+                var nbb_cell_id = 122;
+                var nbb_unformatted_code = "# test\nfrom testing import test_eq\n\nquarter = duration.Duration(\"quarter\")\n\n\ndef loud(n: note.Note, velocity=120) -> note.Note:\n    n.volume = volume.Volume(velocity=velocity)\n    return n\n\n\ntest_eq(\n    (\"C3\", \"Quarter\", 120), parse_single_note(loud(note.Note(\"C3\", duration=quarter)))\n)\ntest_eq(None, parse_single_note(note.Note(\"C3\", duration=duration.Duration(34.0))))\n\ntest_eq(\n    (\"1.3.5\", \"Quarter\", 80),\n    parse_chord(loud(chord.Chord([1, 3, 5], duration=quarter), velocity=80)),\n)\ntest_eq(None, parse_chord(chord.Chord([1, 3, 5], duration=duration.Duration(0.0))))\n\ntest_eq((\"R\", \"Quarter\", 0), parse_rest(note.Rest(duration=quarter)))\ntest_eq(None, parse_rest(note.Rest(duration=duration.Duration(0.0))))";
+                var nbb_formatted_code = "# test\nfrom testing import test_eq\n\nquarter = duration.Duration(\"quarter\")\n\n\ndef loud(n: note.Note, velocity=120) -> note.Note:\n    n.volume = volume.Volume(velocity=velocity)\n    return n\n\n\ntest_eq(\n    (\"C3\", \"Quarter\", 120), parse_single_note(loud(note.Note(\"C3\", duration=quarter)))\n)\ntest_eq(None, parse_single_note(note.Note(\"C3\", duration=duration.Duration(34.0))))\n\ntest_eq(\n    (\"1.3.5\", \"Quarter\", 80),\n    parse_chord(loud(chord.Chord([1, 3, 5], duration=quarter), velocity=80)),\n)\ntest_eq(None, parse_chord(chord.Chord([1, 3, 5], duration=duration.Duration(0.0))))\n\ntest_eq((\"R\", \"Quarter\", 0), parse_rest(note.Rest(duration=quarter)))\ntest_eq(None, parse_rest(note.Rest(duration=duration.Duration(0.0))))";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -270,6 +277,13 @@ var element = $('#b03a882c-369f-467e-870c-5e797cfc85bf');
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As a normalization step, we need to transpose all the music to the same key, so we'll choose C for convenience.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -280,15 +294,15 @@ var element = $('#b03a882c-369f-467e-870c-5e797cfc85bf');
 
 
 
-<div id="18f9ce06-5305-4549-b371-ba5e8ae7f28f"></div>
+<div id="f6e4b170-604a-47b6-80d1-155f45bd3bd6"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#18f9ce06-5305-4549-b371-ba5e8ae7f28f');
+var element = $('#f6e4b170-604a-47b6-80d1-155f45bd3bd6');
 
             setTimeout(function() {
-                var nbb_cell_id = 8;
-                var nbb_unformatted_code = "# export\n\n\ndef parse_midi_file(file: str) -> (Optional[pd.DataFrame], int):\n    \"\"\"\n    Attempts to parse a midi file into a Dataframe. Returns a Dataframe or None, together with the number of notes processed.\n    \"\"\"\n    try:\n        midi = converter.parse(file)\n        notes_to_parse = None\n        parts = instrument.partitionByInstrument(midi)\n        notes = []\n        if parts:  # file has instrument parts\n            notes_to_parse = parts.parts[0].recurse()\n        else:  # file has notes in a flat structure\n            notes_to_parse = midi.flat.notes\n        for element in notes_to_parse:\n            if element.__class__ == note.Note:\n                notes.append(parse_single_note(element))\n            elif element.__class__ == chord.Chord:\n                notes.append(parse_chord(element))\n            elif element.__class__ == note.Rest:\n                notes.append(parse_rest(element))\n\n        df = pd.DataFrame.from_dict(\n            {\n                \"pitches\": [[pitch for (pitch, dur, velocity) in notes]],\n                \"durations\": [[dur for (pitch, dur, velocity) in notes]],\n                \"velocities\": [[velocity for (pitch, dur, velocity) in notes]],\n            }\n        )\n        return (df, len(notes))\n    except MidiException:\n        return (None, 0)\n    except IndexError:\n        return (None, 0)\n\n\ndef row_to_triplets(df: pd.DataFrame, row_index: int) -> Collection[Triplet]:\n    \"\"\"\n    Takes a DataFrame at a specific row and turns that into a triplet.\n    \"\"\"\n    pitches = df.get(\"pitches\")[row_index]\n    durations = df.get(\"durations\")[row_index]\n    velocities = df.get(\"velocities\")[row_index]\n    return list(zip(pitches, durations, velocities))";
-                var nbb_formatted_code = "# export\n\n\ndef parse_midi_file(file: str) -> (Optional[pd.DataFrame], int):\n    \"\"\"\n    Attempts to parse a midi file into a Dataframe. Returns a Dataframe or None, together with the number of notes processed.\n    \"\"\"\n    try:\n        midi = converter.parse(file)\n        notes_to_parse = None\n        parts = instrument.partitionByInstrument(midi)\n        notes = []\n        if parts:  # file has instrument parts\n            notes_to_parse = parts.parts[0].recurse()\n        else:  # file has notes in a flat structure\n            notes_to_parse = midi.flat.notes\n        for element in notes_to_parse:\n            if element.__class__ == note.Note:\n                notes.append(parse_single_note(element))\n            elif element.__class__ == chord.Chord:\n                notes.append(parse_chord(element))\n            elif element.__class__ == note.Rest:\n                notes.append(parse_rest(element))\n\n        df = pd.DataFrame.from_dict(\n            {\n                \"pitches\": [[pitch for (pitch, dur, velocity) in notes]],\n                \"durations\": [[dur for (pitch, dur, velocity) in notes]],\n                \"velocities\": [[velocity for (pitch, dur, velocity) in notes]],\n            }\n        )\n        return (df, len(notes))\n    except MidiException:\n        return (None, 0)\n    except IndexError:\n        return (None, 0)\n\n\ndef row_to_triplets(df: pd.DataFrame, row_index: int) -> Collection[Triplet]:\n    \"\"\"\n    Takes a DataFrame at a specific row and turns that into a triplet.\n    \"\"\"\n    pitches = df.get(\"pitches\")[row_index]\n    durations = df.get(\"durations\")[row_index]\n    velocities = df.get(\"velocities\")[row_index]\n    return list(zip(pitches, durations, velocities))";
+                var nbb_cell_id = 123;
+                var nbb_unformatted_code = "# export\n\n\ndef transpose_to_C(s: stream.Stream) -> (stream.Stream, str):\n    \"Normalizes a stream to the C key, and returns the mode\"\n    k = s.analyze(\"key\")\n    i = interval.Interval(k.tonic, pitch.Pitch(\"C\"))\n    return s.transpose(i), k.mode";
+                var nbb_formatted_code = "# export\n\n\ndef transpose_to_C(s: stream.Stream) -> (stream.Stream, str):\n    \"Normalizes a stream to the C key, and returns the mode\"\n    k = s.analyze(\"key\")\n    i = interval.Interval(k.tonic, pitch.Pitch(\"C\"))\n    return s.transpose(i), k.mode";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -318,7 +332,251 @@ var element = $('#18f9ce06-5305-4549-b371-ba5e8ae7f28f');
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="parse_midi_file" class="doc_header"><code>parse_midi_file</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/midi.py#L40" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>parse_midi_file</code>(<strong><code>file</code></strong>:<code>str</code>)</p>
+<h4 id="transpose_to_C" class="doc_header"><code>transpose_to_C</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/midi.py#L71" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>transpose_to_C</code>(<strong><code>s</code></strong>:<code>Stream</code>)</p>
+</blockquote>
+<p>Normalizes a stream to the C key, and returns the mode</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># test</span>
+<span class="kn">from</span> <span class="nn">testing</span> <span class="kn">import</span> <span class="n">test_eq</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">&quot;data/ff4-main.mid&quot;</span><span class="p">)</span>
+<span class="n">originalKey</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">analyze</span><span class="p">(</span><span class="s2">&quot;key&quot;</span><span class="p">)</span>
+
+<span class="n">transposed</span><span class="p">,</span> <span class="n">mode</span> <span class="o">=</span> <span class="n">transpose_to_C</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="n">transposedKey</span> <span class="o">=</span> <span class="n">transposed</span><span class="o">.</span><span class="n">analyze</span><span class="p">(</span><span class="s2">&quot;key&quot;</span><span class="p">)</span>
+
+<span class="n">test_eq</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="s2">&quot;CM&quot;</span><span class="p">),</span> <span class="n">transposedKey</span><span class="p">)</span>
+<span class="n">test_eq</span><span class="p">(</span><span class="n">originalKey</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+
+<div id="3f21a9ea-f9e8-457f-91d9-f185a0ba78c9"></div>
+<div class="output_subarea output_javascript ">
+<script type="text/javascript">
+var element = $('#3f21a9ea-f9e8-457f-91d9-f185a0ba78c9');
+
+            setTimeout(function() {
+                var nbb_cell_id = 124;
+                var nbb_unformatted_code = "# test\nfrom testing import test_eq\n\ns = converter.parse(\"data/ff4-main.mid\")\noriginalKey = s.analyze(\"key\")\n\ntransposed, mode = transpose_to_C(s)\ntransposedKey = transposed.analyze(\"key\")\n\ntest_eq(key.Key(\"CM\"), transposedKey)\ntest_eq(originalKey.mode, mode)";
+                var nbb_formatted_code = "# test\nfrom testing import test_eq\n\ns = converter.parse(\"data/ff4-main.mid\")\noriginalKey = s.analyze(\"key\")\n\ntransposed, mode = transpose_to_C(s)\ntransposedKey = transposed.analyze(\"key\")\n\ntest_eq(key.Key(\"CM\"), transposedKey)\ntest_eq(originalKey.mode, mode)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            
+</script>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+
+<div id="168c4f82-347c-4e1d-a37f-9cf0b75a5855"></div>
+<div class="output_subarea output_javascript ">
+<script type="text/javascript">
+var element = $('#168c4f82-347c-4e1d-a37f-9cf0b75a5855');
+
+            setTimeout(function() {
+                var nbb_cell_id = 138;
+                var nbb_unformatted_code = "# export\n\n\ndef parse_part(elements, mode) -> Optional[dict]:\n    d = {\n        \"notes\": [],\n        \"instrument\": \"unknown\",\n        \"bpm\": 120,\n        \"time_signature\": \"4/4\",\n        \"mode\": mode,\n    }\n\n    for element in elements:\n        if element.__class__ == note.Note:\n            x = parse_single_note(element)\n            if x is not None:\n                d[\"notes\"].append(x)\n        elif element.__class__ == chord.Chord:\n            x = parse_chord(element)\n            if x is not None:\n                d[\"notes\"].append(x)\n        elif element.__class__ == note.Rest:\n            x = parse_rest(element)\n            if x is not None:\n                d[\"notes\"].append(x)\n        elif isinstance(element, instrument.Instrument):\n            if str(element) is not \"\":\n                d[\"instrument\"] = str(element).lower()\n        elif element.__class__ == tempo.MetronomeMark:\n            d[\"bpm\"] = element.number\n        elif element.__class__ == meter.TimeSignature:\n            d[\"time_signature\"] = element.ratioString\n            \n    if len(d['notes']) is not 0:\n        return d\n    else:\n        return None";
+                var nbb_formatted_code = "# export\n\n\ndef parse_part(elements, mode) -> Optional[dict]:\n    d = {\n        \"notes\": [],\n        \"instrument\": \"unknown\",\n        \"bpm\": 120,\n        \"time_signature\": \"4/4\",\n        \"mode\": mode,\n    }\n\n    for element in elements:\n        if element.__class__ == note.Note:\n            x = parse_single_note(element)\n            if x is not None:\n                d[\"notes\"].append(x)\n        elif element.__class__ == chord.Chord:\n            x = parse_chord(element)\n            if x is not None:\n                d[\"notes\"].append(x)\n        elif element.__class__ == note.Rest:\n            x = parse_rest(element)\n            if x is not None:\n                d[\"notes\"].append(x)\n        elif isinstance(element, instrument.Instrument):\n            if str(element) is not \"\":\n                d[\"instrument\"] = str(element).lower()\n        elif element.__class__ == tempo.MetronomeMark:\n            d[\"bpm\"] = element.number\n        elif element.__class__ == meter.TimeSignature:\n            d[\"time_signature\"] = element.ratioString\n\n    if len(d[\"notes\"]) is not 0:\n        return d\n    else:\n        return None";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            
+</script>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="parse_part" class="doc_header"><code>parse_part</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/midi.py#L80" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>parse_part</code>(<strong><code>elements</code></strong>, <strong><code>mode</code></strong>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># test</span>
+<span class="kn">from</span> <span class="nn">testing</span> <span class="kn">import</span> <span class="n">test_eq</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">&quot;data/rugrats.mid&quot;</span><span class="p">)</span>
+<span class="n">row</span> <span class="o">=</span> <span class="n">parse_part</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">recurse</span><span class="p">(),</span> <span class="s2">&quot;major&quot;</span><span class="p">)</span>
+
+<span class="n">test_eq</span><span class="p">(</span><span class="s2">&quot;piano&quot;</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;instrument&quot;</span><span class="p">])</span>
+<span class="n">test_eq</span><span class="p">(</span><span class="mf">102.0</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;bpm&quot;</span><span class="p">])</span>
+<span class="n">test_eq</span><span class="p">(</span><span class="s2">&quot;major&quot;</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;mode&quot;</span><span class="p">])</span>
+<span class="n">test_eq</span><span class="p">(</span><span class="s2">&quot;4/4&quot;</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;time_signature&quot;</span><span class="p">])</span>
+<span class="n">test_eq</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;R&quot;</span><span class="p">,</span> <span class="s2">&quot;Eighth Triplet (1/3 QL)&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;R&quot;</span><span class="p">,</span> <span class="s2">&quot;Breve Tuplet of 24/17ths (5 2/3 QL)&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;C3&quot;</span><span class="p">,</span> <span class="s2">&quot;Eighth Triplet (1/3 QL)&quot;</span><span class="p">,</span> <span class="mi">103</span><span class="p">),</span>
+    <span class="p">],</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;notes&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">],</span>
+<span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+
+<div id="82769705-60f7-4ea9-b2bd-57d494340735"></div>
+<div class="output_subarea output_javascript ">
+<script type="text/javascript">
+var element = $('#82769705-60f7-4ea9-b2bd-57d494340735');
+
+            setTimeout(function() {
+                var nbb_cell_id = 139;
+                var nbb_unformatted_code = "# test\nfrom testing import test_eq\n\ns = converter.parse(\"data/rugrats.mid\")\nrow = parse_part(s.parts[0].recurse(), \"major\")\n\ntest_eq(\"piano\", row[\"instrument\"])\ntest_eq(102.0, row[\"bpm\"])\ntest_eq(\"major\", row[\"mode\"])\ntest_eq(\"4/4\", row[\"time_signature\"])\ntest_eq(\n    [\n        (\"R\", \"Eighth Triplet (1/3 QL)\", 0),\n        (\"R\", \"Breve Tuplet of 24/17ths (5 2/3 QL)\", 0),\n        (\"C3\", \"Eighth Triplet (1/3 QL)\", 103),\n    ],\n    row[\"notes\"][0:3],\n)";
+                var nbb_formatted_code = "# test\nfrom testing import test_eq\n\ns = converter.parse(\"data/rugrats.mid\")\nrow = parse_part(s.parts[0].recurse(), \"major\")\n\ntest_eq(\"piano\", row[\"instrument\"])\ntest_eq(102.0, row[\"bpm\"])\ntest_eq(\"major\", row[\"mode\"])\ntest_eq(\"4/4\", row[\"time_signature\"])\ntest_eq(\n    [\n        (\"R\", \"Eighth Triplet (1/3 QL)\", 0),\n        (\"R\", \"Breve Tuplet of 24/17ths (5 2/3 QL)\", 0),\n        (\"C3\", \"Eighth Triplet (1/3 QL)\", 103),\n    ],\n    row[\"notes\"][0:3],\n)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            
+</script>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+
+<div id="e88c61e3-1ae4-4d81-8601-52222053afe7"></div>
+<div class="output_subarea output_javascript ">
+<script type="text/javascript">
+var element = $('#e88c61e3-1ae4-4d81-8601-52222053afe7');
+
+            setTimeout(function() {
+                var nbb_cell_id = 141;
+                var nbb_unformatted_code = "# export\n\n\ndef parse_midi_file(file: str) -> Optional[pd.DataFrame]:\n    \"\"\"\n    Attempts to parse a midi file into a Dataframe. Returns a Dataframe or None, together with the number of notes processed.\n    \"\"\"\n    try:\n        midi, mode = transpose_to_C(converter.parse(file))\n        parts = instrument.partitionByInstrument(midi)\n        rows = []\n        if parts:\n            for part in parts:\n                parsed = parse_part(part.recurse(), mode)\n                if parsed is not None:\n                    rows.append(parsed)\n        else:\n            parsed = parse_part(midi.flat.notes, mode)\n            if parsed is not None:\n                rows.append(parsed)\n\n        for row in rows:\n            row[\"pitches\"] = [pitch for (pitch, dur, velocity) in row[\"notes\"]]\n            row[\"durations\"] = [dur for (pitch, dur, velocity) in row[\"notes\"]]\n            row[\"velocities\"] = [velocity for (pitch, dur, velocity) in row[\"notes\"]]\n            del row[\"notes\"]\n\n        return pd.DataFrame(rows)\n    except MidiException:\n        return None\n    except IndexError:\n        return None\n\n\ndef row_to_triplets(df: pd.DataFrame, row_index: int) -> Collection[Triplet]:\n    \"\"\"\n    Takes a DataFrame at a specific row and turns that into a triplet.\n    \"\"\"\n    pitches = df.get(\"pitches\")[row_index]\n    durations = df.get(\"durations\")[row_index]\n    velocities = df.get(\"velocities\")[row_index]\n    return list(zip(pitches, durations, velocities))";
+                var nbb_formatted_code = "# export\n\n\ndef parse_midi_file(file: str) -> Optional[pd.DataFrame]:\n    \"\"\"\n    Attempts to parse a midi file into a Dataframe. Returns a Dataframe or None, together with the number of notes processed.\n    \"\"\"\n    try:\n        midi, mode = transpose_to_C(converter.parse(file))\n        parts = instrument.partitionByInstrument(midi)\n        rows = []\n        if parts:\n            for part in parts:\n                parsed = parse_part(part.recurse(), mode)\n                if parsed is not None:\n                    rows.append(parsed)\n        else:\n            parsed = parse_part(midi.flat.notes, mode)\n            if parsed is not None:\n                rows.append(parsed)\n\n        for row in rows:\n            row[\"pitches\"] = [pitch for (pitch, dur, velocity) in row[\"notes\"]]\n            row[\"durations\"] = [dur for (pitch, dur, velocity) in row[\"notes\"]]\n            row[\"velocities\"] = [velocity for (pitch, dur, velocity) in row[\"notes\"]]\n            del row[\"notes\"]\n\n        return pd.DataFrame(rows)\n    except MidiException:\n        return None\n    except IndexError:\n        return None\n\n\ndef row_to_triplets(df: pd.DataFrame, row_index: int) -> Collection[Triplet]:\n    \"\"\"\n    Takes a DataFrame at a specific row and turns that into a triplet.\n    \"\"\"\n    pitches = df.get(\"pitches\")[row_index]\n    durations = df.get(\"durations\")[row_index]\n    velocities = df.get(\"velocities\")[row_index]\n    return list(zip(pitches, durations, velocities))";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            
+</script>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="parse_midi_file" class="doc_header"><code>parse_midi_file</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/midi.py#L118" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>parse_midi_file</code>(<strong><code>file</code></strong>:<code>str</code>)</p>
 </blockquote>
 <p>Attempts to parse a midi file into a Dataframe. Returns a Dataframe or None, together with the number of notes processed.</p>
 
@@ -339,7 +597,7 @@ var element = $('#18f9ce06-5305-4549-b371-ba5e8ae7f28f');
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="row_to_triplets" class="doc_header"><code>row_to_triplets</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/midi.py#L75" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>row_to_triplets</code>(<strong><code>df</code></strong>:<code>DataFrame</code>, <strong><code>row_index</code></strong>:<code>int</code>)</p>
+<h4 id="row_to_triplets" class="doc_header"><code>row_to_triplets</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/midi.py#L149" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>row_to_triplets</code>(<strong><code>df</code></strong>:<code>DataFrame</code>, <strong><code>row_index</code></strong>:<code>int</code>)</p>
 </blockquote>
 <p>Takes a DataFrame at a specific row and turns that into a triplet.</p>
 
@@ -356,16 +614,80 @@ var element = $('#18f9ce06-5305-4549-b371-ba5e8ae7f28f');
 
 <div class="inner_cell">
     <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>ls data
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>ff4-airship.mid ff4-main.mid    ff4-town.mid    midi.tar.gz     rugrats.mid
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+
+<div id="d881ab0f-b8cd-4dea-81ae-793c55191f4f"></div>
+<div class="output_subarea output_javascript ">
+<script type="text/javascript">
+var element = $('#d881ab0f-b8cd-4dea-81ae-793c55191f4f');
+
+            setTimeout(function() {
+                var nbb_cell_id = 142;
+                var nbb_unformatted_code = "!ls data";
+                var nbb_formatted_code = "!ls data";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            
+</script>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># test</span>
 <span class="kn">from</span> <span class="nn">testing</span> <span class="kn">import</span> <span class="n">test_eq</span><span class="p">,</span> <span class="n">path</span>
 
-<span class="n">df</span><span class="p">,</span> <span class="n">notes</span> <span class="o">=</span> <span class="n">parse_midi_file</span><span class="p">(</span><span class="n">path</span><span class="p">(</span><span class="s2">&quot;data/ff4-main.mid&quot;</span><span class="p">))</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">parse_midi_file</span><span class="p">(</span><span class="n">path</span><span class="p">(</span><span class="s2">&quot;data/ff4-main.mid&quot;</span><span class="p">))</span>
 
-<span class="n">test_eq</span><span class="p">(</span><span class="mi">812</span><span class="p">,</span> <span class="n">notes</span><span class="p">)</span>
+<span class="n">test_eq</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
+<span class="n">test_eq</span><span class="p">(</span><span class="s2">&quot;piano&quot;</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;instrument&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
 
 <span class="n">triplets</span> <span class="o">=</span> <span class="n">row_to_triplets</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
-<span class="n">test_eq</span><span class="p">([(</span><span class="s2">&quot;A5&quot;</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">110</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;R&quot;</span><span class="p">,</span> <span class="mf">192.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;E5&quot;</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">110</span><span class="p">)],</span> <span class="n">triplets</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
+<span class="n">test_eq</span><span class="p">(</span>
+    <span class="p">[(</span><span class="s2">&quot;E5&quot;</span><span class="p">,</span> <span class="s2">&quot;Eighth&quot;</span><span class="p">,</span> <span class="mi">110</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;B4&quot;</span><span class="p">,</span> <span class="s2">&quot;Eighth&quot;</span><span class="p">,</span> <span class="mi">110</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;G4&quot;</span><span class="p">,</span> <span class="s2">&quot;Eighth&quot;</span><span class="p">,</span> <span class="mi">110</span><span class="p">)],</span> <span class="n">triplets</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">test_eq</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">parse_midi_file</span><span class="p">(</span><span class="n">path</span><span class="p">(</span><span class="s2">&quot;data/rugrats.mid&quot;</span><span class="p">))</span>
+<span class="n">test_eq</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
 </pre></div>
 
     </div>
@@ -380,15 +702,15 @@ var element = $('#18f9ce06-5305-4549-b371-ba5e8ae7f28f');
 
 
 
-<div id="cdca14c4-64c6-42cb-a7d0-088c80c6f662"></div>
+<div id="63f08e1e-db94-49c8-9da3-e9597ee9cc31"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#cdca14c4-64c6-42cb-a7d0-088c80c6f662');
+var element = $('#63f08e1e-db94-49c8-9da3-e9597ee9cc31');
 
             setTimeout(function() {
-                var nbb_cell_id = 9;
-                var nbb_unformatted_code = "# test\ndf, notes = parse_midi_file(path(\"data/ff4-main.mid\"))\n\ntest_eq(812, notes)\n\ntriplets = row_to_triplets(df, 0)\n\ntest_eq([(\"A5\", 0.5, 110), (\"R\", 192.0, 0), (\"E5\", 0.5, 110)], triplets[0:3])";
-                var nbb_formatted_code = "# test\ndf, notes = parse_midi_file(path(\"data/ff4-main.mid\"))\n\ntest_eq(812, notes)\n\ntriplets = row_to_triplets(df, 0)\n\ntest_eq([(\"A5\", 0.5, 110), (\"R\", 192.0, 0), (\"E5\", 0.5, 110)], triplets[0:3])";
+                var nbb_cell_id = 144;
+                var nbb_unformatted_code = "# test\nfrom testing import test_eq, path\n\ndf = parse_midi_file(path(\"data/ff4-main.mid\"))\n\ntest_eq(1, len(df))\ntest_eq(\"piano\", df.get(\"instrument\")[0])\n\ntriplets = row_to_triplets(df, 0)\n\ntest_eq(\n    [(\"E5\", \"Eighth\", 110), (\"B4\", \"Eighth\", 110), (\"G4\", \"Eighth\", 110)], triplets[0:3]\n)\ntest_eq(1, len(df))\n\ndf = parse_midi_file(path(\"data/rugrats.mid\"))\ntest_eq(1, len(df))";
+                var nbb_formatted_code = "# test\nfrom testing import test_eq, path\n\ndf = parse_midi_file(path(\"data/ff4-main.mid\"))\n\ntest_eq(1, len(df))\ntest_eq(\"piano\", df.get(\"instrument\")[0])\n\ntriplets = row_to_triplets(df, 0)\n\ntest_eq(\n    [(\"E5\", \"Eighth\", 110), (\"B4\", \"Eighth\", 110), (\"G4\", \"Eighth\", 110)], triplets[0:3]\n)\ntest_eq(1, len(df))\n\ndf = parse_midi_file(path(\"data/rugrats.mid\"))\ntest_eq(1, len(df))";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
                     if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
@@ -427,13 +749,13 @@ var element = $('#cdca14c4-64c6-42cb-a7d0-088c80c6f662');
 
 
 
-<div id="25d1764c-a603-44c2-aa40-7d1282c47643"></div>
+<div id="dec9a2fc-53e0-416d-b8f4-72e78c2fb6e7"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#25d1764c-a603-44c2-aa40-7d1282c47643');
+var element = $('#dec9a2fc-53e0-416d-b8f4-72e78c2fb6e7');
 
             setTimeout(function() {
-                var nbb_cell_id = 10;
+                var nbb_cell_id = 136;
                 var nbb_unformatted_code = "# export\n\n\ndef triplet_to_note(triplet: Triplet):\n    pitch, dur, vel = triplet\n    dur = duration.Duration(dur)\n    vol = volume.Volume(velocity=vel)\n    if re.match(r\"^[0-9]\", pitch):\n        c = chord.Chord([int(x) for x in pitch.split(\".\")], duration=dur)\n        c.volume = vol\n        return c\n    elif pitch == \"R\":\n        return note.Rest(duration=dur)\n    else:\n        n = note.Note(pitch, duration=dur)\n        n.volume = vol\n        return n\n\n\ndef triplets_to_stream(triplets: Collection[Triplet]) -> stream.Stream:\n    s = stream.Stream()\n    _ = [s.append(triplet_to_note(triplet)) for triplet in triplets]\n    return s\n\n\ndef write_midi(stream, name):\n    mf = midi.translate.streamToMidiFile(stream)\n    mf.open(f\"{name}.mid\", \"wb\")\n    mf.write()\n    mf.close()";
                 var nbb_formatted_code = "# export\n\n\ndef triplet_to_note(triplet: Triplet):\n    pitch, dur, vel = triplet\n    dur = duration.Duration(dur)\n    vol = volume.Volume(velocity=vel)\n    if re.match(r\"^[0-9]\", pitch):\n        c = chord.Chord([int(x) for x in pitch.split(\".\")], duration=dur)\n        c.volume = vol\n        return c\n    elif pitch == \"R\":\n        return note.Rest(duration=dur)\n    else:\n        n = note.Note(pitch, duration=dur)\n        n.volume = vol\n        return n\n\n\ndef triplets_to_stream(triplets: Collection[Triplet]) -> stream.Stream:\n    s = stream.Stream()\n    _ = [s.append(triplet_to_note(triplet)) for triplet in triplets]\n    return s\n\n\ndef write_midi(stream, name):\n    mf = midi.translate.streamToMidiFile(stream)\n    mf.open(f\"{name}.mid\", \"wb\")\n    mf.write()\n    mf.close()";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -465,7 +787,7 @@ var element = $('#25d1764c-a603-44c2-aa40-7d1282c47643');
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="triplet_to_note" class="doc_header"><code>triplet_to_note</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/midi.py#L87" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>triplet_to_note</code>(<strong><code>triplet</code></strong>:<code>Tuple</code>[<code>str</code>, <code>float</code>, <code>int</code>])</p>
+<h4 id="triplet_to_note" class="doc_header"><code>triplet_to_note</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/midi.py#L161" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>triplet_to_note</code>(<strong><code>triplet</code></strong>:<code>Tuple</code>[<code>str</code>, <code>float</code>, <code>int</code>])</p>
 </blockquote>
 
 </div>
@@ -485,7 +807,7 @@ var element = $('#25d1764c-a603-44c2-aa40-7d1282c47643');
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="triplets_to_stream" class="doc_header"><code>triplets_to_stream</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/midi.py#L103" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>triplets_to_stream</code>(<strong><code>triplets</code></strong>:<code>Collection</code>[<code>Tuple</code>[<code>str</code>, <code>float</code>, <code>int</code>]])</p>
+<h4 id="triplets_to_stream" class="doc_header"><code>triplets_to_stream</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/midi.py#L177" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>triplets_to_stream</code>(<strong><code>triplets</code></strong>:<code>Collection</code>[<code>Tuple</code>[<code>str</code>, <code>float</code>, <code>int</code>]])</p>
 </blockquote>
 
 </div>
@@ -505,7 +827,7 @@ var element = $('#25d1764c-a603-44c2-aa40-7d1282c47643');
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="write_midi" class="doc_header"><code>write_midi</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/midi.py#L109" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>write_midi</code>(<strong><code>stream</code></strong>, <strong><code>name</code></strong>)</p>
+<h4 id="write_midi" class="doc_header"><code>write_midi</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/midi.py#L183" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>write_midi</code>(<strong><code>stream</code></strong>, <strong><code>name</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -579,10 +901,10 @@ Requirement already satisfied: midi2audio in /Users/txus/Code/codegram/neuralmus
 
 
 
-<div id="6f90022e-abe9-4499-86fa-767d0f663323"></div>
+<div id="5b96acff-8faf-4317-9102-9228f04dca75"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#6f90022e-abe9-4499-86fa-767d0f663323');
+var element = $('#5b96acff-8faf-4317-9102-9228f04dca75');
 
             setTimeout(function() {
                 var nbb_cell_id = 70;
@@ -710,10 +1032,10 @@ var element = $('#6f90022e-abe9-4499-86fa-767d0f663323');
 
 
 
-<div id="696086ad-3fa3-465d-9b22-fc83e70d3085"></div>
+<div id="2dff7dca-0831-4844-8f1c-815c8d1af7b5"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#696086ad-3fa3-465d-9b22-fc83e70d3085');
+var element = $('#2dff7dca-0831-4844-8f1c-815c8d1af7b5');
 
             setTimeout(function() {
                 var nbb_cell_id = 71;
