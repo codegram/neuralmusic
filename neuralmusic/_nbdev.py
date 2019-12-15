@@ -3,11 +3,6 @@
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"Triplet": "01_midi.ipynb",
-         "parse_single_note": "01_midi.ipynb",
-         "parse_chord": "01_midi.ipynb",
-         "parse_rest": "01_midi.ipynb",
-         "transpose_to_C": "01_midi.ipynb",
-         "parse_part": "01_midi.ipynb",
          "parse_midi_file": "01_midi.ipynb",
          "row_to_triplets": "01_midi.ipynb",
          "triplet_to_note": "01_midi.ipynb",

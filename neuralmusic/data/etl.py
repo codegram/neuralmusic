@@ -160,22 +160,31 @@ def build_etl(cfg):
     """
     Builds the ETL flow.
     """
-    tar_gz_path = cfg.tar_gz_path
-    outdir = cfg.outdir
-    assert tar_gz_path, "Config not found: data.etl.tar_gz_path"
-    assert outdir, "Config not found: data.etl.outdir"
+    assert (
+        cfg.tar_gz_path or cfg.midi_path
+    ), "Config not found: data.etl.tar_gz_path or data.etl.midi_path"
+    assert cfg.outdir, "Config not found: data.etl.outdir"
 
     with Flow("Neuralmusic Data ETL") as flow:
-        tar_gz_path = Path(cfg.tar_gz_path).resolve()
-        assert tar_gz_path.exists(), f"{tar_gz_path} does not exist"
-        command = untar_cmd(str(tar_gz_path), "data")
-        untarred = untar(command=command)
+        if cfg.tar_gz_path:
+            tar_gz_path = Path(cfg.tar_gz_path).resolve()
+            assert tar_gz_path.exists(), f"{tar_gz_path} does not exist"
+            command = untar_cmd(str(tar_gz_path), "data")
+            untarred = untar(command=command)
+            midi_path = "data"
+        else:
+            assert (
+                Path(cfg.midi_path).resolve().exists()
+            ), f"{cfg.midi_path} does not exist"
+            midi_path = cfg.midi_path
 
         mini_batches = partition_files(
-            "data", partition_size=cfg.partition_size, upstream_tasks=[untarred]
+            midi_path,
+            partition_size=cfg.partition_size,
+            upstream_tasks=([untarred] if cfg.tar_gz_path else []),
         )
 
-        partitions = process_and_write.map(mini_batches, outdir=outdir)
+        partitions = process_and_write.map(mini_batches, outdir=cfg.outdir)
 
         combine_parquet_files(partitions)
 
