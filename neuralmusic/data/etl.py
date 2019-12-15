@@ -151,7 +151,7 @@ def combine_parquet_files(files: Collection[str]) -> None:
     """
     Combines N parquet files with the same schema into another one.
     """
-    fastparquet.writer.merge(files)
+    fastparquet.writer.merge(files, verify_schema=False)
 
 #Cell
 
