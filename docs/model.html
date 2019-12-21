@@ -41,10 +41,10 @@ summary: "Learning melody and rhythm at the same time"
 
 
 
-<div id="4ab98bb2-bcbc-444c-8f14-2947801bd40a"></div>
+<div id="e4bee562-35bc-4778-80e2-2df442b541ac"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#4ab98bb2-bcbc-444c-8f14-2947801bd40a');
+var element = $('#e4bee562-35bc-4778-80e2-2df442b541ac');
 
             setTimeout(function() {
                 var nbb_cell_id = 4;
@@ -108,10 +108,10 @@ var element = $('#4ab98bb2-bcbc-444c-8f14-2947801bd40a');
 
 
 
-<div id="db6be522-60b5-4b2f-a100-2ea8a007c4a2"></div>
+<div id="89c08b4a-84df-4dff-b7bd-5a01ca5fd32e"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#db6be522-60b5-4b2f-a100-2ea8a007c4a2');
+var element = $('#89c08b4a-84df-4dff-b7bd-5a01ca5fd32e');
 
             setTimeout(function() {
                 var nbb_cell_id = 5;
@@ -169,10 +169,10 @@ the end to 'compare notes', and outputting separate predictions for each aspect.
 
 
 
-<div id="3dd43d7b-caaf-459d-97bf-8baba1c4135c"></div>
+<div id="ac5ce2ce-a564-4f4e-b7d8-2cd1da721cb1"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#3dd43d7b-caaf-459d-97bf-8baba1c4135c');
+var element = $('#ac5ce2ce-a564-4f4e-b7d8-2cd1da721cb1');
 
             setTimeout(function() {
                 var nbb_cell_id = 6;
@@ -293,7 +293,7 @@ var element = $('#3dd43d7b-caaf-459d-97bf-8baba1c4135c');
 <div class="output_text output_subarea output_execute_result">
 <pre>TheModel(
   (pitch_emb): Embedding(56, 1000, padding_idx=1)
-  (duration_emb): Embedding(24, 1000, padding_idx=1)
+  (duration_emb): Embedding(16, 1000, padding_idx=1)
   (pitch_rnn): GRU(1000, 1200, num_layers=2)
   (duration_rnn): GRU(1000, 1200, num_layers=2)
   (pitch_dec): LinearDecoder(
@@ -301,7 +301,7 @@ var element = $('#3dd43d7b-caaf-459d-97bf-8baba1c4135c');
     (output_dp): RNNDropout()
   )
   (duration_dec): LinearDecoder(
-    (decoder): Linear(in_features=2400, out_features=24, bias=True)
+    (decoder): Linear(in_features=2400, out_features=16, bias=True)
     (output_dp): RNNDropout()
   )
 )</pre>
@@ -330,10 +330,10 @@ var element = $('#3dd43d7b-caaf-459d-97bf-8baba1c4135c');
 
 
 
-<div id="fcbd7476-0a83-4b49-b7d6-d2f21091bd74"></div>
+<div id="6bddca69-4bcb-4d50-9e21-5f654593127f"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#fcbd7476-0a83-4b49-b7d6-d2f21091bd74');
+var element = $('#6bddca69-4bcb-4d50-9e21-5f654593127f');
 
             setTimeout(function() {
                 var nbb_cell_id = 8;
@@ -437,10 +437,10 @@ var element = $('#fcbd7476-0a83-4b49-b7d6-d2f21091bd74');
 
 
 
-<div id="d954e9c0-33a7-494e-a018-36569960a171"></div>
+<div id="19fd909c-8abf-4072-bf8d-07311e09c819"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#d954e9c0-33a7-494e-a018-36569960a171');
+var element = $('#19fd909c-8abf-4072-bf8d-07311e09c819');
 
             setTimeout(function() {
                 var nbb_cell_id = 9;
@@ -476,10 +476,10 @@ var element = $('#d954e9c0-33a7-494e-a018-36569960a171');
 
 
 
-<div id="a13c6c27-bf5b-42e5-9af3-34ef7c048651"></div>
+<div id="41820f4d-fe26-406c-8900-0f76e85c5da9"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#a13c6c27-bf5b-42e5-9af3-34ef7c048651');
+var element = $('#41820f4d-fe26-406c-8900-0f76e85c5da9');
 
             setTimeout(function() {
                 var nbb_cell_id = 10;
@@ -516,6 +516,7 @@ var element = $('#a13c6c27-bf5b-42e5-9af3-34ef7c048651');
 <div class="output_markdown rendered_html output_subarea ">
 <h4 id="get_model" class="doc_header"><code>get_model</code><a href="https://github.com/codegram/neuralmusic/tree/master/neuralmusic/model.py#L199" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_model</code>(<strong><code>cfg</code></strong>:<code>OmegaConf</code>, <strong><code>pitch_vocab</code></strong>:<code>Collection</code>[<code>str</code>], <strong><code>duration_vocab</code></strong>:<code>Collection</code>[<code>str</code>])</p>
 </blockquote>
+<p>Constructs the model (and puts it in the GPU if available).</p>
 
 </div>
 

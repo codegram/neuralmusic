@@ -197,6 +197,8 @@ def predict(device, model, prompt, pitch_vocab, duration_vocab, top_k=5, n_notes
 
 
 def get_model(cfg: OmegaConf, pitch_vocab: Vocab, duration_vocab: Vocab) -> TheModel:
+    "Constructs the model (and puts it in the GPU if available)."
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     return TheModel(
         pitch_len=len(pitch_vocab),
         duration_len=len(duration_vocab),
@@ -204,4 +206,4 @@ def get_model(cfg: OmegaConf, pitch_vocab: Vocab, duration_vocab: Vocab) -> TheM
         emb_size=cfg.emb_size,
         rnn_size=cfg.rnn_size,
         rnn_layers=cfg.rnn_layers,
-    )
+    ).to(device)
