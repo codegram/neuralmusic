@@ -35,8 +35,8 @@ Triplet = Tuple[Pitch, Duration, Velocity]
 def _parse_duration(d: duration.Duration) -> Optional[str]:
     try:
         dur = float(d.quarterLength)
-        name = d.fullName
-        if dur > 0.0 and dur <= 32.0 and name != "Inexpressible":
+        name = d.type
+        if dur > 0.0 and dur <= 32.0 and name != "inexpressible":
             return name
         else:
             return None

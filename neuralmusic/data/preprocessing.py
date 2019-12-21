@@ -66,8 +66,9 @@ def preprocess(df: pd.DataFrame) -> (pd.DataFrame, Counter[str], Counter[str]):
     return df_tok, pitch_count, duration_count
 
 #Cell
-Vocab = Collection[str]
 
+
+Vocab = Collection[str]
 
 
 def to_dual(fields):

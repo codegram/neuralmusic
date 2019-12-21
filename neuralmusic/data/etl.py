@@ -13,7 +13,7 @@ from typing import Collection
 
 import prefect
 import fastparquet
-import spell.metrics
+from spell.metrics import send_metric
 from prefect import task, Flow
 from prefect.engine.signals import SKIP
 from prefect.tasks.shell import ShellTask
@@ -49,29 +49,16 @@ def init_stats():
     started_at = time.time()
 
 
-if "SPELL" in os.environ:
-    metric = spell.metrics.send_metric
-
-    def metric(_logger, k, v):
-        spell.metrics.send_metric(k, v)
-
-
-else:
-
-    def metric(logger, k, v):
-        logger.info(f"[{k}]: {v}")
-
-
 def report(logger):
     """
     Reports current metrics, either to Spell or to a logger.
     """
     elapsed = time.time() - started_at
-    metric(logger, "Total Songs", total_songs)
-    metric(logger, "Malformed Songs", malformed_songs)
-    metric(logger, "Songs", valid_songs)
-    metric(logger, "Total Songs / second", (total_songs / elapsed))
-    metric(logger, "Rows / second", (valid_rows / elapsed))
+    send_metric("Total Songs", total_songs)
+    send_metric("Malformed Songs", malformed_songs)
+    send_metric("Songs", valid_songs)
+    send_metric("Total Songs / second", (total_songs / elapsed))
+    send_metric("Rows / second", (valid_rows / elapsed))
 
 #Cell
 @task
