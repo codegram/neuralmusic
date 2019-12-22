@@ -1,6 +1,7 @@
 project: neuralmusic
 
 training:
+  force_gpu: True
   epochs: 10
   batch_size: 128
   seq_len: 60
