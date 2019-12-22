@@ -29,7 +29,9 @@ def main(cfg):
         validation_split=cfg.training.validation_split,
     )
     learn = get_learner(databunch, get_model(cfg.model, pitch_vocab, duration_vocab))
+    log.info(f"Training model")
     learn.fit_one_cycle(cfg.training.epochs)
+    log.info(f"Saving model at {cfg.training.outdir}")
     learn.save(cfg.training.outdir, "model")
 
 

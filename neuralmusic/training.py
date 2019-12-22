@@ -9,6 +9,7 @@ from fastai2.basics import CrossEntropyLossFlat, accuracy, Callback, DataBunch, 
 from fastai2.callback.schedule import *
 from fastai2.callback.progress import *
 from fastai2.callback.fp16 import *
+from fastai2.callback.wandb import *
 
 #Cell
 
@@ -63,7 +64,7 @@ def get_learner(db: DataBunch, model: nn.Module) -> Learner:
         db,
         model,
         loss_func=DualCrossEntropyLossFlat(),
-        cb_funcs=ResetTrainer,
+        cb_funcs=[WandbCallback(), ResetTrainer],
         metrics=[pitch_accuracy, rhythm_accuracy, avg_accuracy],
     )
 

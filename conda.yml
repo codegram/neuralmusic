@@ -16,7 +16,9 @@ dependencies:
   - pip>=19.3.1
   - pip:
       - music21
+      - jupyter
       - spell
+      - wandb
       - fastparquet
       - prefect[viz]
       - hydra-core
