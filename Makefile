@@ -13,7 +13,7 @@ docs_serve: docs
 	cd docs && bundle exec jekyll serve
 
 docs: $(SRC)
-	PYTHONPATH=nbs nbdev_build_docs
+	PYTHONPATH=nbs nbdev_build_docs --fname 'nbs/[0-9]*.ipynb'
 	touch docs
 
 lint:
@@ -26,7 +26,7 @@ etl:
 	spell run --machine-type CPU --conda-file=conda.yml --mount uploads/tv-midi-621:midi 'SPELL=True PYTHONPATH=. bin/etl data.etl.midi_path=/spell/neuralmusic/midi data.etl.outdir=/spell/neuralmusic/out; rm -fr outputs'
 
 jupyter:
-	spell jupyter -t k80 --conda-file conda.yml neuralmusic
+	spell jupyter -t k80 neuralmusic
 
 deps:
 	conda env update --prefix ./env --file conda.yml && activate ./env
